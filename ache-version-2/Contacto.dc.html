@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ache · Contacto</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ache/tokens.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--acento)}
+.menu a:hover{color:var(--acento)}
+.nav a:hover{color:inherit}
+.nav a:hover > span{border-bottom-color:currentColor !important}
+.nav .menu a:hover{color:var(--acento)}
+.contacto-enlace a{border-bottom:1px solid currentColor}
+button{cursor:pointer}
+input::placeholder{color:var(--texto-suave);opacity:1}
+/* CSS_FICHA_V2 */
+.galeria:focus-visible,.dibujos:focus-visible{outline:2px solid var(--texto);outline-offset:4px}
+.comprar{transition:background-color .2s ease}
+.comprar:hover{background:var(--acento) !important;color:var(--sobre-acento) !important}
+.comprar[disabled]:hover{background:transparent !important;color:var(--texto-suave) !important}
+.rel:hover{background:var(--fondo-alt)}
+.celda:hover{background:var(--fondo-alt)}
+.boton:hover{background:var(--acento) !important}
+.boton-2:hover{color:var(--acento)}
+@keyframes avance{from{width:0}to{width:100%}}
+</style>
+</helmet>
+<div data-theme="crema" style="background: var(--fondo); color: var(--texto); font-family: var(--font-sans); font-size: 17px; line-height: 26px">
+<sc-if value="{{sinFicha}}" hint-placeholder-val="{{true}}">
+
+<!-- ENCABEZADO: fijo; se oculta al bajar y vuelve al subir -->
+<header style="position: sticky; top: 0; z-index: 50; box-sizing: border-box; height: 71px; padding: 0 31px 0 32px; display: flex; align-items: center; justify-content: space-between; background: var(--fondo); color: var(--texto); border-bottom: 1px solid var(--linea); transform: {{hdrMover}}; transition: transform 350ms ease">
+  <a href="Main.dc.html" aria-label="Ache, inicio" style="display: flex; align-items: center; height: 44px">
+    <img src="./assets/6230aeafea2c605cd7a6249bfc7eb14a.svg" alt="" style="display: block; height: 37px">
+  </a>
+  <nav class="nav" aria-label="Principal" style="display: flex; align-items: center; gap: 20px; font-family: var(--font-mono); font-size: 14px; line-height: 16px; letter-spacing: 0.04em">
+    <div onMouseEnter="{{abrirNosotros}}" onMouseLeave="{{cerrarMenu}}" style="position: relative">
+      <a href="Nosotros.dc.html" onFocus="{{abrirNosotros}}" style="display: block; padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid {{lineaNosotros}}">QUIÉNES SOMOS</span></a>
+      <sc-if value="{{menuNosotros}}" hint-placeholder-val="{{false}}">
+        <div class="menu" style="position: absolute; top: 70px; left: -16px; z-index: 60; box-sizing: border-box; width: 236px; padding: 17px 16px 15px; background: var(--fondo); color: var(--texto); border-top: 1px solid var(--linea); display: flex; flex-direction: column; font-size: 12px; line-height: 28px; letter-spacing: 0.06em">
+          <a href="Nosotros.dc.html">NUESTRA HISTORIA</a>
+          <a href="Nosotros.dc.html">LA SELECCIÓN</a>
+          <a href="Nosotros.dc.html">LA MADERA</a>
+          <a href="Nosotros.dc.html">LA CARPINTERÍA</a>
+          <a href="Nosotros.dc.html">LA TAPICERÍA</a>
+          <a href="Nosotros.dc.html">LOS ACABADOS</a>
+          <a href="Nosotros.dc.html">RESEÑAS</a>
+        </div>
+      </sc-if>
+    </div>
+    <div onMouseEnter="{{abrirCatalogo}}" onMouseLeave="{{cerrarMenu}}">
+      <a href="Catalogo.dc.html" onFocus="{{abrirCatalogo}}" style="display: block; padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid {{lineaCatalogo}}">CATÁLOGO</span></a>
+      <sc-if value="{{menuCatalogo}}" hint-placeholder-val="{{false}}">
+        <div class="menu" style="position: absolute; top: 70px; left: 0; right: 0; z-index: 60; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); color: var(--texto); font-family: var(--font-sans); letter-spacing: 0; border-bottom: 1px solid var(--linea)">
+          <div style="box-sizing: border-box; padding: 37px 28px 32px; background: var(--fondo-alt)">
+            <div style="font-size: 25px; line-height: 32px">Destacados</div>
+            <div style="margin-top: 21px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+              <a href="#ficha" onClick="{{abrir.k0151}}" style="display: flex; flex-direction: column">
+                <img src="./assets/c4eb2362240f917f3ba0b55306a75837.jpg" alt="Sillón y otomana verdes con estructura de nogal" style="display: block; width: 100%; aspect-ratio: 436 / 349; object-fit: cover">
+                <span style="margin-top: 12px; font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: 0.08em; color: var(--texto-suave)">KIT</span>
+                <span style="margin-top: 6px; font-size: 15px; line-height: 20px">Sala Copenhague</span>
+              </a>
+              <a href="#ficha" onClick="{{abrir.n0148}}" style="display: flex; flex-direction: column">
+                <img src="./assets/11b26f4240e9e417a59253218499d575.jpg" alt="Escritorio de teca con patas en X, cajonera y cubierta de piel" style="display: block; width: 100%; aspect-ratio: 436 / 349; object-fit: cover">
+                <span style="margin-top: 12px; font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: 0.08em; color: var(--texto-suave)">PIEZA DESTACADA</span>
+                <span style="margin-top: 6px; font-size: 15px; line-height: 20px">Escritorio de patas en X</span>
+              </a>
+            </div>
+          </div>
+          <div style="box-sizing: border-box; padding: 32px 32px 36px; background: var(--fondo); border-left: 1px solid var(--linea); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start">
+            <div style="display: flex; flex-direction: column">
+              <div style="font-size: 25px; line-height: 32px">Tipos</div>
+              <div style="margin-top: 22px; display: flex; flex-direction: column; font-family: var(--font-mono); font-size: 12px; line-height: 24px; letter-spacing: 0.06em">
+                <a href="Catalogo.dc.html">SILLAS</a>
+                <a href="Catalogo.dc.html">SILLONES</a>
+                <a href="Catalogo.dc.html">MESAS</a>
+                <a href="Catalogo.dc.html">BANCAS Y BANCOS</a>
+                <a href="Catalogo.dc.html">COMPLEMENTOS</a>
+                <a href="Kits.dc.html">KITS</a>
+                <a href="Catalogo.dc.html">VER TODO</a>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <div style="font-size: 25px; line-height: 32px">Kits</div>
+              <div style="margin-top: 22px; display: flex; flex-direction: column; font-family: var(--font-mono); font-size: 12px; line-height: 24px; letter-spacing: 0.06em">
+                <a href="#ficha" onClick="{{abrir.k0151}}">SALA COPENHAGUE</a>
+                <a href="#ficha" onClick="{{abrir.k0180}}">COMEDOR BERGEN</a>
+                <a href="#ficha" onClick="{{abrir.k0181}}">SILLAS LISBOA</a>
+                <a href="#ficha" onClick="{{abrir.k0182}}">ESCALÓN EN NOGAL</a>
+                <a href="#ficha" onClick="{{abrir.k0183}}">ESCALÓN EN NEGRO</a>
+                <a href="Kits.dc.html">VER TODOS</a>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <div style="font-size: 25px; line-height: 32px">Recién llegados</div>
+              <div style="margin-top: 22px; display: flex; flex-direction: column; font-family: var(--font-mono); font-size: 12px; line-height: 24px; letter-spacing: 0.06em">
+                <a href="#ficha" onClick="{{abrir.k0180}}">COMEDOR BERGEN</a>
+                <a href="#ficha" onClick="{{abrir.n0179}}">SILLA DE REJILLA</a>
+                <a href="#ficha" onClick="{{abrir.n0173}}">SILLÓN DE REJILLA EN TIJERA</a>
+                <a href="#ficha" onClick="{{abrir.k0181}}">SILLAS LISBOA</a>
+                <a href="#ficha" onClick="{{abrir.n0172}}">LÁMPARA DE PIE DE TECA</a>
+                <a href="#ficha" onClick="{{abrir.n0178}}">MESA DE CENTRO TRIANGULAR</a>
+                <a href="Catalogo.dc.html">VER TODOS</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+    <a href="Kits.dc.html" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">KITS</span></a>
+    <a href="Catalogo.dc.html" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">RECIÉN LLEGADOS</span></a>
+    <a href="Contacto.dc.html" aria-current="page" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid currentColor">CONTACTO</span></a>
+    <a href="#" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">WHATSAPP</span></a>
+    <a href="#" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">BUSCAR</span></a>
+    <a href="#" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">CARRITO ({{carritoN}})</span></a>
+  </nav>
+</header>
+
+<!-- TÍTULO -->
+<section aria-label="Título" style="box-sizing: border-box; height: 140px; padding: 41px 32px 0; border-bottom: 1px solid var(--linea)">
+  <h1 style="margin: 0; font-size: 48px; line-height: 56px; font-weight: 400">Contacto</h1>
+</section>
+
+<!-- DATOS DE CONTACTO -->
+<section aria-label="Datos de contacto" style="position: relative; box-sizing: border-box; min-height: 497px; padding: 32px 32px 34px; background: var(--fondo-alt); display: flex; flex-direction: column; font-size: 16px; line-height: 24px">
+  <h2 style="margin: 0; font-size: 21px; line-height: 28px; font-weight: 700">Atención a clientes</h2>
+  <p class="contacto-enlace" style="margin: 19px 0 0">Correo: <a href="#">hola@estudioache.mx</a></p>
+  <p class="contacto-enlace" style="margin: 8px 0 0">WhatsApp: <a href="#">33 1234 5678</a><br>Lunes a viernes, de 10:00 a 18:00<br>Sábados, de 10:00 a 14:00</p>
+  <h2 style="margin: 66px 0 0; font-size: 21px; line-height: 28px; font-weight: 700">Entregas y pagos</h2>
+  <p style="margin: 17px 0 0">Entregamos solo en la Zona Metropolitana de Guadalajara, con flete propio.<br>El flete se cotiza aparte del precio, según el tamaño de la pieza, la distancia y el piso.<br>La entrega es de 3 a 5 días hábiles y te contactamos para coordinarla.</p>
+  <p style="margin: 24px 0 0">Pagos: tarjeta de débito y crédito, Apple Pay, Google Pay, PayPal, transferencia y OXXO.</p>
+  <p style="margin: 24px 0 0">NOTA: los cupones y códigos de referido se aplican al pagar.</p>
+  <img src="./assets/61d3ffbb5bcf99c8662e40e5297dd035.svg" alt="Ilustración de línea de una lámpara de pie junto a una silla" style="position: absolute; right: 96px; bottom: 48px; display: block; height: 340px; width: auto">
+</section>
+
+<!-- FOTO A SANGRE CON EL MONOGRAMA -->
+<div style="position: relative; aspect-ratio: 1903 / 1070; overflow: hidden; background: #b9b2a6">
+  <img src="./assets/a67807a23da5aa21405ef7438a8948de.jpg" alt="Dos sillas de madera oscura con asiento de piel, de frente, con su sombra sobre el muro" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover">
+  <img src="./assets/6230aeafea2c605cd7a6249bfc7eb14a.svg" alt="" style="position: absolute; left: 28px; bottom: 37px; display: block; height: 200px; width: auto">
+</div>
+
+<!-- SUSCRIPCIÓN -->
+<section aria-label="Suscripción" style="box-sizing: border-box; height: 126px; padding: 0 30px 0 32px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea)">
+  <h2 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 400">Recibe primero las piezas nuevas</h2>
+  <sc-if value="{{sinSuscribir}}" hint-placeholder-val="{{true}}">
+    <form onSubmit="{{suscribir}}" style="display: flex; align-items: center; gap: 92px">
+      <label style="flex: 1 1 auto; min-width: 0">
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Correo electrónico</span>
+        <input type="email" required="" placeholder="Tu correo electrónico" style="box-sizing: border-box; width: 100%; height: 52px; padding: 0; border: 0; border-bottom: 1px solid var(--linea); border-radius: 0; background: transparent; color: var(--texto); font-family: var(--font-sans); font-size: 15px; outline-offset: 4px">
+      </label>
+      <button type="submit" style="flex: 0 0 276px; height: 60px; border: 0; background: var(--texto); color: var(--fondo); font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.08em">SUSCRIBIRME →</button>
+    </form>
+  </sc-if>
+  <sc-if value="{{suscrito}}" hint-placeholder-val="{{false}}">
+    <p style="margin: 0; font-size: 17px; line-height: 26px">Listo. Te escribiremos en cuanto lleguen piezas nuevas.</p>
+  </sc-if>
+</section>
+
+<!-- PIE -->
+<footer>
+  <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; border-bottom: 1px solid var(--linea)">
+    <div style="box-sizing: border-box; height: 194px; padding: 32px 27px; border-right: 1px solid var(--linea)">
+      <img src="./assets/9e52996ad4f96e8afed37b893e7c8318.svg" alt="Ache" style="display: block; height: 34px">
+    </div>
+    <nav aria-label="Ayuda" style="box-sizing: border-box; padding: 33px 32px; border-right: 1px solid var(--linea); display: flex; flex-direction: column; align-items: flex-start; gap: 17px">
+      <a href="Contacto.dc.html">Preguntas frecuentes</a>
+      <a href="Contacto.dc.html">Envíos y entregas</a>
+      <a href="Contacto.dc.html">Cuidado de tu mueble</a>
+    </nav>
+    <div style="box-sizing: border-box; padding: 33px 32px; display: flex; flex-direction: column; gap: 17px">
+      <span>Entregamos en la Zona Metropolitana de Guadalajara.</span>
+      <span style="color: var(--texto-suave)">Tarjeta, Apple Pay, Google Pay, PayPal, transferencia y OXXO.</span>
+    </div>
+  </div>
+  <div style="box-sizing: border-box; height: 64px; padding: 0 35px 0 27px; display: flex; align-items: center; justify-content: space-between">
+    <nav aria-label="Redes" style="display: flex; gap: 22px">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">WhatsApp</a>
+    </nav>
+    <span>© 2026 Ache · Sitio por Crafteo</span>
+  </div>
+</footer>
+
+</sc-if>
+<sc-if value="{{conFicha}}" hint-placeholder-val="{{false}}">
+<dc-import name="Pieza" codigo="{{fichaCodigo}}" origen="Contacto" al-volver="{{volverDeFicha}}" carrito="{{carritoLista}}" al-agregar="{{agregarAlCarrito}}" hint-size="100%,4940px"></dc-import>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1903}}'>
+var CODIGOS = ["NO. 0157", "NO. 0154", "NO. 0150", "NO. 0138", "NO. 0147", "NO. 0141", "NO. 0163", "NO. 0164", "NO. 0165", "NO. 0167", "NO. 0171", "NO. 0173", "NO. 0158", "NO. 0153", "NO. 0144", "NO. 0176", "NO. 0179", "NO. 0156", "NO. 0152", "NO. 0148", "NO. 0145", "NO. 0140", "NO. 0135", "NO. 0166", "NO. 0168", "NO. 0169", "NO. 0174", "NO. 0175", "NO. 0177", "NO. 0178", "NO. 0155", "NO. 0136", "NO. 0134", "NO. 0139", "NO. 0170", "NO. 0137", "NO. 0162", "NO. 0172", "KIT NO. 0151", "KIT NO. 0180", "KIT NO. 0181", "KIT NO. 0182", "KIT NO. 0183", "NO. 0149"];
+class Component extends DCLogic {
+componentDidMount() {
+  var self = this;
+  this._y = 0;
+  this._alBajar = function () {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    var dy = y - self._y;
+    self._y = y;
+    var st = self.state || {};
+    var oculto = !!st.oculto;
+    if (y < 300) oculto = false;
+    else if (dy > 4) oculto = true;
+    else if (dy < -4) oculto = false;
+    if (st.oculto !== oculto) self.setState({ oculto: oculto, menu: oculto ? '' : st.menu });
+  };
+  window.addEventListener('scroll', this._alBajar, { passive: true });
+  // en pantallas de menos de 1440 px el diseño se ve a escala, sin apretarse
+  this._escala = function () {
+    var w = window.innerWidth || 1440;
+    document.documentElement.style.zoom = w < 1440 ? String(Math.max(w / 1440, 0.5)) : '';
+  };
+  this._escala();
+  window.addEventListener('resize', this._escala);
+}
+componentWillUnmount() {
+  window.removeEventListener('scroll', this._alBajar);
+  window.removeEventListener('resize', this._escala);
+}
+renderVals() {
+  var self = this;
+  var st = this.state || {};
+  var fichaAbierta = st.ficha || '';
+  var carritoLista = st.carrito || [];
+  var abrirFicha = function (c) {
+    return function (e) {
+      if (e && e.preventDefault) e.preventDefault();
+      self._yAntes = window.scrollY || 0;
+      self.setState({ ficha: c, menu: '' });
+      if (window.scrollTo) window.scrollTo(0, 0);
+    };
+  };
+  var abrir = {};
+  CODIGOS.forEach(function (c) { abrir[(c.indexOf('KIT') === 0 ? 'k' : 'n') + c.slice(-4)] = abrirFicha(c); });
+  var menu = st.menu || '';
+  return {
+    abrir: abrir,
+    sinFicha: !fichaAbierta,
+    conFicha: !!fichaAbierta,
+    fichaCodigo: fichaAbierta,
+    volverDeFicha: function (h) {
+      var y = self._yAntes || 0;
+      self.setState({ ficha: '' });
+      setTimeout(function () { var el = h ? document.getElementById(h) : null; if (el) el.scrollIntoView(); else window.scrollTo(0, y); }, 40);
+    },
+    carritoLista: carritoLista,
+    carritoN: carritoLista.length,
+    agregarAlCarrito: function (c) { if (carritoLista.indexOf(c) < 0) self.setState({ carrito: carritoLista.concat([c]) }); },
+    hdrMover: st.oculto ? 'translateY(-100%)' : 'translateY(0)',
+    menuNosotros: menu === 'nosotros',
+    menuCatalogo: menu === 'catalogo',
+    lineaNosotros: menu === 'nosotros' ? 'currentColor' : 'transparent',
+    lineaCatalogo: menu === 'catalogo' ? 'currentColor' : 'transparent',
+    abrirNosotros: function () { self.setState({ menu: 'nosotros' }); },
+    abrirCatalogo: function () { self.setState({ menu: 'catalogo' }); },
+    cerrarMenu: function () { self.setState({ menu: '' }); },
+    sinSuscribir: !st.suscrito,
+    suscrito: !!st.suscrito,
+    suscribir: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ suscrito: true }); }
+  };
+}
+}
+</script>
+</body>
+</html>

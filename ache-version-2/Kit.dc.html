@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ache · Ficha de kit</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ache/tokens.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div data-theme="crema" style="background: var(--fondo); color: var(--texto); font-family: var(--font-sans)">
+<dc-import name="Pieza" codigo="{{codigo}}" hint-size="100%,2721px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"kit": {"editor": "enum", "options": ["KIT NO. 0151 · Sala Copenhague", "KIT NO. 0180 · Comedor Bergen", "KIT NO. 0181 · Sillas Lisboa", "KIT NO. 0182 · Escalón en nogal", "KIT NO. 0183 · Escalón en negro"], "default": "KIT NO. 0151 · Sala Copenhague"}, "$preview": {"width": 1440, "height": 2721}}'>
+class Component extends DCLogic {
+renderVals() {
+  var k = String((this.props || {}).kit || 'KIT NO. 0151 · Sala Copenhague').split(' · ')[0];
+  return { codigo: 'KIT ' + k.replace(/^KIT /, '') };
+}
+}
+</script>
+</body>
+</html>

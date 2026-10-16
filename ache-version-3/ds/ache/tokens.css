@@ -1,0 +1,330 @@
+/* Ache — generated from tokens.json */
+:root, [data-theme="crema"] {
+  --crema: #f3f2e8; /* Pantone 7527 C al 70 %. Fondo de la tienda (esquema Crema) y texto sobre vino y óxido. */
+  --negro: #190100; /* Negro de marca, RGB 25 1 0 del brandbook. Logotipo y texto sobre crema, ocre y azul. */
+  --ocre: #ca863a; /* Pantone 7503 C. Bloques de color, esquema Ocre e insignia «Recién llegado». Como texto, solo sobre vino o negro (4.8:1 sobre vino). */
+  --oxido: #7f332c; /* Pantone 174 C. Acento sobre crema: enlaces, hover y «Vendido» (7.7:1). Como fondo lleva texto crema; el negro no alcanza contraste. */
+  --vino: #411f25; /* Pantone 4975 C (el brandbook lo rotula 652 C). Pie de página y secciones oscuras con texto crema (12.9:1). */
+  --azul: #83aab8; /* Pantone 652 C (el brandbook lo rotula 4975 C). Fondo de bloques e ilustraciones con texto negro (8.0:1). Nunca como texto. */
+  --fondo: var(--crema); /* Fondo de la sección según su esquema: crema, ocre, óxido, vino o azul. */
+  --fondo-alt: #e6e4da; /* Fondo de apoyo dentro del esquema: marcos de foto, tarjetas, campos. Mezcla calculada sobre fondo; no es un color nuevo de marca. */
+  --texto: var(--negro); /* Texto principal y filetes fuertes sobre fondo y fondo-alt. Negro en crema, ocre y azul; crema en óxido y vino. */
+  --texto-suave: #655551; /* Texto secundario: metadatos, rótulos de la ficha, contadores. ≥ 4.5:1 sobre fondo y fondo-alt en los cinco esquemas (en ocre queda casi igual que texto). */
+  --linea: var(--negro); /* Filetes de 1 px y bordes de controles (el brandbook usa líneas negras de 1 px bajo cada rótulo). ≥ 3:1 sobre fondo y fondo-alt. */
+  --linea-suave: #ccc7be; /* Separadores decorativos entre filas de una lista o ficha. No lleva significado; no usar como borde de control. */
+  --acento: var(--oxido); /* Enlaces en hover, botón primario en hover, insignia «Vendido». Como texto ≥ 4.5:1 sobre fondo y fondo-alt. */
+  --sobre-acento: var(--crema); /* Texto e íconos sobre un relleno de acento. */
+  --resalte: var(--ocre); /* Relleno de la insignia «Recién llegado» y de pequeños destacados. Ocre en Crema, Óxido y Azul; negro en Ocre; azul en Vino, para no confundirse con «Vendido». */
+  --sobre-resalte: var(--negro); /* Texto sobre un relleno de resalte (6.7:1 o más en todos los esquemas). */
+  --marca: var(--negro); /* Color del logotipo, el monograma, los sellos y las ilustraciones en cada esquema, exactamente como lo aprueba el brandbook. En Ocre (óxido sobre ocre, 2.9:1) y Óxido (negro sobre óxido, 2.3:1) son pares del brandbook por debajo de 3:1: úsalos solo con el logotipo y gráficos grandes, nunca con texto. */
+  --foco: var(--oxido); /* Anillo de foco de teclado: 2 px sólidos con 2 px de separación. ≥ 3:1 sobre fondo y fondo-alt en todos los esquemas. */
+  --ocre-10: #faf3eb; /* Tinte de ocre al 10 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --ocre-20: #f4e7d8; /* Tinte de ocre al 20 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --ocre-30: #efdbc4; /* Tinte de ocre al 30 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --ocre-40: #eacfb0; /* Tinte de ocre al 40 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --ocre-50: #e4c29c; /* Tinte de ocre al 50 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --ocre-60: #dfb689; /* Tinte de ocre al 60 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --ocre-70: #daaa75; /* Tinte de ocre al 70 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --ocre-80: #d59e61; /* Tinte de ocre al 80 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --ocre-90: #cf924e; /* Tinte de ocre al 90 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --oxido-10: #f2ebea; /* Tinte de óxido al 10 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --oxido-20: #e5d6d5; /* Tinte de óxido al 20 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --oxido-30: #d9c2c0; /* Tinte de óxido al 30 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --oxido-40: #ccadab; /* Tinte de óxido al 40 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --oxido-50: #bf9996; /* Tinte de óxido al 50 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --oxido-60: #b28580; /* Tinte de óxido al 60 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --oxido-70: #a5706b; /* Tinte de óxido al 70 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --oxido-80: #995c56; /* Tinte de óxido al 80 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --oxido-90: #8c4741; /* Tinte de óxido al 90 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --vino-10: #ece9e9; /* Tinte de vino al 10 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --vino-20: #d9d2d3; /* Tinte de vino al 20 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --vino-30: #c6bcbe; /* Tinte de vino al 30 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --vino-40: #b3a5a8; /* Tinte de vino al 40 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --vino-50: #a08f92; /* Tinte de vino al 50 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --vino-60: #8d797c; /* Tinte de vino al 60 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --vino-70: #7a6266; /* Tinte de vino al 70 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --vino-80: #674c51; /* Tinte de vino al 80 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --vino-90: #54353b; /* Tinte de vino al 90 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --azul-10: #f3f6f8; /* Tinte de azul al 10 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --azul-20: #e6eef1; /* Tinte de azul al 20 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --azul-30: #dae6ea; /* Tinte de azul al 30 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --azul-40: #cddde3; /* Tinte de azul al 40 % (escala del brandbook). Fondos de apoyo y áreas grandes; el texto encima va en negro. */
+  --azul-50: #c1d4dc; /* Tinte de azul al 50 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --azul-60: #b5ccd4; /* Tinte de azul al 60 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --azul-70: #a8c4cd; /* Tinte de azul al 70 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --azul-80: #9cbbc6; /* Tinte de azul al 80 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+  --azul-90: #8fb2bf; /* Tinte de azul al 90 % (escala del brandbook). Gráficos y bloques de apoyo; nunca para texto. */
+}
+[data-theme="ocre"] {
+  --fondo: var(--ocre);
+  --fondo-alt: #d19959;
+  --texto: var(--negro);
+  --texto-suave: #39190a;
+  --linea: var(--negro);
+  --linea-suave: #a3692d;
+  --acento: var(--vino);
+  --sobre-acento: var(--crema);
+  --resalte: var(--negro);
+  --sobre-resalte: var(--ocre);
+  --marca: var(--oxido);
+  --foco: var(--negro);
+}
+[data-theme="oxido"] {
+  --fondo: var(--oxido);
+  --fondo-alt: #712c26;
+  --texto: var(--crema);
+  --texto-suave: #d9c8bf;
+  --linea: var(--crema);
+  --linea-suave: #9f6861;
+  --acento: var(--crema);
+  --sobre-acento: var(--oxido);
+  --resalte: var(--ocre);
+  --sobre-resalte: var(--negro);
+  --marca: var(--negro);
+  --foco: var(--crema);
+}
+[data-theme="vino"] {
+  --fondo: var(--vino);
+  --fondo-alt: #36171b;
+  --texto: var(--crema);
+  --texto-suave: #c5bbb5;
+  --linea: var(--crema);
+  --linea-suave: #684d50;
+  --acento: var(--ocre);
+  --sobre-acento: var(--negro);
+  --resalte: var(--azul);
+  --sobre-resalte: var(--negro);
+  --marca: var(--crema);
+  --foco: var(--ocre);
+}
+[data-theme="azul"] {
+  --fondo: var(--azul);
+  --fondo-alt: #a2bec5;
+  --texto: var(--negro);
+  --texto-suave: var(--vino);
+  --linea: var(--negro);
+  --linea-suave: #6c8590;
+  --acento: var(--vino);
+  --sobre-acento: var(--crema);
+  --resalte: var(--ocre);
+  --sobre-resalte: var(--negro);
+  --marca: var(--negro);
+  --foco: var(--negro);
+}
+:root {
+  --espacio-1: 4px; /* Ajustes finos: separación entre estrellas, íconos y texto. */
+  --espacio-2: 8px; /* Dentro de controles: entre ícono y etiqueta; relleno lateral de insignias. */
+  --espacio-3: 12px; /* Entre miniaturas de la galería; relleno vertical de filas de la ficha. */
+  --espacio-4: 16px; /* Entre elementos de un grupo: enlaces del filtro, nombre y precio. */
+  --espacio-6: 24px; /* Relleno lateral de botones; separación entre columnas de tarjetas. */
+  --espacio-8: 32px; /* Entre bloques de una misma sección. */
+  --espacio-12: 48px; /* Entre secciones en móvil; columnas del pie de página. */
+  --espacio-16: 64px; /* Entre título de sección y su contenido en escritorio. */
+  --espacio-24: 96px; /* Entre secciones en escritorio. */
+  --espacio-32: 128px; /* Respiro antes y después de la portada y del manifiesto. */
+  --radio-0: 0px; /* Todo: botones, campos, insignias, tarjetas e imágenes. La marca es rectilínea (etiquetas colgantes, cajas, sellos). */
+  --borde-fino: 1px; /* Filetes, bordes de botón secundario, divisiones de la ficha y del proceso. */
+  --borde-foco: 2px; /* Grosor del anillo de foco (color foco, separación 2 px). */
+  --logo-min: 32px; /* Altura mínima del logotipo en pantalla (brandbook). */
+  --monograma-min: 37px; /* Altura mínima del monograma en pantalla (brandbook). */
+  --contenido-max: 1440px; /* Ancho máximo del contenido; las fotos y bloques de color pueden ir a sangre. */
+  --lectura-max: 640px; /* Medida máxima de párrafos y reseñas. */
+  --margen: 48px; /* Margen lateral de página en escritorio. */
+  --margen-movil: 16px; /* Margen lateral de página en móvil. */
+  --font-sans: "Neue Haas Unica Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, Menlo, Consolas, monospace;
+  --text-display: 400 88px/88px var(--font-sans); /* Una por pantalla: portada de Home y aperturas de sección. */
+  --text-titulo-1: 400 56px/60px var(--font-sans); /* Título de página: Catálogo, Nosotros. */
+  --text-titulo-2: 400 40px/44px var(--font-sans); /* Títulos de sección. */
+  --text-titulo-3: 400 28px/34px var(--font-sans); /* Nombre de la pieza en su ficha; títulos de bloque. */
+  --text-enfasis: 700 24px/30px var(--font-sans); /* Énfasis del brandbook (Bold, 25 pt): frases destacadas. Nunca más de dos líneas. */
+  --text-cuerpo-lg: 400 20px/30px var(--font-sans); /* Manifiesto, introducciones y reseñas. */
+  --text-cuerpo: 400 16px/24px var(--font-sans); /* Párrafos y descripción de la pieza. Medida máxima: lectura-max. */
+  --text-cuerpo-sm: 400 14px/20px var(--font-sans); /* Textos de apoyo: pasos del proceso, avisos, pie de página. */
+  --text-precio: 500 16px/24px var(--font-sans); /* Precio en tarjetas y ficha. Cifras tabulares, separador de miles con coma, sin precio tachado. */
+  --text-subtitulo: 300 18px/26px var(--font-mono); /* Subtítulos del brandbook (tracking 200): lemas y aperturas de sección. */
+  --text-etiqueta: 400 12px/16px var(--font-mono); /* Navegación, botones, insignias, rótulos de la ficha técnica. */
+  --text-dato: 400 13px/20px var(--font-mono); /* Valores de la ficha técnica y metadatos de la pieza: número, madera, año, medidas. */
+}
+.display {
+  font-family: var(--font-sans);
+  font-size: 88px;
+  line-height: 88px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.titulo-1 {
+  font-family: var(--font-sans);
+  font-size: 56px;
+  line-height: 60px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.titulo-2 {
+  font-family: var(--font-sans);
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.titulo-3 {
+  font-family: var(--font-sans);
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.enfasis {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.cuerpo-lg {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.cuerpo {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.cuerpo-sm {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.precio {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.subtitulo {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+}
+.etiqueta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+.dato {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("fonts/NeueHaasUnicaPro-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("fonts/NeueHaasUnicaPro-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("fonts/NeueHaasUnicaPro-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("fonts/NeueHaasUnicaPro-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Mono";
+  src: url("fonts/DMMono-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Mono";
+  src: url("fonts/DMMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("../_blob/84598547ef51f09442e1edfcb56074ff") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("../_blob/22ea82b9649b2ad6cc2c4f6e38a894fd") format("truetype");
+  font-weight: 950;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DMMono";
+  src: url("../_blob/893e15b39905f1a18c199bc6600ff8f3") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DMMono";
+  src: url("../_blob/5923d6dd1a4845c9ebc6ac25875fbf95") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DMMono Light Italic";
+  src: url("../_blob/b2e43668ec8720e86b0e9bc985002570") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DMMono";
+  src: url("../_blob/b12eaea392145290d83aaa177fd3d415") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DMMono Medium Italic";
+  src: url("../_blob/f09dbb8846b88b6d2e02d0b3d4c37754") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DMMono";
+  src: url("../_blob/f06cca10dfbfd5818a4d49cc349b5369") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

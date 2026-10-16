@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ache · Ficha de kit (escritorio)</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ache/tokens.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--acento)}
+</style>
+</helmet>
+<div data-theme="crema" style="background: var(--fondo); color: var(--texto); font-family: var(--font-sans); font-size: 16px; line-height: 24px; overflow: hidden">
+
+<!-- ENCABEZADO: fijo; se oculta al bajar y vuelve al subir -->
+<header style="position: sticky; top: 0; z-index: 50; box-sizing: border-box; height: 68px; padding: 0 10%; display: flex; align-items: center; justify-content: space-between; gap: 32px; background: var(--fondo); border-bottom: 1px solid var(--linea-suave); transform: {{hdrMover}}; transition: transform 350ms ease">
+  <a href="Main.dc.html" aria-label="Ache, inicio" style="display: flex; align-items: center; height: 44px">
+    <img src="./assets/76eb2481528a9eb10bb84a496025ee3c.svg" alt="Ache" style="display: block; height: 32px">
+  </a>
+  <nav aria-label="Principal" style="display: flex; align-items: center; gap: clamp(26px, 2.9vw, 56px); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.1em">
+    <a href="Catalogo.dc.html" style="padding: 14px 0">CATÁLOGO</a>
+    <a href="Catalogo.dc.html" style="padding: 14px 0">RECIÉN LLEGADOS</a>
+    <a href="Kits.dc.html" aria-current="page" style="padding: 14px 0 3px; border-bottom: 1px solid currentColor">KITS</a>
+    <a href="Nosotros.dc.html" style="padding: 14px 0">QUIÉNES SOMOS</a>
+    <a href="#" style="padding: 14px 0">WHATSAPP</a>
+    <a href="#" style="padding: 14px 0">BUSCAR</a>
+    <a href="#" style="padding: 14px 0">CUENTA</a>
+    <a href="#" style="padding: 14px 0">CARRITO ({{carrito}})</a>
+  </nav>
+</header>
+
+<!-- RUTA -->
+<nav aria-label="Ruta" style="box-sizing: border-box; padding: 20px 10% 0; display: flex; gap: 10px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">
+  <a href="Main.dc.html" style="padding: 14px 0">INICIO</a>
+  <span aria-hidden="true" style="padding: 14px 0">›</span>
+  <a href="Kits.dc.html" style="padding: 14px 0">KITS</a>
+  <span aria-hidden="true" style="padding: 14px 0">›</span>
+  <span style="padding: 14px 0; color: var(--texto)">SALA COPENHAGUE</span>
+</nav>
+
+<!-- GALERÍA A LA IZQUIERDA, INFORMACIÓN DEL KIT A LA DERECHA -->
+<section style="box-sizing: border-box; padding: 16px 10% 0; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 64px">
+
+  <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+    <div style="position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--fondo-alt)">
+      <sc-if value="{{vistaFrente}}" hint-placeholder-val="{{true}}">
+        <img src="./assets/0269b5dce12dd328d6c6951018b8ed9f.jpg" alt="Sillón y otomana verdes de la Sala Copenhague en un estudio de muros blancos" style="display: block; width: 100%; height: 100%; object-fit: cover">
+      </sc-if>
+      <sc-if value="{{vistaDetalle}}" hint-placeholder-val="{{false}}">
+        <img src="./assets/0a1a40821d7e478d7cf6fcdcdeb8520e.jpg" alt="Sillón gris de la Sala Copenhague" style="display: block; width: 100%; height: 100%; object-fit: cover">
+      </sc-if>
+      <sc-if value="{{vistaVeta}}" hint-placeholder-val="{{false}}">
+        <img src="./assets/ee8d027aeee60146307e9f5ced003c12.jpg" alt="Sofá de tres plazas de la Sala Copenhague junto a una escultura de bloques de madera" style="display: block; width: 100%; height: 100%; object-fit: cover">
+      </sc-if>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+      <button type="button" aria-label="Vista del sillón y la otomana" onClick="{{verFrente}}" style="padding: 0; border: 1px solid var(--linea-suave); background: var(--fondo-alt); aspect-ratio: 1 / 1; overflow: hidden; cursor: pointer">
+        <img src="./assets/0269b5dce12dd328d6c6951018b8ed9f.jpg" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover">
+      </button>
+      <button type="button" aria-label="Vista del sillón gris" onClick="{{verDetalle}}" style="padding: 0; border: 1px solid var(--linea-suave); background: var(--fondo-alt); aspect-ratio: 1 / 1; overflow: hidden; cursor: pointer">
+        <img src="./assets/0a1a40821d7e478d7cf6fcdcdeb8520e.jpg" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover">
+      </button>
+      <button type="button" aria-label="Vista del sofá" onClick="{{verVeta}}" style="padding: 0; border: 1px solid var(--linea-suave); background: var(--fondo-alt); aspect-ratio: 1 / 1; overflow: hidden; cursor: pointer">
+        <img src="./assets/ee8d027aeee60146307e9f5ced003c12.jpg" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover">
+      </button>
+    </div>
+  </div>
+
+  <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 28px; padding-top: 8px">
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--acento)">KIT NO. 0151 · 4 PIEZAS</div>
+      <h1 style="margin: 0; font-size: 40px; line-height: 44px; font-weight: 400">Sala Copenhague</h1>
+      <div style="font-size: 20px; line-height: 30px; font-weight: 500">$46,800 MXN <span style="font-weight: 400; color: var(--texto-suave)">· el conjunto</span></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 400; letter-spacing: 0.12em; color: var(--texto-suave)">DESCRIPCIÓN</h2>
+      <p style="margin: 0; max-width: 520px">Sofá de tres plazas, sillón verde, otomana verde y sillón gris que llegaron juntos al taller. Los restauramos como un conjunto: reforzamos la estructura de nogal, cambiamos la espuma y los tapizamos en lana, para que las cuatro piezas conserven el mismo tono. Se venden juntos.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+      <h2 style="margin: 0; padding-bottom: 8px; border-bottom: 1px solid var(--linea); font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 400; letter-spacing: 0.12em; color: var(--texto-suave)">FICHA DEL KIT</h2>
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--linea-suave); font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em"><span style="color: var(--texto-suave)">INCLUYE</span><span>SOFÁ, DOS SILLONES Y OTOMANA</span></div>
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--linea-suave); font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em"><span style="color: var(--texto-suave)">SOFÁ</span><span>210 × 85 × 78 CM</span></div>
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--linea-suave); font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em"><span style="color: var(--texto-suave)">SILLONES</span><span>75 × 80 × 78 CM C/U</span></div>
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--linea-suave); font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em"><span style="color: var(--texto-suave)">OTOMANA</span><span>60 × 60 × 42 CM</span></div>
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--linea-suave); font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em"><span style="color: var(--texto-suave)">MADERA</span><span>NOGAL</span></div>
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--linea-suave); font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em"><span style="color: var(--texto-suave)">TAPICERÍA</span><span>LANA GRIS Y VERDE</span></div>
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--linea-suave); font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em"><span style="color: var(--texto-suave)">AÑO</span><span>CIRCA 1965</span></div>
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--linea-suave); font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em"><span style="color: var(--texto-suave)">INTERVENCIÓN</span><span>ESTRUCTURA, TAPIZ Y ACABADO AL ACEITE</span></div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 12px">
+      <button type="button" onClick="{{agregar}}" style="flex: 1 1 220px; height: 52px; padding: 0 14px; border: 1px solid var(--texto); background: var(--texto); color: var(--fondo); font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; cursor: pointer">{{textoBoton}}</button>
+      <a href="#" style="flex: 1 1 220px; box-sizing: border-box; height: 52px; padding: 0 14px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--linea); font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">PREGUNTAR POR WHATSAPP</a>
+    </div>
+
+    <p style="margin: 0; font-size: 14px; line-height: 20px; color: var(--texto-suave)">Las cuatro piezas se venden y se entregan juntas. Entrega de 3 a 5 días hábiles en la Zona Metropolitana de Guadalajara. El flete se cotiza aparte del precio, según tamaño, distancia y piso.</p>
+
+    <div style="display: flex; flex-direction: column">
+      <h2 style="margin: 0 0 12px; font-size: 20px; line-height: 30px; font-weight: 400">Más sobre este kit</h2>
+      <button type="button" style="display: flex; justify-content: space-between; align-items: center; height: 52px; padding: 0; border: 0; border-top: 1px solid var(--linea); background: none; color: var(--texto); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; cursor: pointer"><span>HISTORIA</span><span aria-hidden="true">+</span></button>
+      <button type="button" style="display: flex; justify-content: space-between; align-items: center; height: 52px; padding: 0; border: 0; border-top: 1px solid var(--linea); background: none; color: var(--texto); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; cursor: pointer"><span>CUIDADOS</span><span aria-hidden="true">+</span></button>
+      <button type="button" style="display: flex; justify-content: space-between; align-items: center; height: 52px; padding: 0; border: 0; border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); background: none; color: var(--texto); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; cursor: pointer"><span>ENTREGAS Y PAGOS</span><span aria-hidden="true">+</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- LAS PIEZAS DEL KIT: se venden juntas -->
+<section style="box-sizing: border-box; padding: 120px 10% 0; display: flex; flex-direction: column; gap: 40px">
+  <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px">
+    <h2 style="margin: 0; font-size: 40px; line-height: 44px; font-weight: 400">Las piezas del kit</h2>
+    <p style="margin: 0; flex: 0 1 560px">Las cuatro piezas comparten la misma madera y el mismo tapiz porque llegaron juntas. Por eso las restauramos al mismo tiempo y no las separamos.</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px">
+    <div style="display: flex; flex-direction: column">
+      <div style="aspect-ratio: 3 / 4; overflow: hidden; background: var(--fondo-alt)"><img src="./assets/cbf1ce74a3ab11b38935c3e37daa8666.jpg" alt="Sofá de tres plazas tapizado en lana gris con estructura de nogal" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
+      <div style="margin-top: 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 16px">
+        <span style="font-size: 17px; line-height: 22px">Sofá de tres plazas</span>
+        <span style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.1em; color: var(--texto-suave); white-space: nowrap">1 DE 4</span>
+      </div>
+      <div style="margin-top: 4px; font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.1em; color: var(--acento)">210 × 85 × 78 CM · NOGAL</div>
+    </div>
+    <div style="display: flex; flex-direction: column">
+      <div style="aspect-ratio: 3 / 4; overflow: hidden; background: var(--fondo-alt)"><img src="./assets/65cd33310f764265095371ab3766bc1f.jpg" alt="Sillón de nogal tapizado en lana verde" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
+      <div style="margin-top: 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 16px">
+        <span style="font-size: 17px; line-height: 22px">Sillón verde</span>
+        <span style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.1em; color: var(--texto-suave); white-space: nowrap">2 DE 4</span>
+      </div>
+      <div style="margin-top: 4px; font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.1em; color: var(--acento)">75 × 80 × 78 CM · NOGAL</div>
+    </div>
+    <div style="display: flex; flex-direction: column">
+      <div style="aspect-ratio: 3 / 4; overflow: hidden; background: var(--fondo-alt)"><img src="./assets/157863add1499edc864d5fbaa00f3583.jpg" alt="Otomana de nogal tapizada en lana verde" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
+      <div style="margin-top: 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 16px">
+        <span style="font-size: 17px; line-height: 22px">Otomana verde</span>
+        <span style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.1em; color: var(--texto-suave); white-space: nowrap">3 DE 4</span>
+      </div>
+      <div style="margin-top: 4px; font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.1em; color: var(--acento)">60 × 60 × 42 CM · NOGAL</div>
+    </div>
+    <div style="display: flex; flex-direction: column">
+      <div style="aspect-ratio: 3 / 4; overflow: hidden; background: var(--fondo-alt)"><img src="./assets/86cb8d44e0e5c71eb3264c3e56aa1514.jpg" alt="Sillón de nogal tapizado en lana gris" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
+      <div style="margin-top: 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 16px">
+        <span style="font-size: 17px; line-height: 22px">Sillón gris</span>
+        <span style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.1em; color: var(--texto-suave); white-space: nowrap">4 DE 4</span>
+      </div>
+      <div style="margin-top: 4px; font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.1em; color: var(--acento)">75 × 80 × 78 CM · NOGAL</div>
+    </div>
+  </div>
+</section>
+
+<!-- EL TALLER -->
+<section data-theme="azul" style="margin-top: 96px; box-sizing: border-box; padding: 72px 10%; background: var(--fondo); color: var(--texto); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+  <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 16px; max-width: 640px">
+    <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">EL TALLER</div>
+    <h2 style="margin: 0; font-size: 40px; line-height: 44px; font-weight: 400">Lo que hay detrás de cada mueble</h2>
+    <a href="Nosotros.dc.html" style="padding: 14px 0 4px; border-bottom: 1px solid var(--linea); font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">CONOCE ACHE</a>
+  </div>
+  <img src="./assets/e58b4579814200d283a0efae6e5f4fa4.svg" alt="" style="height: 140px; display: block">
+</section>
+
+<!-- PIE -->
+<footer data-theme="vino" style="box-sizing: border-box; padding: 80px 10% 32px; background: var(--fondo); color: var(--texto); display: flex; flex-direction: column; gap: 64px">
+  <div style="display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between">
+    <div style="flex: 1 1 300px; max-width: 380px; display: flex; flex-direction: column; gap: 20px">
+      <img src="./assets/b4f546f58f012a1ac9033d258d007004.svg" alt="Ache" style="height: 32px; display: block; align-self: flex-start">
+      <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">MENOS REEMPLAZAR, MÁS RESTAURAR</div>
+      <form style="margin-top: 12px; display: flex; align-items: center; border-bottom: 1px solid var(--linea)">
+        <label for="correo-pie" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%)">Tu correo</label>
+        <input id="correo-pie" type="email" placeholder="Tu correo para avisarte de piezas nuevas" style="flex-grow: 1; min-width: 0; height: 44px; padding: 0; border: 0; background: none; color: var(--texto); font-family: var(--font-sans); font-size: 14px">
+        <button type="submit" aria-label="Suscribirme" style="width: 44px; height: 44px; padding: 0; border: 0; background: none; color: var(--texto); font-family: var(--font-sans); font-size: 20px; text-align: right; cursor: pointer">→</button>
+      </form>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">TIENDA</div>
+      <a href="Catalogo.dc.html" style="padding: 12px 0">Catálogo</a>
+      <a href="Catalogo.dc.html" style="padding: 12px 0">Recién llegados</a>
+      <a href="Kits.dc.html" style="padding: 12px 0">Kits</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">CLIENTES</div>
+      <a href="#" style="padding: 12px 0">Entregas y flete</a>
+      <a href="#" style="padding: 12px 0">Formas de pago</a>
+      <a href="#" style="padding: 12px 0">Políticas</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">ACHE</div>
+      <a href="Nosotros.dc.html" style="padding: 12px 0">Quiénes somos</a>
+      <a href="Nosotros.dc.html" style="padding: 12px 0">Reseñas</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">CONTACTO</div>
+      <a href="#" style="padding: 12px 0">WhatsApp</a>
+      <a href="#" style="padding: 12px 0">hola@estudioache.mx</a>
+      <a href="#" style="padding: 12px 0">Instagram</a>
+    </div>
+  </div>
+  <div style="padding-top: 24px; border-top: 1px solid var(--linea-suave); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">
+    <span>© 2026 ACHE · GUADALAJARA, MÉXICO</span>
+    <span>TARJETA · APPLE PAY · GOOGLE PAY · PAYPAL · TRANSFERENCIA · OXXO</span>
+    <span>SITIO POR CRAFTEO</span>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2629}}'>
+class Component extends DCLogic {
+componentDidMount() {
+  var self = this;
+  this._y = 0;
+  this._alBajar = function () {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    var oculto = y > 420 && y > self._y;
+    self._y = y;
+    if ((self.state || {}).oculto !== oculto) self.setState({ oculto: oculto });
+  };
+  window.addEventListener('scroll', this._alBajar, { passive: true });
+}
+componentWillUnmount() { window.removeEventListener('scroll', this._alBajar); }
+renderVals() {
+var self = this;
+var st = this.state || {};
+var vista = st.vista || 'frente';
+return {
+  hdrMover: st.oculto ? 'translateY(-100%)' : 'translateY(0)',
+  vistaFrente: vista === 'frente',
+  vistaDetalle: vista === 'detalle',
+  vistaVeta: vista === 'veta',
+  verFrente: function () { self.setState({ vista: 'frente' }); },
+  verDetalle: function () { self.setState({ vista: 'detalle' }); },
+  verVeta: function () { self.setState({ vista: 'veta' }); },
+  carrito: st.agregada ? 1 : 0,
+  textoBoton: st.agregada ? 'KIT AGREGADO AL CARRITO' : 'AGREGAR EL KIT AL CARRITO',
+  agregar: function () { self.setState({ agregada: true }); }
+};
+}
+}
+</script>
+</body>
+</html>

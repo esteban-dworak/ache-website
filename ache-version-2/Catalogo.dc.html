@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ache · Catálogo</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ache/tokens.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--acento)}
+.celda:hover{background:var(--fondo-alt)}
+.celdas > :nth-child(4n){border-right:0 !important}
+.menu a:hover{color:var(--acento)}
+.nav a:hover{color:inherit}
+.nav a:hover > span{border-bottom-color:currentColor !important}
+.nav .menu a:hover{color:var(--acento)}
+.filtro button:hover{color:var(--texto)}
+.ver-mas:hover{color:var(--acento) !important}
+button{cursor:pointer}
+input::placeholder{color:var(--texto-suave);opacity:1}
+/* CSS_FICHA_V2 */
+.galeria:focus-visible,.dibujos:focus-visible{outline:2px solid var(--texto);outline-offset:4px}
+.comprar{transition:background-color .2s ease}
+.comprar:hover{background:var(--acento) !important;color:var(--sobre-acento) !important}
+.comprar[disabled]:hover{background:transparent !important;color:var(--texto-suave) !important}
+.rel:hover{background:var(--fondo-alt)}
+.celda:hover{background:var(--fondo-alt)}
+.boton:hover{background:var(--acento) !important}
+.boton-2:hover{color:var(--acento)}
+@keyframes avance{from{width:0}to{width:100%}}
+</style>
+</helmet>
+<div data-theme="crema" style="background: var(--fondo); color: var(--texto); font-family: var(--font-sans); font-size: 17px; line-height: 26px">
+<sc-if value="{{sinFicha}}" hint-placeholder-val="{{true}}">
+
+<!-- ENCABEZADO: fijo; se oculta al bajar y vuelve al subir -->
+<header style="position: sticky; top: 0; z-index: 50; box-sizing: border-box; height: 71px; padding: 0 31px 0 32px; display: flex; align-items: center; justify-content: space-between; background: var(--fondo); color: var(--texto); border-bottom: 1px solid var(--linea); transform: {{hdrMover}}; transition: transform 350ms ease">
+  <a href="Main.dc.html" aria-label="Ache, inicio" style="display: flex; align-items: center; height: 44px">
+    <img src="./assets/6230aeafea2c605cd7a6249bfc7eb14a.svg" alt="" style="display: block; height: 37px">
+  </a>
+  <nav class="nav" aria-label="Principal" style="display: flex; align-items: center; gap: 20px; font-family: var(--font-mono); font-size: 14px; line-height: 16px; letter-spacing: 0.04em">
+    <div onMouseEnter="{{abrirNosotros}}" onMouseLeave="{{cerrarMenu}}" style="position: relative">
+      <a href="Nosotros.dc.html" onFocus="{{abrirNosotros}}" style="display: block; padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid {{lineaNosotros}}">QUIÉNES SOMOS</span></a>
+      <sc-if value="{{menuNosotros}}" hint-placeholder-val="{{false}}">
+        <div class="menu" style="position: absolute; top: 70px; left: -16px; z-index: 60; box-sizing: border-box; width: 236px; padding: 17px 16px 15px; background: var(--fondo); color: var(--texto); border-top: 1px solid var(--linea); display: flex; flex-direction: column; font-size: 12px; line-height: 28px; letter-spacing: 0.06em">
+          <a href="Nosotros.dc.html">NUESTRA HISTORIA</a>
+          <a href="Nosotros.dc.html">LA SELECCIÓN</a>
+          <a href="Nosotros.dc.html">LA MADERA</a>
+          <a href="Nosotros.dc.html">LA CARPINTERÍA</a>
+          <a href="Nosotros.dc.html">LA TAPICERÍA</a>
+          <a href="Nosotros.dc.html">LOS ACABADOS</a>
+          <a href="Nosotros.dc.html">RESEÑAS</a>
+        </div>
+      </sc-if>
+    </div>
+    <div onMouseEnter="{{abrirCatalogo}}" onMouseLeave="{{cerrarMenu}}">
+      <a href="Catalogo.dc.html" aria-current="page" onFocus="{{abrirCatalogo}}" style="display: block; padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid currentColor">CATÁLOGO</span></a>
+      <sc-if value="{{menuCatalogo}}" hint-placeholder-val="{{false}}">
+        <div class="menu" style="position: absolute; top: 70px; left: 0; right: 0; z-index: 60; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); color: var(--texto); font-family: var(--font-sans); letter-spacing: 0; border-bottom: 1px solid var(--linea)">
+          <div style="box-sizing: border-box; padding: 37px 28px 32px; background: var(--fondo-alt)">
+            <div style="font-size: 25px; line-height: 32px">Destacados</div>
+            <div style="margin-top: 21px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+              <a href="#ficha" onClick="{{abrir.k0151}}" style="display: flex; flex-direction: column">
+                <img src="./assets/c4eb2362240f917f3ba0b55306a75837.jpg" alt="Sillón y otomana verdes con estructura de nogal" style="display: block; width: 100%; aspect-ratio: 436 / 349; object-fit: cover">
+                <span style="margin-top: 12px; font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: 0.08em; color: var(--texto-suave)">KIT</span>
+                <span style="margin-top: 6px; font-size: 15px; line-height: 20px">Sala Copenhague</span>
+              </a>
+              <a href="#ficha" onClick="{{abrir.n0148}}" style="display: flex; flex-direction: column">
+                <img src="./assets/11b26f4240e9e417a59253218499d575.jpg" alt="Escritorio de teca con patas en X, cajonera y cubierta de piel" style="display: block; width: 100%; aspect-ratio: 436 / 349; object-fit: cover">
+                <span style="margin-top: 12px; font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: 0.08em; color: var(--texto-suave)">PIEZA DESTACADA</span>
+                <span style="margin-top: 6px; font-size: 15px; line-height: 20px">Escritorio de patas en X</span>
+              </a>
+            </div>
+          </div>
+          <div style="box-sizing: border-box; padding: 32px 32px 36px; background: var(--fondo); border-left: 1px solid var(--linea); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start">
+            <div style="display: flex; flex-direction: column">
+              <div style="font-size: 25px; line-height: 32px">Tipos</div>
+              <div style="margin-top: 22px; display: flex; flex-direction: column; font-family: var(--font-mono); font-size: 12px; line-height: 24px; letter-spacing: 0.06em">
+                <a href="Catalogo.dc.html">SILLAS</a>
+                <a href="Catalogo.dc.html">SILLONES</a>
+                <a href="Catalogo.dc.html">MESAS</a>
+                <a href="Catalogo.dc.html">BANCAS Y BANCOS</a>
+                <a href="Catalogo.dc.html">COMPLEMENTOS</a>
+                <a href="Kits.dc.html">KITS</a>
+                <a href="Catalogo.dc.html">VER TODO</a>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <div style="font-size: 25px; line-height: 32px">Kits</div>
+              <div style="margin-top: 22px; display: flex; flex-direction: column; font-family: var(--font-mono); font-size: 12px; line-height: 24px; letter-spacing: 0.06em">
+                <a href="#ficha" onClick="{{abrir.k0151}}">SALA COPENHAGUE</a>
+                <a href="#ficha" onClick="{{abrir.k0180}}">COMEDOR BERGEN</a>
+                <a href="#ficha" onClick="{{abrir.k0181}}">SILLAS LISBOA</a>
+                <a href="#ficha" onClick="{{abrir.k0182}}">ESCALÓN EN NOGAL</a>
+                <a href="#ficha" onClick="{{abrir.k0183}}">ESCALÓN EN NEGRO</a>
+                <a href="Kits.dc.html">VER TODOS</a>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <div style="font-size: 25px; line-height: 32px">Recién llegados</div>
+              <div style="margin-top: 22px; display: flex; flex-direction: column; font-family: var(--font-mono); font-size: 12px; line-height: 24px; letter-spacing: 0.06em">
+                <a href="#ficha" onClick="{{abrir.k0180}}">COMEDOR BERGEN</a>
+                <a href="#ficha" onClick="{{abrir.n0179}}">SILLA DE REJILLA</a>
+                <a href="#ficha" onClick="{{abrir.n0173}}">SILLÓN DE REJILLA EN TIJERA</a>
+                <a href="#ficha" onClick="{{abrir.k0181}}">SILLAS LISBOA</a>
+                <a href="#ficha" onClick="{{abrir.n0172}}">LÁMPARA DE PIE DE TECA</a>
+                <a href="#ficha" onClick="{{abrir.n0178}}">MESA DE CENTRO TRIANGULAR</a>
+                <a href="Catalogo.dc.html">VER TODOS</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+    <a href="Kits.dc.html" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">KITS</span></a>
+    <a href="Catalogo.dc.html" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">RECIÉN LLEGADOS</span></a>
+    <a href="Contacto.dc.html" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">CONTACTO</span></a>
+    <a href="#" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">WHATSAPP</span></a>
+    <a href="#" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">BUSCAR</span></a>
+    <a href="#" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">CARRITO ({{carritoN}})</span></a>
+  </nav>
+</header>
+
+<!-- TÍTULO -->
+<section aria-label="Título" style="box-sizing: border-box; height: 140px; padding: 41px 32px 0; border-bottom: 1px solid var(--linea)">
+  <h1 style="margin: 0; font-size: 48px; line-height: 56px; font-weight: 400">Catálogo</h1>
+</section>
+
+<!-- FILTRO: solo por tipo de mueble; se queda pegado arriba al bajar -->
+<div class="filtro" role="group" aria-label="Filtrar por tipo" style="position: sticky; top: {{filtroTop}}; z-index: 40; box-sizing: border-box; height: 54px; padding: 0 32px; display: flex; align-items: center; gap: 18px; background: var(--fondo); border-bottom: 1px solid var(--linea); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.06em; transition: top 350ms ease">
+  <span style="color: var(--texto-suave)">FILTRAR POR TIPO:</span>
+  <sc-for list="{{tipos}}" as="t" hint-placeholder-count="7">
+    <button type="button" onClick="{{t.elegir}}" aria-pressed="{{t.marcado}}" style="box-sizing: border-box; height: 44px; padding: 0; border: 0; background: transparent; color: {{t.color}}; font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.06em"><span style="padding-bottom: 3px; border-bottom: 1px solid {{t.linea}}">{{t.nombre}}</span></button>
+  </sc-for>
+</div>
+
+<!-- CUADRÍCULA CON BORDES -->
+<section aria-label="Piezas">
+  <div class="celdas" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr))">
+    <sc-for list="{{piezas}}" as="p" hint-placeholder-count="8">
+      <div class="celda" style="position: relative; box-sizing: border-box; padding: 64px 64px 44px; border-right: 1px solid var(--linea); border-bottom: 1px solid var(--linea); display: flex; flex-direction: column; color: var(--texto)">
+        <div style="position: relative">
+          <img src="{{p.foto}}" alt="{{p.alt}}" style="display: block; width: 100%; aspect-ratio: 347 / 463; object-fit: cover">
+          <sc-if value="{{p.nuevo}}" hint-placeholder-val="{{false}}">
+            <span style="position: absolute; left: 12px; top: 12px; padding: 4px 8px; background: var(--resalte); color: var(--sobre-resalte); font-family: var(--font-mono); font-size: 11px; line-height: 14px; letter-spacing: 0.08em">RECIÉN LLEGADO</span>
+          </sc-if>
+          <sc-if value="{{p.vendido}}" hint-placeholder-val="{{false}}">
+            <span style="position: absolute; left: 12px; top: 12px; padding: 4px 8px; background: var(--acento); color: var(--sobre-acento); font-family: var(--font-mono); font-size: 11px; line-height: 14px; letter-spacing: 0.08em">VENDIDO</span>
+          </sc-if>
+          <sc-if value="{{p.kit}}" hint-placeholder-val="{{false}}">
+            <span style="position: absolute; left: 12px; top: 12px; padding: 3px 7px; border: 1px solid var(--linea); background: var(--fondo); color: var(--texto); font-family: var(--font-mono); font-size: 11px; line-height: 14px; letter-spacing: 0.08em">KIT</span>
+          </sc-if>
+        </div>
+        <div style="margin-top: 28px; font-size: 14px; line-height: 20px">{{p.nombre}}</div>
+        <div style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.04em; color: {{p.colorDato}}">{{p.dato}}</div>
+        <a href="#ficha" onClick="{{p.abrir}}" aria-label="Ver {{p.nombre}}" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0"></a>
+      </div>
+    </sc-for>
+  </div>
+  <div style="box-sizing: border-box; height: 86px; display: flex; align-items: center; justify-content: center; gap: 40px; border-bottom: 1px solid var(--linea); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.06em">
+    <span>{{conteo}}</span>
+    <sc-if value="{{hayMas}}" hint-placeholder-val="{{true}}">
+      <button type="button" class="ver-mas" onClick="{{verMas}}" style="box-sizing: border-box; height: 44px; padding: 0; border: 0; background: transparent; color: var(--texto); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.06em"><span style="padding-bottom: 5px; border-bottom: 1px solid currentColor">{{verMasTexto}}</span></button>
+    </sc-if>
+  </div>
+</section>
+
+<!-- EL OFICIO -->
+<section aria-label="El oficio" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--linea)">
+  <div style="box-sizing: border-box; aspect-ratio: 952 / 634; padding: 72px 64px 63px; border-right: 1px solid var(--linea); display: flex; flex-direction: column; align-items: flex-start">
+    <h2 style="margin: 0; font-size: 50px; line-height: 60px; font-weight: 400; font-style: italic">El oficio de restaurar</h2>
+    <p style="margin: 6px 0 0; max-width: 520px; font-size: 22px; line-height: 28px">Elegimos cada pieza por su estructura y su madera, la desarmamos y la devolvemos a su mejor versión, sin borrarle la historia.</p>
+    <a href="Nosotros.dc.html" style="margin-top: auto; font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.06em; padding-bottom: 6px; border-bottom: 1px solid currentColor">CONOCE CÓMO TRABAJAMOS →</a>
+  </div>
+  <div style="position: relative; box-sizing: border-box; aspect-ratio: 952 / 634; overflow: hidden; background: var(--fondo-alt)">
+    <img src="./assets/8addd19d1e4d60a07bafbf78fe65f2f4.jpg" alt="Credenza de nogal con frente acanalado sobre un fondo claro" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover">
+  </div>
+</section>
+
+<!-- SUSCRIPCIÓN -->
+<section aria-label="Suscripción" style="box-sizing: border-box; height: 126px; padding: 0 30px 0 32px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; border-bottom: 1px solid var(--linea)">
+  <h2 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 400">Recibe primero las piezas nuevas</h2>
+  <sc-if value="{{sinSuscribir}}" hint-placeholder-val="{{true}}">
+    <form onSubmit="{{suscribir}}" style="display: flex; align-items: center; gap: 92px">
+      <label style="flex: 1 1 auto; min-width: 0">
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Correo electrónico</span>
+        <input type="email" required="" placeholder="Tu correo electrónico" style="box-sizing: border-box; width: 100%; height: 52px; padding: 0; border: 0; border-bottom: 1px solid var(--linea); border-radius: 0; background: transparent; color: var(--texto); font-family: var(--font-sans); font-size: 15px; outline-offset: 4px">
+      </label>
+      <button type="submit" style="flex: 0 0 276px; height: 60px; border: 0; background: var(--texto); color: var(--fondo); font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.08em">SUSCRIBIRME →</button>
+    </form>
+  </sc-if>
+  <sc-if value="{{suscrito}}" hint-placeholder-val="{{false}}">
+    <p style="margin: 0; font-size: 17px; line-height: 26px">Listo. Te escribiremos en cuanto lleguen piezas nuevas.</p>
+  </sc-if>
+</section>
+
+<!-- PIE -->
+<footer>
+  <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; border-bottom: 1px solid var(--linea)">
+    <div style="box-sizing: border-box; height: 194px; padding: 32px 27px; border-right: 1px solid var(--linea)">
+      <img src="./assets/9e52996ad4f96e8afed37b893e7c8318.svg" alt="Ache" style="display: block; height: 34px">
+    </div>
+    <nav aria-label="Ayuda" style="box-sizing: border-box; padding: 33px 32px; border-right: 1px solid var(--linea); display: flex; flex-direction: column; align-items: flex-start; gap: 17px">
+      <a href="Contacto.dc.html">Preguntas frecuentes</a>
+      <a href="Contacto.dc.html">Envíos y entregas</a>
+      <a href="Contacto.dc.html">Cuidado de tu mueble</a>
+    </nav>
+    <div style="box-sizing: border-box; padding: 33px 32px; display: flex; flex-direction: column; gap: 17px">
+      <span>Entregamos en la Zona Metropolitana de Guadalajara.</span>
+      <span style="color: var(--texto-suave)">Tarjeta, Apple Pay, Google Pay, PayPal, transferencia y OXXO.</span>
+    </div>
+  </div>
+  <div style="box-sizing: border-box; height: 64px; padding: 0 35px 0 27px; display: flex; align-items: center; justify-content: space-between">
+    <nav aria-label="Redes" style="display: flex; gap: 22px">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">WhatsApp</a>
+    </nav>
+    <span>© 2026 Ache · Sitio por Crafteo</span>
+  </div>
+</footer>
+
+</sc-if>
+<sc-if value="{{conFicha}}" hint-placeholder-val="{{false}}">
+<dc-import name="Pieza" codigo="{{fichaCodigo}}" origen="Catalogo" al-volver="{{volverDeFicha}}" carrito="{{carritoLista}}" al-agregar="{{agregarAlCarrito}}" hint-size="100%,4940px"></dc-import>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4124}}'>
+var CODIGOS = ["NO. 0157", "NO. 0154", "NO. 0150", "NO. 0138", "NO. 0147", "NO. 0141", "NO. 0163", "NO. 0164", "NO. 0165", "NO. 0167", "NO. 0171", "NO. 0173", "NO. 0158", "NO. 0153", "NO. 0144", "NO. 0176", "NO. 0179", "NO. 0156", "NO. 0152", "NO. 0148", "NO. 0145", "NO. 0140", "NO. 0135", "NO. 0166", "NO. 0168", "NO. 0169", "NO. 0174", "NO. 0175", "NO. 0177", "NO. 0178", "NO. 0155", "NO. 0136", "NO. 0134", "NO. 0139", "NO. 0170", "NO. 0137", "NO. 0162", "NO. 0172", "KIT NO. 0151", "KIT NO. 0180", "KIT NO. 0181", "KIT NO. 0182", "KIT NO. 0183", "NO. 0149"];
+class Component extends DCLogic {
+componentDidMount() {
+  var self = this;
+  this._y = 0;
+  this._alBajar = function () {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    var dy = y - self._y;
+    self._y = y;
+    var st = self.state || {};
+    var oculto = !!st.oculto;
+    if (y < 300) oculto = false;
+    else if (dy > 4) oculto = true;
+    else if (dy < -4) oculto = false;
+    if (st.oculto !== oculto) self.setState({ oculto: oculto, menu: oculto ? '' : st.menu });
+  };
+  window.addEventListener('scroll', this._alBajar, { passive: true });
+  // en pantallas de menos de 1440 px el diseño se ve a escala, sin apretarse
+  this._escala = function () {
+    var w = window.innerWidth || 1440;
+    document.documentElement.style.zoom = w < 1440 ? String(Math.max(w / 1440, 0.5)) : '';
+  };
+  this._escala();
+  window.addEventListener('resize', this._escala);
+}
+componentWillUnmount() {
+  window.removeEventListener('scroll', this._alBajar);
+  window.removeEventListener('resize', this._escala);
+}
+renderVals() {
+  var self = this;
+  var st = this.state || {};
+  var fichaAbierta = st.ficha || '';
+  var carritoLista = st.carrito || [];
+  var abrirFicha = function (c) {
+    return function (e) {
+      if (e && e.preventDefault) e.preventDefault();
+      self._yAntes = window.scrollY || 0;
+      self.setState({ ficha: c, menu: '' });
+      if (window.scrollTo) window.scrollTo(0, 0);
+    };
+  };
+  var abrir = {};
+  CODIGOS.forEach(function (c) { abrir[(c.indexOf('KIT') === 0 ? 'k' : 'n') + c.slice(-4)] = abrirFicha(c); });
+  var menu = st.menu || '';
+  var datos = [
+    ["17f1754c8c9bc97bc5367a586882c175", "Silla de teca con respaldo de madera y asiento de rejilla", "Silla de rejilla", "NO. 0179 · $7,200", "sillas", "nuevo", "NO. 0179"],
+    ["b99dc9d040324e28003b28c6017ac492", "Mesa de roble con cubierta de parquet, del kit Comedor Bergen", "Comedor Bergen", "5 PIEZAS · $52,800", "kits", "kit", "KIT NO. 0180"],
+    ["9bed3f319f1f583b5f64be8c81a43412", "Sillón de teca con patas en tijera, asiento y respaldo de rejilla", "Sillón de rejilla en tijera", "NO. 0173 · $14,300", "sillones", "nuevo", "NO. 0173"],
+    ["90fcd341b8516910ab4c81fc00c87c41", "Lámpara de pie con base de teca calada y pantalla de fibra", "Lámpara de pie de teca", "NO. 0172 · $8,600", "complementos", "nuevo", "NO. 0172"],
+    ["9e7e16f0bb258000ab84de75911638fa", "Mesa de centro de roble con cubierta triangular", "Mesa de centro triangular", "NO. 0178 · $11,400", "mesas", "nuevo", "NO. 0178"],
+    ["3afc40de16230915ec983ab0a8842ad9", "Silla de nogal con brazos, respaldo de rejilla y asiento blanco, del kit Sillas Lisboa", "Sillas Lisboa", "6 PIEZAS · $41,400", "kits", "kit", "KIT NO. 0181"],
+    ["d6ef05669f2e461d471abc6b38dfafc1", "Sillón bajo de teca con patas cruzadas y rejilla", "Sillón de patas cruzadas", "NO. 0171 · $15,400", "sillones", "nuevo", "NO. 0171"],
+    ["04766d07c89f4df2a83afda1d29fc5e2", "Silla de teca con patas cruzadas y asiento de rejilla", "Silla plegable de rejilla", "NO. 0176 · $6,800", "sillas", "nuevo", "NO. 0176"],
+    ["766189e43964f07bdd16c8256a92f30a", "Mesa cuadrada de teca con patas cónicas", "Mesa cuadrada", "NO. 0177 · $10,900", "mesas", "", "NO. 0177"],
+    ["f9694a615ea98576988670f343ed2c03", "Mesa de centro redonda de fresno ebonizado", "Mesa de centro negra", "NO. 0175 · $13,900", "mesas", "", "NO. 0175"],
+    ["d53dfe1a422b4286ceadbadb104bd7d6", "Silla escalonada de nogal con cojines grises, del kit Escalón en nogal", "Escalón en nogal", "2 PIEZAS · $16,800", "kits", "kit", "KIT NO. 0182"],
+    ["74db477e96e23f093a6c666665b528f6", "Mesa auxiliar redonda de fresno teñido color vino", "Mesa auxiliar vino", "NO. 0174 · $7,800", "mesas", "", "NO. 0174"],
+    ["968a3d01b12b51cd8faaafee5f3abdec", "Banco alto de teca con aro reposapiés de latón", "Banco alto con aro de latón", "NO. 0170 · $6,900", "bancas", "", "NO. 0170"],
+    ["ca6fb9b9aa325aed55129e2767539bb1", "Silla escalonada de fresno ebonizado con respaldo verde, del kit Escalón en negro", "Escalón en negro", "2 PIEZAS · $16,800", "kits", "kit", "KIT NO. 0183"],
+    ["54975d925e0419855e8dc532d1fc95fe", "Consola de teca con dos cajones y patas en V", "Consola de dos cajones", "NO. 0169 · $11,800", "mesas", "", "NO. 0169"],
+    ["b0ea2bdecf34d3c7292fb7c01952f044", "Mesa auxiliar redonda de nogal con base en cruz", "Mesa auxiliar en cruz", "NO. 0168 · $6,400", "mesas", "", "NO. 0168"],
+    ["c7c7f2ee893a7d46fca2deeede07be72", "Sillón con tapiz gris y patas de teca oscura en V", "Sillón gris de patas oscuras", "NO. 0167 · $17,600", "sillones", "", "NO. 0167"],
+    ["3c35d1c8cff100ef3355546033948876", "Mesa de centro redonda de teca con patas de tabla", "Mesa de centro redonda", "NO. 0166 · $12,600", "mesas", "", "NO. 0166"],
+    ["8147022b8f74ebe4aa257b46f5798b46", "Sillón de teca con brazos anchos, asiento y respaldo de rejilla", "Sillón de rejilla con brazos", "NO. 0165 · $14,900", "sillones", "", "NO. 0165"],
+    ["f5fdc233891a6cdfd80a8007f4803f21", "Sillón de teca con patas en V y tapiz de lino claro", "Sillón de lino", "NO. 0164 · $16,200", "sillones", "", "NO. 0164"],
+    ["cda9a63aab019c70b5ffdec2fb7f17a4", "Sillón de teca con brazos, asiento de rejilla y respaldo alto de rejilla", "Sillón de rejilla alto", "NO. 0163 · $15,800", "sillones", "", "NO. 0163"],
+    ["6b8da60500aa653ea82825c779d3b03f", "Sofá de tres plazas con tapiz gris y estructura de nogal, del kit Sala Copenhague", "Sala Copenhague", "4 PIEZAS · $46,800", "kits", "kit", "KIT NO. 0151"],
+    ["21404c661abfe367467554149c15297b", "Biombo de nogal de tres hojas con tableros de tela", "Biombo de tres hojas", "NO. 0162 · $13,400", "complementos", "", "NO. 0162"],
+    ["bc5ceda51b2c9c68d5a2e1e4fbb27196", "Silla de comedor de teca con asiento y respaldo de rejilla", "Silla de comedor", "NO. 0158 · $7,800", "sillas", "", "NO. 0158"],
+    ["10824675bf1977dad7bc8b0e5e5ea9cd", "Sillón de madera con patas en X y cojines de lino", "Sillón de patas en X", "NO. 0157 · $18,900", "sillones", "", "NO. 0157"],
+    ["82ccae95345230bc9123f79b1c49b1ea", "Mesa de comedor rectangular de nogal con patas torneadas", "Mesa de comedor", "NO. 0156 · $28,600", "mesas", "", "NO. 0156"],
+    ["f294146f3d12a729f6fdde018ee52013", "Banca de teca con asiento de rejilla y patas en V", "Banca de teca", "NO. 0155 · $11,900", "bancas", "", "NO. 0155"],
+    ["4d7987d96d099ed008f8ff7d7faa0083", "Sillón con tapiz de terciopelo verde y brazos de madera", "Sillón de terciopelo verde", "NO. 0154 · $21,400", "sillones", "", "NO. 0154"],
+    ["c5c32227e8be96e220a7a09a86d3834a", "Silla de estudio de teca con paleta, asiento y respaldo de rejilla", "Silla de estudio", "NO. 0153 · $9,400", "sillas", "vendido", "NO. 0153"],
+    ["5214dcbd78b65d5dd2b79098ff40bbff", "Mesa de centro de madera con cubierta de cristal", "Mesa de centro con cristal", "NO. 0152 · $13,800", "mesas", "", "NO. 0152"],
+    ["6ac05c087754f4ddf0339fbdc5bd8a43", "Butaca sin brazos con tapiz de terciopelo olivo", "Butaca olivo", "NO. 0150 · $16,500", "sillones", "", "NO. 0150"],
+    ["257ae2d060f732b7cc20f38691462011", "Biombo de nogal de tres hojas con celosía de listones", "Biombo de celosía", "NO. 0149 · $12,800", "complementos", "", "NO. 0149"],
+    ["4851a06931d3e6ce6fcd3a54e62f7313", "Escritorio de teca con patas en X y cajonera", "Escritorio de patas en X", "NO. 0148 · $19,600", "mesas", "", "NO. 0148"],
+    ["140e4ac5aa457069ec3d99a6f1564ab6", "Sillón bajo de teca con asiento y respaldo de rejilla", "Sillón bajo de rejilla", "NO. 0147 · $17,200", "sillones", "", "NO. 0147"],
+    ["eb32719438bda7597ae55798e82ec663", "Mesa auxiliar de madera con revistero de rejilla", "Mesa auxiliar", "NO. 0145 · $8,900", "mesas", "", "NO. 0145"],
+    ["6d7bfc3629230a4c4cfe75ca3abb66ec", "Silla con estructura pintada de rojo, asiento de piel y respaldo de correas de piel con hebillas", "Silla intervenida", "NO. 0144 · $8,600", "sillas", "", "NO. 0144"],
+    ["adfbc3e3cda2662c2e40602d30be5cc8", "Sofá de dos plazas con cojines blancos y patas de teca", "Sofá de dos plazas", "NO. 0141 · $24,800", "sillones", "vendido", "NO. 0141"],
+    ["e1cc90eaa033b57aea670890df8ab5cf", "Mesa de centro con cubierta de mármol", "Mesa de mármol", "NO. 0140 · $15,400", "mesas", "", "NO. 0140"],
+    ["78cdda5b765a7d4a8a9d170756a1dcf8", "Otomana de nogal con cojín de lino blanco", "Otomana de lino", "NO. 0139 · $6,900", "bancas", "", "NO. 0139"],
+    ["09e51e1c7da2235a801f7edb7c30962a", "Butaca baja de teca con cojines de lino", "Butaca baja", "NO. 0138 · $14,500", "sillones", "", "NO. 0138"],
+    ["98b8114c0ad99c41e28687388a8882c1", "Revistero de teca con patas cruzadas", "Revistero", "NO. 0137 · $4,900", "complementos", "", "NO. 0137"],
+    ["3326ed7b5da4daa45caead191da73023", "Banca larga de teca con asiento de rejilla", "Banca de rejilla", "NO. 0136 · $9,700", "bancas", "", "NO. 0136"],
+    ["3072808978824b6b891892df6ac24efe", "Mesa de centro baja de parota con patas de tabla", "Mesa de centro baja", "NO. 0135 · $16,900", "mesas", "", "NO. 0135"],
+    ["1423aeebc2669788a317635e3def27d5", "Banco redondo de cedro de cuatro patas", "Banco redondo", "NO. 0134 · $4,600", "bancas", "vendido", "NO. 0134"]
+  ];
+  var tipo = st.tipo || 'todo';
+  var lista = datos.filter(function (d) { return tipo === 'todo' || d[4] === tipo; }).map(function (d) {
+    return {
+      foto: './assets/' + d[0] + '.jpg', alt: d[1], nombre: d[2], dato: d[3],
+      nuevo: d[5] === 'nuevo', vendido: d[5] === 'vendido', kit: d[5] === 'kit', abrir: abrirFicha(d[6]),
+      colorDato: d[5] === 'vendido' ? 'var(--acento)' : 'var(--texto-suave)'
+    };
+  });
+  var visibles = st.todas ? lista : lista.slice(0, 24);
+  var tipos = [['todo', 'TODO'], ['sillas', 'SILLAS'], ['sillones', 'SILLONES'], ['mesas', 'MESAS'], ['bancas', 'BANCAS Y BANCOS'], ['complementos', 'COMPLEMENTOS'], ['kits', 'KITS']].map(function (t) {
+    var on = t[0] === tipo;
+    return {
+      nombre: t[1], marcado: on ? 'true' : 'false',
+      color: on ? 'var(--texto)' : 'var(--texto-suave)',
+      linea: on ? 'currentColor' : 'transparent',
+      elegir: function () { self.setState({ tipo: t[0], todas: false }); }
+    };
+  });
+  return {
+    abrir: abrir,
+    sinFicha: !fichaAbierta,
+    conFicha: !!fichaAbierta,
+    fichaCodigo: fichaAbierta,
+    volverDeFicha: function (h) {
+      var y = self._yAntes || 0;
+      self.setState({ ficha: '' });
+      setTimeout(function () { var el = h ? document.getElementById(h) : null; if (el) el.scrollIntoView(); else window.scrollTo(0, y); }, 40);
+    },
+    carritoLista: carritoLista,
+    carritoN: carritoLista.length,
+    agregarAlCarrito: function (c) { if (carritoLista.indexOf(c) < 0) self.setState({ carrito: carritoLista.concat([c]) }); },
+    hdrMover: st.oculto ? 'translateY(-100%)' : 'translateY(0)',
+    filtroTop: st.oculto ? '0px' : '70px',
+    menuNosotros: menu === 'nosotros',
+    menuCatalogo: menu === 'catalogo',
+    lineaNosotros: menu === 'nosotros' ? 'currentColor' : 'transparent',
+    abrirNosotros: function () { self.setState({ menu: 'nosotros' }); },
+    abrirCatalogo: function () { self.setState({ menu: 'catalogo' }); },
+    cerrarMenu: function () { self.setState({ menu: '' }); },
+    tipos: tipos,
+    piezas: visibles,
+    conteo: tipo === 'todo' ? visibles.length + ' / ' + datos.length + ' PIEZAS' : lista.length + (lista.length === 1 ? ' PIEZA' : ' PIEZAS'),
+    hayMas: visibles.length < lista.length,
+    verMasTexto: 'VER ' + (lista.length - visibles.length) + ' PIEZAS MÁS ↓',
+    verMas: function () { self.setState({ todas: true }); },
+    sinSuscribir: !st.suscrito,
+    suscrito: !!st.suscrito,
+    suscribir: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ suscrito: true }); }
+  };
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ache · Catálogo</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ache/tokens.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+:root{--u:calc(100vw / 1920)}
+html{scrollbar-width:none}
+html::-webkit-scrollbar{display:none}
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:inherit}
+input{font:inherit;color:inherit}
+input::placeholder{color:var(--texto-suave);opacity:1}
+:focus-visible{outline:2px solid var(--foco);outline-offset:2px}
+.m{font-family:var(--font-mono);font-weight:400;letter-spacing:0}
+.nav a:hover,.nav button:hover{opacity:.55}
+.nav{text-shadow:0 0 10px color-mix(in srgb, var(--fondo) 55%, transparent)}
+.nav a,.nav button{transition:opacity .25s ease}
+.enlace{position:relative;display:flex;align-items:center;justify-content:space-between;overflow:hidden}
+.enlace::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:var(--texto);transform:scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.7,0,.2,1)}
+.enlace:hover::before,.enlace:focus-within::before{transform:scaleX(1)}
+.enlace > *{position:relative;transition:color .3s ease,transform .55s cubic-bezier(.7,0,.2,1)}
+.enlace:hover > *,.enlace:focus-within > *{color:var(--fondo)}
+.enlace:hover .enlace-t,.enlace:focus-within .enlace-t{transform:translateX(calc(22 * var(--u)))}
+.grande:hover .flecha{transform:translate(calc(10 * var(--u)),0)}
+.flecha{display:inline-block;transition:transform .4s ease}
+.pieza img{transition:filter .5s ease}
+.pieza:hover img{filter:brightness(.94)}
+.boton{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;border:1px solid var(--linea);font-family:var(--font-mono);font-weight:400;letter-spacing:.02em;text-transform:uppercase;transition:background-color .35s ease,color .35s ease}
+.boton:hover{background:var(--texto);color:var(--fondo)}
+.boton-lleno{background:var(--texto);color:var(--fondo)}
+.boton-lleno:hover{background:transparent;color:var(--texto)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[data-arrastre]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+
+.celda img{transition:opacity .25s ease,filter .5s ease}
+.celda .marco{position:relative}
+.celda .marco::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;border:1px solid transparent;transition:border-color .25s ease;pointer-events:none}
+.cambiando .celda .marco::after{border-color:var(--linea-suave)}
+.cambiando .celda img,.cambiando .celda .rotulo{opacity:0}
+.celda .rotulo{transition:opacity .25s ease}
+.fila{transition:background-color .2s ease,color .2s ease}
+.fila:hover{background:var(--texto) !important;color:var(--fondo)}
+.fila:hover .suave{color:var(--fondo) !important;opacity:.62}
+.ctrl{color:var(--texto-suave);transition:color .2s ease}
+.ctrl:hover{color:var(--texto)}
+.ctrl[aria-pressed="true"]{color:var(--texto);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:calc(5 * var(--u))}
+.vista{position:relative;width:calc(88 * var(--u));height:44px;display:flex;align-items:center;cursor:pointer}
+.vista::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--texto)}
+</style>
+</helmet>
+<div data-theme="{{tema}}" style="position: relative; background: var(--fondo); color: var(--texto); font-family: var(--font-sans); font-weight: 500; letter-spacing: -0.01em; transition: background-color .6s ease, color .6s ease">
+
+<!-- VELO: oscurece la página cuando hay un panel abierto -->
+<div aria-hidden="true" onClick="{{cerrarTodo}}" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 55; background: var(--fondo); opacity: {{velo}}; pointer-events: {{veloPE}}; transition: opacity .8s ease"></div>
+
+<!-- PANEL QUIÉNES SOMOS: baja desde arriba y empuja la página -->
+<aside data-theme="{{temaInv}}" aria-label="Quiénes somos" aria-hidden="{{panelOculto}}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 70; box-sizing: border-box; height: calc(716 * var(--u)); background: var(--fondo); color: var(--texto); transform: {{panelY}}; visibility: {{panelVis}}; transition: {{panelTrans}}">
+  <p class="m" style="position: absolute; left: calc(29 * var(--u)); top: calc(28 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: 1; letter-spacing: 0.02em; color: var(--texto-suave)">(SOBRE ACHE)</p>
+  <p style="position: absolute; left: calc(29 * var(--u)); top: calc(74 * var(--u)); width: calc(560 * var(--u)); margin: 0; font-size: calc(27 * var(--u)); line-height: calc(34 * var(--u)); letter-spacing: -0.015em">Ache es un taller en Guadalajara que rescata muebles con buena estructura y madera noble. Los restauramos a mano para darles una segunda vida. Cada pieza es única: cuando se vende, no se repite.</p>
+  <p class="m" style="position: absolute; left: calc(790 * var(--u)); top: calc(29 * var(--u)); margin: 0; font-size: calc(17 * var(--u)); line-height: 1; letter-spacing: 0.02em; color: var(--texto-suave)">MADERAS</p>
+  <ul style="position: absolute; left: calc(790 * var(--u)); top: calc(52 * var(--u)); margin: 0; padding: 0; list-style: none; font-size: calc(18 * var(--u)); line-height: calc(26 * var(--u))">
+    <li>Nogal</li><li>Roble</li><li>Teca</li><li>Cedro</li><li>Parota</li>
+  </ul>
+  <button type="button" onClick="{{cerrarPanel}}" style="position: absolute; right: calc(29 * var(--u)); top: calc(24 * var(--u)); font-size: calc(27 * var(--u)); line-height: 1">(Cerrar)</button>
+  <img src="{{ilusPanel}}" alt="Ilustración de línea de una lámpara de pie junto a un sillón" style="position: absolute; left: calc(1222 * var(--u)); top: calc(250 * var(--u)); width: auto; height: calc(300 * var(--u))">
+  <img src="./assets/688226a01776cd6915166a9c5c30ef82.jpg" alt="Silla de nogal de respaldo alto" style="position: absolute; right: calc(29 * var(--u)); bottom: calc(28 * var(--u)); width: calc(262 * var(--u)); height: calc(356 * var(--u)); object-fit: cover">
+  <div style="position: absolute; left: calc(29 * var(--u)); right: calc(393 * var(--u)); bottom: calc(28 * var(--u)); display: flex; align-items: flex-end; font-size: calc(17 * var(--u)); line-height: calc(17 * var(--u))">
+    <p style="margin: 0; width: calc(330 * var(--u))">Muebles restaurados<br>y piezas únicas</p>
+    <p style="margin: 0; width: calc(253 * var(--u))">Taller en<br>Guadalajara, Jal.</p>
+    <p style="margin: 0; width: calc(262 * var(--u))">Correo<br><a href="#">hola@estudioache.mx</a></p>
+    <p style="margin: 0; width: calc(246 * var(--u))">WhatsApp<br><a href="#">33 1234 5678</a></p>
+    <a href="Nosotros.dc.html" class="grande" style="margin-left: auto; font-size: calc(27 * var(--u)); line-height: 1">Conoce nuestra historia <span class="flecha m" style="font-weight: 300; font-size: calc(20 * var(--u))">→</span></a>
+  </div>
+</aside>
+
+<!-- PANEL CARRITO: mismo comportamiento que el de Quiénes somos -->
+<aside data-theme="{{temaInv}}" aria-label="Carrito" aria-hidden="{{carroOculto}}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 71; box-sizing: border-box; height: calc(716 * var(--u)); background: var(--fondo); color: var(--texto); transform: {{carroY}}; visibility: {{carroVis}}; transition: {{carroTrans}}">
+  <p class="m" style="position: absolute; left: calc(29 * var(--u)); top: calc(28 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: 1; letter-spacing: 0.02em; color: var(--texto-suave)">(CARRITO · {{carritoN}})</p>
+  <button type="button" onClick="{{cerrarCarro}}" style="position: absolute; right: calc(29 * var(--u)); top: calc(24 * var(--u)); font-size: calc(27 * var(--u)); line-height: 1">(Cerrar)</button>
+  <sc-if value="{{carritoVacio}}" hint-placeholder-val="{{true}}">
+    <div style="position: absolute; left: calc(29 * var(--u)); top: calc(74 * var(--u)); width: calc(600 * var(--u))">
+      <p style="margin: 0; font-size: calc(27 * var(--u)); line-height: calc(34 * var(--u)); letter-spacing: -0.015em">Tu carrito está vacío. Cada pieza es única: en cuanto la pagas, deja de estar disponible para los demás.</p>
+      <a href="Catalogo.dc.html" class="grande" style="display: inline-block; margin-top: calc(40 * var(--u)); font-size: calc(27 * var(--u)); line-height: 1">Ver el catálogo <span class="flecha m" style="font-weight: 300; font-size: calc(20 * var(--u))">→</span></a>
+    </div>
+    <img src="{{ilusCarro}}" alt="Ilustración de línea de un sillón" style="position: absolute; left: calc(1222 * var(--u)); top: calc(210 * var(--u)); width: auto; height: calc(330 * var(--u))">
+  </sc-if>
+  <sc-if value="{{carritoLleno}}" hint-placeholder-val="{{false}}">
+    <ul style="position: absolute; left: calc(29 * var(--u)); top: calc(74 * var(--u)); width: calc(1031 * var(--u)); max-height: calc(500 * var(--u)); overflow-y: auto; margin: 0; padding: 0; list-style: none; border-bottom: 1px solid var(--linea)">
+      <sc-for list="{{carritoItems}}" as="p" hint-placeholder-count="1">
+        <li style="display: flex; align-items: flex-start; padding: calc(18 * var(--u)) 0; border-top: 1px solid var(--linea)">
+          <img src="{{p.foto}}" alt="{{p.alt}}" style="display: block; flex: 0 0 auto; width: calc(92 * var(--u)); height: calc(122 * var(--u)); object-fit: cover">
+          <div style="flex: 1 1 auto; margin-left: calc(24 * var(--u))">
+            <p class="m" style="margin: 0; font-size: calc(17 * var(--u)); line-height: 1; color: var(--texto-suave)">{{p.codigo}}</p>
+            <p style="margin: calc(12 * var(--u)) 0 0; font-size: calc(27 * var(--u)); line-height: 1; letter-spacing: -0.015em">{{p.nombre}}</p>
+            <p class="m" style="margin: calc(12 * var(--u)) 0 0; font-size: calc(17 * var(--u)); line-height: 1; color: var(--texto-suave)">{{p.detalle}}</p>
+          </div>
+          <div style="text-align: right">
+            <p style="margin: 0; font-size: calc(27 * var(--u)); line-height: 1; font-variant-numeric: tabular-nums">{{p.precio}}</p>
+            <button type="button" onClick="{{p.quitar}}" class="m" style="margin-top: calc(14 * var(--u)); font-size: calc(17 * var(--u)); line-height: 1; color: var(--texto-suave)">QUITAR</button>
+          </div>
+        </li>
+      </sc-for>
+    </ul>
+    <div style="position: absolute; left: calc(1363 * var(--u)); right: calc(29 * var(--u)); top: calc(74 * var(--u)); font-size: calc(18 * var(--u)); line-height: calc(22 * var(--u))">
+      <div style="display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; height: calc(57 * var(--u)); border-top: 1px solid var(--linea)"><span>Subtotal</span><span style="font-variant-numeric: tabular-nums">{{subtotal}}</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; height: calc(57 * var(--u)); border-top: 1px solid var(--linea)"><span>Flete</span><span style="color: var(--texto-suave)">Se cotiza aparte</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; height: calc(57 * var(--u)); border-top: 1px solid var(--linea)"><span>Cupones y referidos</span><span style="color: var(--texto-suave)">Se aplican al pagar</span></div>
+      <a href="#" class="boton boton-lleno" style="height: calc(69 * var(--u)); font-size: calc(18 * var(--u))">Pagar · {{subtotal}} <span aria-hidden="true" style="margin-left: calc(12 * var(--u)); font-weight: 300">→</span></a>
+      <p style="margin: calc(18 * var(--u)) 0 0; font-size: calc(16 * var(--u)); line-height: calc(20 * var(--u)); color: var(--texto-suave)">El flete se calcula por tamaño, distancia y piso. Te contactamos para coordinar la entrega.</p>
+    </div>
+  </sc-if>
+  <div style="position: absolute; left: calc(29 * var(--u)); right: calc(29 * var(--u)); bottom: calc(28 * var(--u)); display: flex; align-items: flex-end; font-size: calc(17 * var(--u)); line-height: calc(17 * var(--u))">
+    <p style="margin: 0; width: calc(330 * var(--u))">Pagos<br><span style="color: var(--texto-suave)">Tarjeta, Apple Pay, Google Pay,</span><br><span style="color: var(--texto-suave)">PayPal, transferencia y OXXO</span></p>
+    <p style="margin: 0; width: calc(253 * var(--u))">Envíos<br><span style="color: var(--texto-suave)">Zona Metropolitana</span><br><span style="color: var(--texto-suave)">de Guadalajara</span></p>
+    <p style="margin: 0; width: calc(262 * var(--u))">Entrega<br><span style="color: var(--texto-suave)">De 3 a 5 días hábiles,</span><br><span style="color: var(--texto-suave)">con flete propio</span></p>
+    <a href="#" class="grande" style="margin-left: auto; font-size: calc(27 * var(--u)); line-height: 1">¿Dudas? Escríbenos por WhatsApp <span class="flecha m" style="font-weight: 300; font-size: calc(20 * var(--u))">→</span></a>
+  </div>
+</aside>
+
+<!-- ENCABEZADO -->
+<header class="nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 60; box-sizing: border-box; height: calc(77 * var(--u)); padding: 0 calc(29 * var(--u)); display: flex; align-items: center; justify-content: space-between; font-size: calc(23 * var(--u)); line-height: 1; transform: {{empuje}}; opacity: {{hdrOp}}; transition: transform .8s cubic-bezier(.7,0,.2,1), opacity .6s ease; pointer-events: none">
+  <div style="display: flex; align-items: center; pointer-events: auto">
+    <a href="Main.dc.html" aria-label="Ache, inicio" style="display: block; margin-right: calc(24 * var(--u))"><img src="{{logo}}" alt="Ache" style="display: block; height: 32px; width: auto; filter: drop-shadow(0 0 8px color-mix(in srgb, var(--fondo) 50%, transparent))"></a>
+    <span class="m" aria-label="Hora en Guadalajara" style="font-size: calc(21 * var(--u)); color: var(--texto-suave)">{{hh}}<span style="opacity: {{dosPuntos}}">:</span>{{mm}}</span>
+    <span style="margin-left: calc(14 * var(--u))">Guadalajara, Jal.</span>
+    <span aria-hidden="true" style="margin-left: calc(48 * var(--u)); font-variant-numeric: tabular-nums">{{pct}}%</span>
+  </div>
+  <p aria-live="polite" class="m" style="position: absolute; left: 34%; top: 50%; transform: translateY(-50%); margin: 0; font-size: calc(21 * var(--u)); color: var(--texto-suave); white-space: nowrap; pointer-events: none">{{piezaHeader}}</p>
+  <nav aria-label="Principal" style="display: flex; align-items: center; gap: calc(36 * var(--u)); pointer-events: auto">
+    <a href="Main.dc.html"><span class="m" style="font-size: calc(21 * var(--u)); color: var(--texto-suave)">1.</span> Inicio</a>
+    <a href="Catalogo.dc.html" onClick="{{irCatalogo}}" data-local="si"><span class="m" style="font-size: calc(21 * var(--u)); color: var(--texto-suave)">2.</span> Catálogo</a>
+    <a href="Catalogo.dc.html" onClick="{{irKits}}" data-local="si"><span class="m" style="font-size: calc(21 * var(--u)); color: var(--texto-suave)">3.</span> Kits</a>
+    <button type="button" onClick="{{alternarPanel}}" aria-expanded="{{panelAbierto}}"><span class="m" style="font-size: calc(21 * var(--u)); color: var(--texto-suave)">4.</span> Quiénes somos</button>
+    <button type="button" onClick="{{alternarCarro}}" aria-expanded="{{carroAbierto}}">Carrito ({{carritoN}})</button>
+    <button type="button" onClick="{{alternarTema}}" aria-label="{{temaEtiqueta}}" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0 -14px"><span aria-hidden="true" style="display: block; width: calc(15 * var(--u)); height: calc(15 * var(--u)); border-radius: 50%; background: currentColor"></span></button>
+  </nav>
+</header>
+
+
+<!-- TÍTULO FIJO QUE SE ENCOGE AL BAJAR -->
+<div aria-hidden="false" style="position: fixed; top: 0; left: 0; right: 0; z-index: 40; pointer-events: none; transform: {{empuje}}; transition: transform .8s cubic-bezier(.7,0,.2,1)">
+  <div ref="{{tituloRef}}" style="position: absolute; left: calc(29 * var(--u)); right: calc(29 * var(--u)); top: calc(105.6 * var(--u)); display: flex; justify-content: space-between; align-items: flex-start; font-size: calc(122 * var(--u)); line-height: 1; letter-spacing: -0.04em">
+    <h1 style="margin: 0; font: inherit">{{titulo}}</h1>
+    <span style="font-variant-numeric: tabular-nums">{{conteo}}</span>
+  </div>
+</div>
+
+<main style="transform: {{empuje}}; transition: transform .8s cubic-bezier(.7,0,.2,1)">
+  <div style="height: calc(227.6 * var(--u))"></div>
+
+  <!-- CONTROLES: IMG / TXT, tipo de mueble y vista -->
+  <div style="position: relative; margin: calc(69.6 * var(--u)) calc(29 * var(--u)) 0; height: calc(20 * var(--u)); font-family: var(--font-mono); font-weight: 400; font-size: calc(20 * var(--u)); line-height: calc(20 * var(--u))">
+    <div role="group" aria-label="Modo de vista" style="position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: calc(8 * var(--u))">
+      <button type="button" class="ctrl" aria-pressed="{{modoImg}}" onClick="{{verImg}}">IMG</button><span aria-hidden="true">/</span><button type="button" class="ctrl" aria-pressed="{{modoTxt}}" onClick="{{verTxt}}">TXT</button>
+    </div>
+    <div role="group" aria-label="Filtrar por tipo de mueble" style="position: absolute; left: calc(372 * var(--u)); top: 0; display: flex; align-items: center; gap: calc(8 * var(--u)); white-space: nowrap">
+      <sc-for list="{{tipos}}" as="t" hint-placeholder-count="8">
+        <span aria-hidden="true" style="display: {{t.sep}}">/</span><button type="button" class="ctrl" aria-pressed="{{t.activo}}" onClick="{{t.elegir}}">{{t.nombre}}<sup style="font-size: calc(12 * var(--u)); line-height: 0; margin-left: calc(3 * var(--u)); vertical-align: calc(7 * var(--u))">{{t.n}}</sup></button>
+      </sc-for>
+    </div>
+    <sc-if value="{{modoImgBool}}" hint-placeholder-val="{{true}}">
+      <div style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: calc(26 * var(--u))">
+        <span id="vista-rotulo">VISTA</span>
+        <div class="vista" role="slider" tabindex="0" aria-labelledby="vista-rotulo" aria-valuemin="1" aria-valuemax="3" aria-valuenow="{{vistaN}}" aria-valuetext="{{vistaTexto}}" onPointerDown="{{vistaBajar}}" onKeyDown="{{vistaTecla}}">
+          <span aria-hidden="true" style="position: absolute; top: 50%; left: {{vistaX}}; width: calc(7 * var(--u)); height: calc(13 * var(--u)); margin-left: calc(-3.5 * var(--u)); transform: translateY(-50%); background: var(--texto); transition: left .3s cubic-bezier(.7,0,.2,1)"></span>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- CUADRÍCULA -->
+  <sc-if value="{{modoImgBool}}" hint-placeholder-val="{{true}}">
+    <section aria-label="Piezas" class="{{claseRejilla}}" style="margin: calc(73.4 * var(--u)) calc(29 * var(--u)) 0; display: flex; flex-wrap: wrap; column-gap: {{gapX}}; row-gap: {{gapY}}">
+      <sc-for list="{{celdas}}" as="c" hint-placeholder-count="35">
+        <div class="celda" aria-hidden="{{c.oculto}}" style="flex: 0 0 auto; width: {{ancho}}; visibility: {{c.vis}}">
+          <a href="{{c.href}}" class="pieza" onMouseEnter="{{c.entrar}}" onMouseLeave="{{salir}}" tabindex="{{c.tab}}" style="display: block">
+            <span class="rotulo m" style="display: flex; justify-content: space-between; height: calc(17 * var(--u)); font-size: {{rotuloF}}; line-height: calc(17 * var(--u)); color: var(--texto-suave)"><span>{{c.madera}}</span><span style="color: {{c.precioColor}}">{{c.precio}}</span></span>
+            <span class="marco" style="display: block; margin-top: calc(7.4 * var(--u)); width: 100%; aspect-ratio: 348 / 465">
+              <img src="{{c.foto}}" alt="{{c.alt}}" style="display: block; width: 100%; height: 100%; object-fit: cover">
+            </span>
+            <span class="rotulo" style="margin-top: calc(19 * var(--u)); display: flex; justify-content: space-between; gap: calc(24 * var(--u)); font-size: {{capF}}; line-height: calc(20 * var(--u)); white-space: nowrap"><span class="m">{{c.codigo}}</span><span style="display: {{nombreVis}}; overflow: hidden; text-overflow: ellipsis">{{c.nombre}}</span></span>
+          </a>
+        </div>
+      </sc-for>
+    </section>
+  </sc-if>
+
+  <!-- LISTA EN TEXTO -->
+  <sc-if value="{{modoTxtBool}}" hint-placeholder-val="{{false}}">
+    <section aria-label="Piezas en lista" style="margin-top: calc(73.4 * var(--u))">
+      <div class="m" style="position: relative; height: calc(17 * var(--u)); margin: 0 calc(29 * var(--u)); font-size: calc(17 * var(--u)); line-height: calc(17 * var(--u))">
+        <span style="position: absolute; left: 0">Número</span>
+        <span style="position: absolute; left: calc(372 * var(--u))">Pieza</span>
+        <span style="position: absolute; left: calc(1000 * var(--u))">Tipo</span>
+        <span style="position: absolute; right: 0">Madera · Precio</span>
+      </div>
+      <div style="margin-top: calc(40.4 * var(--u))">
+        <sc-for list="{{filas}}" as="f" hint-placeholder-count="32">
+          <a href="{{f.href}}" class="fila" onMouseEnter="{{f.entrar}}" onMouseLeave="{{txtSalir}}" style="position: relative; display: block; box-sizing: border-box; height: calc(41 * var(--u)); background: {{f.fondo}}; font-size: calc(17 * var(--u)); line-height: calc(41 * var(--u))">
+            <span style="position: absolute; left: calc(29 * var(--u))"><span class="m suave" style="color: var(--texto-suave)">{{f.n}} /</span> <span class="m">{{f.codigo}}</span></span>
+            <span style="position: absolute; left: calc(401 * var(--u))">{{f.nombre}}</span>
+            <span class="suave" style="position: absolute; left: calc(1029 * var(--u)); color: var(--texto-suave)">{{f.tipo}}</span>
+            <span class="m" style="position: absolute; right: calc(29 * var(--u))"><span class="suave" style="color: var(--texto-suave)">{{f.madera}} ·</span> <span style="color: {{f.precioColor}}">{{f.precio}}</span></span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- PIE -->
+  <footer style="position: relative; margin-top: {{pieM}}; padding: 0 calc(29 * var(--u)) calc(29 * var(--u)); height: calc(61 * var(--u)); font-size: calc(19 * var(--u)); line-height: calc(22 * var(--u))">
+    <p style="position: absolute; left: calc(29 * var(--u)); bottom: calc(29 * var(--u)); margin: 0">Muebles restaurados<br>y piezas únicas</p>
+    <p style="position: absolute; left: calc(401 * var(--u)); bottom: calc(29 * var(--u)); margin: 0">ACHE®<br>Derechos reservados 2026</p>
+    <p style="position: absolute; left: calc(681 * var(--u)); bottom: calc(29 * var(--u)); margin: 0">Correo<br><a href="#">hola@estudioache.mx</a></p>
+    <p style="position: absolute; left: calc(1147 * var(--u)); bottom: calc(29 * var(--u)); margin: 0">Taller en<br>Guadalajara, Jal.</p>
+    <a href="#" class="grande" style="position: absolute; left: calc(1463 * var(--u)); bottom: calc(32 * var(--u)); font-size: calc(28 * var(--u)); line-height: 1">Instagram <span class="flecha m" style="font-weight: 300; font-size: calc(20 * var(--u))">→</span></a>
+    <a href="#" class="grande" style="position: absolute; right: calc(29 * var(--u)); bottom: calc(32 * var(--u)); font-size: calc(28 * var(--u)); line-height: 1">WhatsApp <span class="flecha m" style="font-weight: 300; font-size: calc(20 * var(--u))">→</span></a>
+  </footer>
+</main>
+
+<!-- FOTO FLOTANTE DE LA LISTA EN TEXTO -->
+<sc-if value="{{txtFotoVis}}" hint-placeholder-val="{{false}}">
+  <img src="{{txtFoto}}" alt="" aria-hidden="true" style="position: fixed; left: 50%; top: 50%; z-index: 45; width: calc(494 * var(--u)); height: calc(657 * var(--u)); object-fit: cover; transform: translate(-50%, -50%); pointer-events: none">
+</sc-if>
+
+<!-- VOLVER ARRIBA -->
+<button type="button" onClick="{{arriba}}" class="m" style="position: fixed; right: calc(29 * var(--u)); bottom: calc(22 * var(--u)); z-index: 50; font-size: calc(17 * var(--u)); line-height: 1; text-decoration: underline; text-underline-offset: calc(4 * var(--u)); opacity: {{arribaOp}}; pointer-events: {{arribaPE}}; transition: opacity .3s ease">VOLVER ARRIBA</button>
+
+
+<!-- TELÓN ENTRE PÁGINAS -->
+<div aria-hidden="true" data-theme="{{temaInv}}" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 92; overflow: hidden; background: var(--fondo); color: var(--texto); transform: {{telonT}}; visibility: {{telonVis}}; transition: {{telonTrans}}; pointer-events: {{telonPE}}">
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; transform: {{telonTi}}; transition: {{telonTrans}}">
+    <div style="position: absolute; left: calc(29 * var(--u)); right: calc(29 * var(--u)); top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; align-items: center; font-size: calc(22 * var(--u)); line-height: calc(21 * var(--u)); opacity: {{telonTxtOp}}; transition: opacity .35s ease">
+      <p style="margin: 0">Muebles restaurados<br>y piezas únicas</p>
+      <img src="{{telonIlus}}" alt="" style="display: block; height: calc(150 * var(--u)); width: auto">
+      <p style="margin: 0; text-align: right">Restaurado a mano en<br>Guadalajara, Jal.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CURSOR: cruz que sigue al puntero, con rótulo -->
+<div ref="{{cursorRef}}" aria-hidden="true" style="position: fixed; top: 0; left: 0; z-index: 100; width: 0; height: 0; pointer-events: none; color: var(--texto)">
+  <span style="position: absolute; left: calc(-13 * var(--u)); top: 0; width: calc(26 * var(--u)); height: 1px; background: currentColor; box-shadow: 0 0 0 1px color-mix(in srgb, var(--fondo) 45%, transparent)"></span>
+  <span style="position: absolute; left: 0; top: calc(-13 * var(--u)); width: 1px; height: calc(26 * var(--u)); background: currentColor; box-shadow: 0 0 0 1px color-mix(in srgb, var(--fondo) 45%, transparent)"></span>
+  <span class="m" style="position: absolute; left: 50%; top: calc(16 * var(--u)); transform: translateX(-50%); font-weight: 400; font-size: calc(17 * var(--u)); line-height: 1; letter-spacing: 0.02em; white-space: nowrap; text-shadow: 0 0 2px var(--fondo), 0 0 8px var(--fondo)">{{etiqueta}}</span>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"temaInicial": {"editor": "enum", "options": ["vino", "crema"], "default": "vino"}, "$preview": {"width": 1440, "height": 4606}}'>
+var PAGINA = "Catalogo";
+var LOGO_CREMA = "./assets/755d057cc81957185f5a10b2bbb4673a.svg";
+var LOGO_NEGRO = "./assets/c66ad7214c46e56ca12b847f601a477f.svg";
+var ILUS = {"sillon": ["./assets/52b5167dd3330152fc3fd818e7c8bccf.svg", "./assets/63274264ca4178173fc0519c58fae787.svg"], "lampara": ["./assets/7174d68a83717b397f16aca20a25dbcf.svg", "./assets/ff1e4d84371fd56f1da9ba13093a6ecb.svg"], "mesa": ["./assets/a75bb0ec799207e28638301151cf863f.svg", "./assets/adbd59ca62be57c40d73ccc2cdc8db9d.svg"], "florero": ["./assets/9133fe1115202be3396c0b9fb91458bc.svg", "./assets/e36debc4dddc83b4236077ea957aded7.svg"], "comedor": ["./assets/d3da365fe647962802d4408a5954c52a.svg", "./assets/823f3bbb1927e9d8e7d349157443ddbc.svg"]};
+var PIEZAS = [["NO. 0161", "Sillón de terciopelo rosa", "sillones", "Nogal", 16800, false, "76b67a808325e60c98e2705e6a138848", "Sillón de nogal con tapiz de terciopelo rosa y un libro abierto en el asiento", false], ["NO. 0143", "Buró de nogal", "buros", "Nogal", 9800, false, "57171f2712839ed51925a8d26e26910c", "Buró de nogal de dos cajones con jaladera tallada", false], ["NO. 0158", "Silla de comedor", "sillas", "Teca", 7800, false, "a9fe933f24fcefbd12f6ed786d4fdd66", "Silla de comedor de teca con asiento y respaldo de rejilla", false], ["NO. 0157", "Sillón de patas en X", "sillones", "Nogal", 18900, false, "df104df3fa0c980baa7acecab47ce0f5", "Sillón de madera con patas en X y cojines de lino", false], ["KIT NO. 0151", "Sala Copenhague", "kits", "Nogal", 46800, false, "79d5bdee5dcdab73d0f41ae274617d14", "Sofá de tres plazas tapizado en gris con estructura de nogal, parte del kit Sala Copenhague", true], ["KIT NO. 0182", "Escalón en nogal", "kits", "Nogal", 16800, false, "d90ad3998f64f131a6e06dc919919e93", "Silla escalonada de nogal con cojines grises, parte del kit Escalón en nogal", true], ["KIT NO. 0183", "Escalón en negro", "kits", "Fresno", 16800, false, "790a00080c3fa18667a3ab4a62d9fba6", "Silla escalonada de fresno ebonizado con respaldo verde y asiento gris, parte del kit Escalón en negro", true], ["NO. 0156", "Mesa de comedor", "mesas", "Nogal", 28600, false, "3327c94abe9a1337492eb0515be31892", "Mesa de comedor rectangular de nogal con patas torneadas", false], ["NO. 0114", "Sillón de piel", "sillones", "Roble", 23800, false, "2d184f9c17a617162e4045b01c67b11a", "Sillón de roble con respaldo alto y cojines de piel café", false], ["NO. 0155", "Banca de teca", "bancas", "Teca", 11900, false, "bde282867a36467cad5153413380a0a2", "Banca de teca con asiento de rejilla y patas en V", false], ["NO. 0154", "Sillón de terciopelo verde", "sillones", "Teca", 21400, false, "ab6c31f7407cbdf16caf58c1ad81c7f9", "Sillón con tapiz de terciopelo verde y brazos de madera", false], ["NO. 0153", "Silla de estudio", "sillas", "Teca", 9400, true, "b032d6735b84ef6dc0db24845c1f2de2", "Silla de estudio de teca con paleta y asiento de rejilla", false], ["NO. 0152", "Mesa de centro con cristal", "mesas", "Teca", 13800, false, "8751d5ad928344007841c23e6347c45c", "Mesa de centro de madera con cubierta de cristal", false], ["NO. 0150", "Butaca olivo", "sillones", "Teca", 16500, false, "ee860948a4c2c02cd51bd8c7baafafcb", "Butaca sin brazos con tapiz de terciopelo olivo", false], ["NO. 0113", "Credenza de rejilla", "buros", "Roble", 17900, false, "8f0a63ce06427a8ccd18d82b90243f75", "Credenza de roble con una puerta de rejilla y repisas abiertas", false], ["NO. 0163", "Sillón de rejilla alto", "sillones", "Teca", 15800, false, "f466877ee265d3e28cfeb4f32ab8b735", "Sillón de teca con brazos y asiento de rejilla", false], ["NO. 0162", "Biombo de tres hojas", "complementos", "Nogal", 13400, false, "6101d0ef320932ef6e483d19b713566e", "Biombo de nogal de tres hojas con tableros de tela", false], ["NO. 0148", "Escritorio de patas en X", "mesas", "Teca", 19600, false, "dfd9d8a73a3c3271a1345d07d309ed1b", "Escritorio de teca con patas en X y cajonera", false], ["NO. 0147", "Sillón bajo de rejilla", "sillones", "Teca", 17200, false, "036d2a765db3fff4604d7d743fad142d", "Sillón bajo de teca con asiento y respaldo de rejilla", false], ["NO. 0127", "Banco de costura", "bancas", "Cedro", 5200, false, "3c8fb4d6e6138fb16e9e119cf1ca3870", "Banco de costura de cedro con asiento tapizado", false], ["NO. 0145", "Mesa auxiliar", "mesas", "Teca", 8900, false, "2ef8ab3b993127cad3428ad25ee4ab94", "Mesa auxiliar de madera con revistero de rejilla", false], ["NO. 0144", "Silla intervenida", "sillas", "Roble", 8600, false, "0d4842f67cf4bc2816a1973250a0cd42", "Silla con estructura pintada de rojo y asiento tejido", false], ["NO. 0116", "Sillón de roble y piel", "sillones", "Roble", 18700, false, "2673b088ccf6c7697c32484db1833d6e", "Sillón de roble con asiento y respaldo de piel negra", false], ["NO. 0142", "Credenza de nogal", "buros", "Nogal", 18600, false, "c129ecc5cb5d4c6685d486ff9b58eb15", "Credenza baja de nogal con frente de listones", false], ["KIT NO. 0146", "Comedor Oslo", "kits", "Roble", 38400, false, "a120af093b7e9dc10c2fbd10ef8bc3c0", "Comedor redondo de roble con dos sillas de respaldo de barrotes", true], ["NO. 0141", "Sofá de dos plazas", "sillones", "Teca", 24800, true, "a4eb91fcd9bada3b119e10aad7da98cc", "Sofá de dos plazas con cojines blancos y patas de teca", false], ["NO. 0140", "Mesa de mármol", "mesas", "Nogal", 15400, false, "b7a3b96b8917f8b9e36e55f46493755c", "Mesa de centro con cubierta de mármol", false], ["NO. 0139", "Otomana de lino", "bancas", "Nogal", 6900, false, "9690bc28a5ed6e8a71d560024bd181c0", "Otomana de nogal con cojín de lino blanco", false], ["NO. 0138", "Butaca baja", "sillones", "Teca", 14500, false, "f5029b6cd9feb530e1ed9fd1ac6177f5", "Butaca baja de teca con cojines de lino", false], ["NO. 0118", "Silla de brazos tapizada", "sillas", "Nogal", 8900, false, "1f485c54a568ae4c22b2d229c7a09727", "Silla de brazos de nogal tapizada en tela gris", false], ["NO. 0137", "Revistero", "complementos", "Teca", 4900, false, "ae5ec159aca3d4cdfd2045d5f874af04", "Revistero de teca con patas cruzadas", false], ["NO. 0136", "Banca de rejilla", "bancas", "Teca", 9700, false, "5a6b50bf8e69d429002d3e4479e8aec8", "Banca larga de teca con asiento de rejilla", false], ["NO. 0135", "Mesa de centro baja", "mesas", "Parota", 16900, false, "f5d6f27bc435f04316849db29e0ca280", "Mesa de centro baja de parota con patas de tabla", false], ["KIT NO. 0128", "Sillas Milán", "kits", "Nogal", 13600, true, "d42adb0505fa80d52b39d37a830fa4ae", "Par de sillas de nogal de respaldo alto", true], ["NO. 0134", "Banco redondo", "bancas", "Cedro", 4600, true, "2de65012e186957c5be7b6bebb561b15", "Banco redondo de cedro de tres patas", false], ["NO. 0117", "Banco alto de nogal", "bancas", "Nogal", 5600, false, "2f887104475ace2a16da2dfe4a7f63d9", "Banco alto de nogal con asiento curvo", false], ["NO. 0133", "Mesa de roble", "mesas", "Roble", 16900, false, "b87c749574d1f78cb5c0c15b343e65ae", "Mesa rectangular de roble con patas torneadas", false], ["NO. 0115", "Sillón tapizado gris", "sillones", "Fresno", 19200, false, "05ff52d398308b6ae002c917350da01a", "Sillón de concha de fresno tapizado en tela gris", false], ["NO. 0132", "Sillón verde", "sillones", "Nogal", 12400, false, "5f5b5de071929b95d6399906f19ab91b", "Sillón de nogal con cojines de terciopelo verde", false], ["NO. 0131", "Mesa baja larga", "mesas", "Nogal", 11200, false, "0982f486740120228f7342b118159f43", "Mesa baja larga de nogal", false], ["NO. 0130", "Credenza de teca", "buros", "Teca", 19800, false, "2d3a48e425e9989e0e1565fd2f20fc2b", "Credenza de teca con dos puertas", false]];
+var TIPOS = [["todo", "TODO", "Catálogo"], ["sillas", "SILLAS", "Sillas"], ["sillones", "SILLONES", "Sillones"], ["mesas", "MESAS", "Mesas"], ["bancas", "BANCAS Y BANCOS", "Bancas y bancos"], ["buros", "BURÓS Y CREDENZAS", "Burós y credenzas"], ["complementos", "COMPLEMENTOS", "Complementos"], ["kits", "KITS", "Kits"]];
+var HUECOS = [2, 6, 17, 31];
+class Component extends DCLogic {
+
+_ini() {
+  if (this._listo) return;
+  this._listo = true;
+  this._cur = { current: null };
+  var via = false, dest = null, tema = null;
+  try { var t = +window.sessionStorage.getItem('ache-v3-telon'); via = !!t && (Date.now() - t) < 6000; dest = window.sessionStorage.getItem('ache-v3-destino'); } catch (e) {}
+  try { tema = window.localStorage.getItem('ache-v3-tema'); } catch (e) {}
+  this._via = via;
+  this._destino0 = dest || PAGINA;
+  this._tema0 = (tema === 'vino' || tema === 'crema') ? tema : null;
+  this._carro0 = this._leerCarrito();
+  this._telon0 = via ? 'cubre' : this._telonSinVia();
+  if (this._iniPagina) this._iniPagina();
+}
+_telonSinVia() { return 'cubre'; }
+_leerCarrito() {
+  try { var c = JSON.parse(window.localStorage.getItem('ache-v3-carrito') || '[]'); return Array.isArray(c) ? c : []; } catch (e) { return []; }
+}
+_guardarCarrito(c) {
+  try { window.localStorage.setItem('ache-v3-carrito', JSON.stringify(c)); } catch (e) {}
+  this.setState({ carrito: c });
+}
+_fondoBody(tema) {
+  try { document.body.style.background = (tema || 'vino') === 'vino' ? '#411f25' : '#f3f2e8'; } catch (e) {}
+}
+_montarBase() {
+  var self = this;
+  this._ini();
+  try { window.sessionStorage.removeItem('ache-v3-telon'); } catch (e) {}
+  var W = window.innerWidth || 1440;
+  this._W = W; this._u = W / 1920;
+  this._H = Math.min(window.innerHeight || 900, Math.round(W * 0.62));
+  this._vista = (window.innerHeight || 900) < 1500;
+  this.setState({ altoVista: this._H });
+  this._fondoBody(this._tema0 || this.props.temaInicial || 'vino');
+  this._tt = [];
+  if (this._telon0 === 'cubre') {
+    this._tt.push(setTimeout(function () { self.setState({ telon: 'sube', telonAnim: true }); }, self._via ? 260 : 480));
+    this._tt.push(setTimeout(function () { self.setState({ telon: 'oculto', telonAnim: false }); }, self._via ? 1050 : 1270));
+  }
+  // cursor
+  this._mx = -100; this._my = -100; this._cx = -100; this._cy = -100;
+  this._mover = function (e) { self._mx = e.clientX; self._my = e.clientY; };
+  this._fuera = function (e) { if (!e.relatedTarget) { self._mx = -100; self._my = -100; self._cx = -100; self._cy = -100; } };
+  window.addEventListener('mousemove', this._mover, { passive: true });
+  document.addEventListener('mouseout', this._fuera);
+  this._tick = function () {
+    self._cx += (self._mx - self._cx) * 0.2;
+    self._cy += (self._my - self._cy) * 0.2;
+    var el = self._cur && self._cur.current;
+    if (el) el.style.transform = 'translate3d(' + self._cx.toFixed(1) + 'px,' + self._cy.toFixed(1) + 'px,0)';
+    self._raf = requestAnimationFrame(self._tick);
+  };
+  this._raf = requestAnimationFrame(this._tick);
+  // reloj de Guadalajara
+  this._reloj = setInterval(function () { self.setState({ ahora: Date.now() }); }, 1000);
+  // enlaces internos: el telón sube, cubre y luego navega
+  this._clic = function (e) {
+    if (self._yendo) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    if (self._movido) { e.preventDefault(); e.stopPropagation(); return; }
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var href = a.getAttribute('href') || '';
+    if (!/\.dc\.html$/.test(href) || a.getAttribute('target') === '_blank' || a.getAttribute('data-local') === 'si') return;
+    e.preventDefault(); e.stopPropagation();
+    var dest = href.replace('.dc.html', '');
+    if (dest === PAGINA) {
+      e.preventDefault(); e.stopPropagation();
+      self.setState({ panel: false, carro: false });
+      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (err) { window.scrollTo(0, 0); }
+      return;
+    }
+    self.setState({ telon: 'oculto', telonAnim: false, telonDest: dest, panel: false, carro: false });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.setState({ telon: 'cubre', telonAnim: true }); }); });
+    self._tt.push(setTimeout(function () {
+      try { window.sessionStorage.setItem('ache-v3-telon', String(Date.now())); window.sessionStorage.setItem('ache-v3-destino', dest); } catch (err) {}
+      self._yendo = true;
+      a.click();
+      self._tt.push(setTimeout(function () { self._yendo = false; }, 400));
+      // si la navegación no ocurrió, se vuelve a mostrar la página
+      self._tt.push(setTimeout(function () { if (!self._salio) self.setState({ telon: 'sube', telonAnim: true }); }, 2600));
+    }, 720));
+  };
+  this._salida = function () { self._salio = true; };
+  document.addEventListener('click', this._clic, true);
+  window.addEventListener('pagehide', this._salida);
+  this._tecla = function (e) { if (e.key === 'Escape') self.setState({ panel: false, carro: false }); };
+  window.addEventListener('keydown', this._tecla);
+}
+_desmontarBase() {
+  window.removeEventListener('mousemove', this._mover);
+  document.removeEventListener('mouseout', this._fuera);
+  document.removeEventListener('click', this._clic, true);
+  window.removeEventListener('pagehide', this._salida);
+  window.removeEventListener('keydown', this._tecla);
+  cancelAnimationFrame(this._raf);
+  clearInterval(this._reloj);
+  (this._tt || []).forEach(function (t) { clearTimeout(t); });
+}
+_pctPagina() {
+  var y = window.scrollY || document.documentElement.scrollTop || 0;
+  var max = (document.documentElement.scrollHeight || 1) - (window.innerHeight || 1);
+  return max > 0 ? Math.max(0, Math.min(100, Math.round(100 * y / max))) : 0;
+}
+_precio(n) { return '$' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+_valsBase() {
+  var self = this;
+  this._ini();
+  var st = this.state || {};
+  var tema = st.tema || this._tema0 || this.props.temaInicial || 'vino';
+  var inv = tema === 'vino' ? 'crema' : 'vino';
+  var panel = !!st.panel, carro = !!st.carro, algo = panel || carro;
+  var hh = '0', mm = '00';
+  try {
+    var partes = new Intl.DateTimeFormat('es-MX', { timeZone: 'America/Mexico_City', hour: 'numeric', minute: '2-digit', hour12: false }).formatToParts(new Date());
+    partes.forEach(function (p) { if (p.type === 'hour') hh = String(+p.value % 24); if (p.type === 'minute') mm = p.value; });
+  } catch (e) {}
+  var seg = Math.floor((st.ahora || Date.now()) / 1000);
+  var carrito = st.carrito || this._carro0 || [];
+  var subtotal = 0; carrito.forEach(function (p) { subtotal += p.precio || 0; });
+  var telon = st.telon || this._telon0;
+  var dest = st.telonDest || this._destino0 || PAGINA;
+  var mapa = { Main: 'sillon', Catalogo: 'mesa', Pieza: 'lampara', Kit: 'comedor', Nosotros: 'florero' };
+  var il = ILUS[mapa[dest] || 'sillon'];
+  var trans = function (abierto) { return 'transform .8s cubic-bezier(.7,0,.2,1), background-color .6s ease, visibility 0s linear ' + (abierto ? '0s' : '.8s'); };
+  var pct = st.pct || 0;
+  return {
+    tema: tema, temaInv: inv,
+    logo: tema === 'vino' ? LOGO_CREMA : LOGO_NEGRO,
+    temaEtiqueta: tema === 'vino' ? 'Cambiar a fondo crema' : 'Cambiar a fondo vino',
+    alternarTema: function () {
+      var t = tema === 'vino' ? 'crema' : 'vino';
+      try { window.localStorage.setItem('ache-v3-tema', t); } catch (e) {}
+      self._fondoBody(t);
+      self.setState({ tema: t });
+    },
+    hh: hh, mm: mm, dosPuntos: seg % 2 ? 1 : 0.15,
+    pct: pct < 10 ? '0' + pct : String(pct),
+    piezaHeader: st.piezaHeader || '', etiqueta: st.etiqueta || '',
+    salir: function () { self.setState({ etiqueta: '', piezaHeader: '' }); },
+    panelAbierto: panel ? 'true' : 'false', panelOculto: panel ? 'false' : 'true',
+    panelY: panel ? 'translateY(0)' : 'translateY(-101%)', panelVis: panel ? 'visible' : 'hidden', panelTrans: trans(panel),
+    alternarPanel: function () { self.setState({ panel: !panel, carro: false }); },
+    cerrarPanel: function () { self.setState({ panel: false }); },
+    ilusPanel: inv === 'vino' ? ILUS.lampara[0] : ILUS.lampara[1],
+    ilusCarro: inv === 'vino' ? ILUS.sillon[0] : ILUS.sillon[1],
+    carroAbierto: carro ? 'true' : 'false', carroOculto: carro ? 'false' : 'true',
+    carroY: carro ? 'translateY(0)' : 'translateY(-101%)', carroVis: carro ? 'visible' : 'hidden', carroTrans: trans(carro),
+    alternarCarro: function () { self.setState({ carro: !carro, panel: false }); },
+    cerrarCarro: function () { self.setState({ carro: false }); },
+    cerrarTodo: function () { self.setState({ panel: false, carro: false }); },
+    empuje: algo ? 'translateY(calc(716 * var(--u)))' : 'none',
+    velo: algo ? 0.6 : 0, veloPE: algo ? 'auto' : 'none',
+    carritoN: carrito.length,
+    carritoVacio: carrito.length === 0, carritoLleno: carrito.length > 0,
+    carritoItems: carrito.map(function (p, i) {
+      return { foto: p.foto, alt: p.alt || p.nombre, codigo: p.codigo, nombre: p.nombre, detalle: p.detalle || '', precio: self._precio(p.precio || 0),
+        quitar: function () { var c = carrito.slice(); c.splice(i, 1); self._guardarCarrito(c); } };
+    }),
+    subtotal: this._precio(subtotal),
+    irKits: function (e) { try { window.localStorage.setItem('ache-v3-filtro', 'kits'); } catch (err) {} if (self._filtroLocal) { if (e && e.preventDefault) e.preventDefault(); self._filtroLocal('kits'); } },
+    irCatalogo: function (e) { try { window.localStorage.setItem('ache-v3-filtro', 'todo'); } catch (err) {} if (self._filtroLocal) { if (e && e.preventDefault) e.preventDefault(); self._filtroLocal('todo'); } },
+    telonT: telon === 'cubre' ? 'translateY(0)' : (telon === 'sube' ? 'translateY(-100%)' : 'translateY(100%)'),
+    telonTi: telon === 'cubre' ? 'translateY(0)' : (telon === 'sube' ? 'translateY(100%)' : 'translateY(-100%)'),
+    telonTrans: st.telonAnim ? 'transform .7s cubic-bezier(.7,0,.2,1)' : 'none',
+    telonTxtOp: telon === 'sube' ? 0 : 1,
+    telonPE: telon === 'cubre' ? 'auto' : 'none',
+    telonVis: telon === 'oculto' && !st.telonAnim ? 'hidden' : 'visible',
+    telonIlus: inv === 'vino' ? il[0] : il[1],
+    altoVista: st.altoVista || this._H || 900,
+    cursorRef: this._cur,
+    hdrOp: 1
+  };
+}
+
+_refs() { if (!this._tit) this._tit = { current: null }; }
+_iniPagina() {
+  var f = null;
+  try { f = window.localStorage.getItem('ache-v3-filtro'); } catch (e) {}
+  this._filtro0 = TIPOS.some(function (t) { return t[0] === f; }) ? f : 'todo';
+}
+componentDidMount() {
+  var self = this;
+  this._refs();
+  this._montarBase();
+  try { window.localStorage.removeItem('ache-v3-filtro'); } catch (e) {}
+  this._alBajar = function () {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    var u = self._u || ((window.innerWidth || 1440) / 1920);
+    var el = self._tit.current;
+    if (el) {
+      var p = Math.max(0, Math.min(1, y / (260 * u)));
+      el.style.fontSize = ((122 - 50 * p) * u).toFixed(2) + 'px';
+      el.style.top = Math.max(76.6 * u, 105.6 * u - y).toFixed(2) + 'px';
+    }
+    var st = self.state || {};
+    var pct = self._pctPagina();
+    var fondo = (document.documentElement.scrollHeight || 0) - (window.innerHeight || 0) - y;
+    var arriba = y > 500 && fondo > 260 * u;
+    if (st.pct !== pct || !!st.arriba !== arriba) self.setState({ pct: pct, arriba: arriba });
+  };
+  window.addEventListener('scroll', this._alBajar, { passive: true });
+  this._alBajar();
+  this._filtroLocal = function (f) { self._cambiar({ filtro: f }); window.scrollTo(0, 0); };
+}
+componentWillUnmount() {
+  this._desmontarBase();
+  window.removeEventListener('scroll', this._alBajar);
+  clearTimeout(this._c1); clearTimeout(this._c2);
+}
+_cambiar(nuevo) {
+  var self = this;
+  clearTimeout(this._c1); clearTimeout(this._c2);
+  this.setState({ cambiando: true });
+  this._c1 = setTimeout(function () { self.setState(nuevo); }, 260);
+  this._c2 = setTimeout(function () { self.setState({ cambiando: false }); }, 700);
+}
+renderVals() {
+  var self = this;
+  this._refs();
+  var base = this._valsBase();
+  var st = this.state || {};
+  var filtro = st.filtro || this._filtro0 || 'todo';
+  var cols = st.cols || 5;
+  var modo = st.modo || 'img';
+  var lista = PIEZAS.filter(function (p) { return filtro === 'todo' || p[2] === filtro; });
+  var tipoNombre = {};
+  TIPOS.forEach(function (t) { tipoNombre[t[0]] = t[2]; });
+  function precio(p) { return p[5] ? 'VENDIDO' : self._precio(p[4]); }
+  function entrar(p) { return function () { self.setState({ etiqueta: 'EXPLORAR', piezaHeader: p[0] + ' ' + p[1].toUpperCase() }); }; }
+  var conHuecos = filtro === 'todo' && cols === 5;
+  var celdas = [], k = 0, total = lista.length + (conHuecos ? HUECOS.length : 0);
+  for (var i = 0; i < total; i++) {
+    if (conHuecos && HUECOS.indexOf(i) >= 0) {
+      celdas.push({ vis: 'hidden', oculto: 'true', href: '#', tab: '-1', foto: lista[0][6] ? './assets/' + lista[0][6] + '.jpg' : '', alt: '', madera: '', precio: '', precioColor: 'inherit', codigo: '', nombre: '', entrar: function () {} });
+      continue;
+    }
+    var p = lista[k++];
+    celdas.push({ vis: 'visible', oculto: 'false', href: p[8] ? 'Kit.dc.html' : 'Pieza.dc.html', tab: '0', foto: './assets/' + p[6] + '.jpg', alt: p[7],
+      madera: p[3].toUpperCase(), precio: precio(p), precioColor: p[5] ? 'var(--acento)' : 'inherit', codigo: p[0], nombre: p[1], entrar: entrar(p) });
+  }
+  var hov = st.txtI;
+  var filas = lista.map(function (p, i) {
+    return { href: p[8] ? 'Kit.dc.html' : 'Pieza.dc.html', n: ('00' + (i + 1)).slice(-3), codigo: p[0], nombre: p[1], tipo: tipoNombre[p[2]],
+      madera: p[3], precio: precio(p), precioColor: p[5] ? 'var(--acento)' : 'inherit', fondo: i % 2 === 0 ? 'var(--fondo-alt)' : 'transparent',
+      entrar: function () { self.setState({ txtI: i, etiqueta: 'EXPLORAR', piezaHeader: p[0] + ' ' + p[1].toUpperCase() }); } };
+  });
+  var cuenta = function (t) { return t === 'todo' ? PIEZAS.length : PIEZAS.filter(function (p) { return p[2] === t; }).length; };
+  var tipos = TIPOS.map(function (t, i) {
+    return { nombre: t[1], n: ('0' + cuenta(t[0])).slice(-2), sep: i === 0 ? 'none' : 'inline', activo: t[0] === filtro ? 'true' : 'false',
+      elegir: function () { if (t[0] !== filtro) self._cambiar({ filtro: t[0], txtI: null }); } };
+  });
+  var ancho = ((1862 - (cols - 1) * 30) / cols).toFixed(3);
+  var pasos = [8, 5, 3];
+  var vi = pasos.indexOf(cols);
+  function fijarVista(j) { j = Math.max(0, Math.min(2, j)); if (pasos[j] !== cols) self._cambiar({ cols: pasos[j] }); }
+  var n = lista.length;
+  return Object.assign(base, {
+    tituloRef: this._tit,
+    titulo: tipoNombre[filtro],
+    conteo: '0_' + ('0' + n).slice(-2),
+    modoImg: modo === 'img' ? 'true' : 'false', modoTxt: modo === 'txt' ? 'true' : 'false',
+    modoImgBool: modo === 'img', modoTxtBool: modo === 'txt',
+    verImg: function () { if (modo !== 'img') self._cambiar({ modo: 'img', txtI: null }); },
+    verTxt: function () { if (modo !== 'txt') self._cambiar({ modo: 'txt' }); },
+    tipos: tipos,
+    vistaN: vi + 1, vistaTexto: cols + ' columnas',
+    vistaX: (vi * 50) + '%',
+    vistaBajar: function (e) {
+      var r = e.currentTarget.getBoundingClientRect();
+      var x = (e.clientX - r.left) / Math.max(1, r.width);
+      fijarVista(Math.round(x * 2));
+    },
+    vistaTecla: function (e) {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); fijarVista(vi - 1); }
+      if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); fijarVista(vi + 1); }
+    },
+    claseRejilla: st.cambiando ? 'cambiando' : '',
+    celdas: celdas,
+    ancho: 'calc(' + ancho + ' * var(--u))',
+    gapX: 'calc(30 * var(--u))', gapY: cols === 8 ? 'calc(60 * var(--u))' : 'calc(89.6 * var(--u))',
+    rotuloF: cols === 8 ? 'calc(14 * var(--u))' : 'calc(17 * var(--u))',
+    capF: cols === 8 ? 'calc(17 * var(--u))' : 'calc(20 * var(--u))',
+    nombreVis: cols === 8 ? 'none' : 'block',
+    filas: filas,
+    txtSalir: function () { self.setState({ txtI: null, etiqueta: '', piezaHeader: '' }); },
+    txtFotoVis: modo === 'txt' && hov != null && !!lista[hov],
+    txtFoto: hov != null && lista[hov] ? './assets/' + lista[hov][6] + '.jpg' : '',
+    pieM: modo === 'txt' ? 'calc(240 * var(--u))' : 'calc(184 * var(--u))',
+    arriba: function () { try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); } },
+    arribaOp: st.arriba ? 1 : 0, arribaPE: st.arriba ? 'auto' : 'none'
+  });
+}
+
+}
+</script>
+</body>
+</html>

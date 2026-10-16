@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ache · Inicio (escritorio)</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ache/tokens.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--acento)}
+</style>
+</helmet>
+<div data-theme="crema" style="background: var(--fondo); color: var(--texto); font-family: var(--font-sans); font-size: 16px; line-height: 24px">
+
+<!-- ENCABEZADO: fijo; transparente sobre la portada, crema al bajar; se oculta al bajar y vuelve al subir -->
+<header style="position: sticky; top: 0; z-index: 50; box-sizing: border-box; height: 68px; padding: 0 10%; display: flex; align-items: center; justify-content: space-between; gap: 32px; background: {{hdrFondo}}; border-bottom: 1px solid {{hdrLinea}}; transform: {{hdrMover}}; transition: transform 350ms ease, background-color 250ms ease, border-color 250ms ease">
+  <a href="Main.dc.html" aria-label="Ache, inicio" style="display: flex; align-items: center; height: 44px">
+    <img src="./assets/76eb2481528a9eb10bb84a496025ee3c.svg" alt="Ache" style="display: block; height: 32px">
+  </a>
+  <nav aria-label="Principal" style="display: flex; align-items: center; gap: clamp(26px, 2.9vw, 56px); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.1em">
+    <a href="Catalogo.dc.html" style="padding: 14px 0">CATÁLOGO</a>
+    <a href="Catalogo.dc.html" style="padding: 14px 0">RECIÉN LLEGADOS</a>
+    <a href="Kits.dc.html" style="padding: 14px 0">KITS</a>
+    <a href="Nosotros.dc.html" style="padding: 14px 0">QUIÉNES SOMOS</a>
+    <a href="#" style="padding: 14px 0">WHATSAPP</a>
+    <a href="#" style="padding: 14px 0">BUSCAR</a>
+    <a href="#" style="padding: 14px 0">CUENTA</a>
+    <a href="#" style="padding: 14px 0">CARRITO (0)</a>
+  </nav>
+</header>
+
+<!-- PORTADA: carrusel de tres diapositivas a sangre, con el encabezado encima -->
+<section aria-label="Portada" style="position: relative; margin-top: -69px; aspect-ratio: 1903 / 890; min-height: 620px; overflow: hidden; background: var(--fondo-alt)">
+
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: {{op1}}; z-index: {{z1}}; transition: opacity 900ms ease">
+    <img src="./assets/df3c28d7c25584e8773108ad0245b0c7.jpg" alt="Credenza de nogal con frente acanalado sobre fondo claro" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 70%">
+    <div style="position: absolute; top: 25%; left: 0; right: 0; box-sizing: border-box; padding: 0 10%; display: flex; flex-direction: column; align-items: center; gap: 30px; text-align: center">
+      <h1 style="margin: 0; font-size: 60px; line-height: 64px; font-weight: 400">Menos reemplazar, más restaurar</h1>
+      <a href="Catalogo.dc.html" style="box-sizing: border-box; height: 44px; padding: 0 34px; display: inline-flex; align-items: center; background: var(--texto); color: var(--fondo); font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">VER CATÁLOGO</a>
+    </div>
+  </div>
+
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: {{op2}}; z-index: {{z2}}; transition: opacity 900ms ease">
+    <img src="./assets/0507fc088f498a2bd04ded0d75ebe23e.jpg" alt="Sillón de terciopelo rosa con estructura de madera" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 75%">
+    <div style="position: absolute; top: 25%; left: 0; right: 0; box-sizing: border-box; padding: 0 10%; display: flex; flex-direction: column; align-items: center; gap: 30px; text-align: center">
+      <h2 style="margin: 0; font-size: 60px; line-height: 64px; font-weight: 400">Piezas únicas, restauradas a mano</h2>
+      <a href="Catalogo.dc.html" style="box-sizing: border-box; height: 44px; padding: 0 34px; display: inline-flex; align-items: center; background: var(--texto); color: var(--fondo); font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">VER LAS PIEZAS</a>
+    </div>
+  </div>
+
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: {{op3}}; z-index: {{z3}}; transition: opacity 900ms ease">
+    <img src="./assets/417fd28520b789dbcd7df672c4928c1d.jpg" alt="Buró de nogal sobre fondo claro" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 75%">
+    <div style="position: absolute; top: 25%; left: 0; right: 0; box-sizing: border-box; padding: 0 10%; display: flex; flex-direction: column; align-items: center; gap: 30px; text-align: center">
+      <h2 style="margin: 0; font-size: 60px; line-height: 64px; font-weight: 400">Restaurados e intervenidos, 100% en madera</h2>
+      <a href="Nosotros.dc.html" style="box-sizing: border-box; height: 44px; padding: 0 34px; display: inline-flex; align-items: center; background: var(--texto); color: var(--fondo); font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">CONOCE ACHE</a>
+    </div>
+  </div>
+
+  <div role="group" aria-label="Diapositivas" style="position: absolute; left: 0; right: 0; bottom: 24px; z-index: 5; display: flex; justify-content: center">
+    <button type="button" aria-label="Diapositiva 1" onClick="{{ir1}}" style="width: 44px; height: 44px; padding: 0; border: 0; background: none; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="display: block; width: 28px; height: 2px; background: {{ind1}}"></span></button>
+    <button type="button" aria-label="Diapositiva 2" onClick="{{ir2}}" style="width: 44px; height: 44px; padding: 0; border: 0; background: none; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="display: block; width: 28px; height: 2px; background: {{ind2}}"></span></button>
+    <button type="button" aria-label="Diapositiva 3" onClick="{{ir3}}" style="width: 44px; height: 44px; padding: 0; border: 0; background: none; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="display: block; width: 28px; height: 2px; background: {{ind3}}"></span></button>
+  </div>
+
+  <!-- SUSCRIPCIÓN: ventana abajo a la derecha, aparece a los dos segundos -->
+  <sc-if value="{{popup}}" hint-placeholder-val="{{true}}">
+  <aside aria-label="Suscripción por correo" style="position: absolute; right: 2%; bottom: 32px; z-index: 10; box-sizing: border-box; width: 30%; min-width: 400px; padding: 44px 44px 40px; background: var(--fondo); color: var(--texto); display: flex; flex-direction: column">
+    <button type="button" onClick="{{cerrar}}" style="position: absolute; top: 8px; right: 12px; height: 44px; padding: 0 8px; border: 0; background: none; color: var(--texto); font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; cursor: pointer">CERRAR</button>
+    <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--acento)">AVISO DE PIEZAS NUEVAS</div>
+    <p style="margin: 16px 0 0; font-size: 24px; line-height: 31px">Suscríbete y entérate antes que nadie de las piezas nuevas, los kits y las restauraciones de cada semana.</p>
+    <form style="margin-top: 32px; display: flex; align-items: center; border-bottom: 1px solid var(--linea)">
+      <label for="correo-aviso" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%)">Tu correo</label>
+      <input id="correo-aviso" type="email" placeholder="Tu correo" style="flex-grow: 1; min-width: 0; height: 44px; padding: 0; border: 0; background: none; color: var(--texto); font-family: var(--font-sans); font-size: 15px">
+      <button type="submit" aria-label="Suscribirme" style="width: 44px; height: 44px; padding: 0; border: 0; background: none; color: var(--texto); font-family: var(--font-sans); font-size: 20px; text-align: right; cursor: pointer">→</button>
+    </form>
+  </aside>
+  </sc-if>
+</section>
+
+<!-- PIEZA DESTACADA: foto a la izquierda, texto centrado a la derecha -->
+<section style="box-sizing: border-box; padding: 112px 10% 0; display: flex; flex-wrap: wrap; align-items: center">
+  <a href="Pieza.dc.html" style="flex: 1 1 420px; min-width: 0; display: block">
+    <img src="./assets/1bd3ebb554ceafd57842f17466a76ebd.jpg" alt="Credenza de nogal, de frente" style="display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--fondo-alt)">
+  </a>
+  <div style="flex: 1 1 420px; min-width: 0; box-sizing: border-box; padding: 48px 0 48px 2.7%; display: flex; flex-direction: column; align-items: center; text-align: center">
+    <div style="font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.12em; color: var(--acento)">PIEZA DESTACADA · NO. 0142</div>
+    <h2 style="margin: 18px 0 0; font-size: 56px; line-height: 58px; font-weight: 400">Credenza de nogal</h2>
+    <p style="margin: 50px 0 0; max-width: 720px; font-size: 15px; line-height: 23px">Credenza de nogal macizo con frente de listones. La restauramos e intervenimos en nuestro taller de Guadalajara, con un acabado al aceite que deja ver la veta.</p>
+    <p style="margin: 44px 0 0; max-width: 720px; font-size: 15px; line-height: 23px">Pieza única: 180 × 45 × 70 cm · $18,600 MXN</p>
+    <a href="Pieza.dc.html" style="margin-top: 50px; padding: 12px 0 4px; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--acento)">VER PIEZA</a>
+  </div>
+</section>
+
+<!-- RECIÉN LLEGADOS: título con enlace, filtro por tipo y carrusel de cuatro tarjetas -->
+<section aria-label="Recién llegados" style="box-sizing: border-box; padding: 136px 10% 0">
+  <div style="display: flex; align-items: baseline; gap: 26px; flex-wrap: wrap">
+    <h2 style="margin: 0; font-size: 40px; line-height: 44px; font-weight: 400">Recién llegados</h2>
+    <a href="Catalogo.dc.html" style="padding: 12px 0 3px; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--acento)">VER TODO</a>
+  </div>
+  <div role="radiogroup" aria-label="Tipo de mueble" style="margin-top: 22px; display: flex; flex-wrap: wrap; gap: 0 30px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">
+    <sc-for list="{{tipos}}" as="tipo" hint-placeholder-count="5">
+      <button type="button" role="radio" aria-checked="{{tipo.marcado}}" onClick="{{tipo.elegir}}" style="height: 44px; padding: 0; border: 0; background: none; display: flex; align-items: center; gap: 9px; color: {{tipo.color}}; font: inherit; letter-spacing: inherit; cursor: pointer">
+        <span aria-hidden="true" style="box-sizing: border-box; width: 13px; height: 13px; border-radius: 50%; border: 1px solid currentColor; display: flex; align-items: center; justify-content: center"><span style="width: 7px; height: 7px; border-radius: 50%; background: {{tipo.punto}}"></span></span>
+        <span>{{tipo.nombre}}</span>
+      </button>
+    </sc-for>
+  </div>
+  <div style="position: relative; margin-top: 20px">
+    <div style="overflow: hidden">
+      <div style="display: flex; gap: 24px; transform: {{pista}}; transition: transform 550ms ease">
+        <sc-for list="{{piezas}}" as="pieza" hint-placeholder-count="8">
+          <a href="{{pieza.href}}" style="flex: 0 0 calc((100% - 72px) / 4); min-width: 0; display: flex; flex-direction: column">
+            <div style="position: relative; background: var(--fondo-alt)">
+              <img src="{{pieza.foto}}" alt="{{pieza.alt}}" style="display: block; width: 100%; aspect-ratio: 362 / 482; object-fit: cover">
+              <sc-if value="{{pieza.vendido}}" hint-placeholder-val="{{false}}">
+                <span style="position: absolute; top: 11px; right: 10px; padding: 4px 8px; background: var(--fondo); color: var(--texto); font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: 0.1em">VENDIDO</span>
+              </sc-if>
+              <sc-if value="{{pieza.kit}}" hint-placeholder-val="{{false}}">
+                <span style="position: absolute; top: 11px; right: 10px; padding: 4px 8px; background: var(--fondo); color: var(--texto); font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: 0.1em">KIT</span>
+              </sc-if>
+            </div>
+            <div style="margin-top: 26px; display: flex; justify-content: space-between; align-items: baseline; gap: 16px">
+              <span style="font-size: 17px; line-height: 22px">{{pieza.nombre}}</span>
+              <span style="font-size: 15px; line-height: 22px; font-weight: 500; white-space: nowrap">{{pieza.precio}}</span>
+            </div>
+            <div style="margin-top: 4px; font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.1em; color: var(--acento)">{{pieza.dato}}</div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+    <sc-if value="{{haySiguiente}}" hint-placeholder-val="{{true}}">
+      <button type="button" aria-label="Siguientes piezas" onClick="{{siguiente}}" style="position: absolute; right: 12px; top: 46%; width: 64px; height: 56px; padding: 0; border: 0; background: none; color: var(--texto); font-family: var(--font-sans); font-size: 44px; line-height: 56px; cursor: pointer">→</button>
+    </sc-if>
+    <sc-if value="{{hayAnterior}}" hint-placeholder-val="{{false}}">
+      <button type="button" aria-label="Piezas anteriores" onClick="{{anterior}}" style="position: absolute; left: 12px; top: 46%; width: 64px; height: 56px; padding: 0; border: 0; background: none; color: var(--texto); font-family: var(--font-sans); font-size: 44px; line-height: 56px; cursor: pointer">←</button>
+    </sc-if>
+  </div>
+</section>
+
+<!-- KIT SALA COPENHAGUE: escena a sangre; cada punto abre su tarjeta al pasar el mouse -->
+<section aria-label="Sala Copenhague" style="position: relative; margin-top: 136px; aspect-ratio: 1897 / 730; overflow: hidden; background: var(--fondo-alt); color: var(--texto); font-size: 15px; line-height: 20px">
+  <img src="./assets/1f8abf9b3bbdad7a52533468bb27c6c3.jpg" alt="Sala Copenhague: sillón gris, otomana y sillón verdes y sofá de tres plazas, de nogal, junto a una escultura de bloques de madera" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%">
+
+  <div onMouseEnter="{{entrarA}}" onMouseLeave="{{salir}}" style="position: absolute; left: 87%; top: 81%; width: 0; height: 0; z-index: {{zA}}">
+    <a href="Kit.dc.html" onFocus="{{entrarA}}" onBlur="{{salir}}" style="position: absolute; left: -7px; top: -22px; height: 44px; display: flex; align-items: center; gap: 10px; white-space: nowrap; color: var(--texto)">
+      <span aria-hidden="true" style="box-sizing: border-box; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid currentColor; display: flex; align-items: center; justify-content: center"><span style="width: 6px; height: 6px; border-radius: 50%; background: {{puntoA}}"></span></span>
+      <sc-if value="{{aCerrado}}" hint-placeholder-val="{{true}}"><span>Sofá · 1 de 4</span></sc-if>
+    </a>
+    <sc-if value="{{aAbierto}}" hint-placeholder-val="{{false}}">
+      <div data-theme="vino" style="position: absolute; right: 16px; top: -60px; box-sizing: border-box; height: 120px; padding: 10px 18px 10px 10px; display: flex; gap: 16px; background: var(--fondo); color: var(--texto)">
+        <img src="./assets/cbf1ce74a3ab11b38935c3e37daa8666.jpg" alt="" style="display: block; width: 100px; height: 100px; object-fit: cover; object-position: 50% 62%">
+        <div style="display: flex; flex-direction: column; justify-content: space-between; min-width: 136px; padding-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <span>Sofá de tres plazas</span>
+            <span style="font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: 0.1em; color: var(--texto-suave)">1 DE 4 · NOGAL</span>
+          </div>
+          <a href="Kit.dc.html" style="align-self: flex-start; padding-bottom: 2px; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">VER EL KIT</a>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <div onMouseEnter="{{entrarB}}" onMouseLeave="{{salir}}" style="position: absolute; left: 53%; top: 63%; width: 0; height: 0; z-index: {{zB}}">
+    <a href="Kit.dc.html" onFocus="{{entrarB}}" onBlur="{{salir}}" style="position: absolute; left: -7px; top: -22px; height: 44px; display: flex; align-items: center; gap: 10px; white-space: nowrap; color: var(--texto)">
+      <span aria-hidden="true" style="box-sizing: border-box; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid currentColor; display: flex; align-items: center; justify-content: center"><span style="width: 6px; height: 6px; border-radius: 50%; background: {{puntoB}}"></span></span>
+      <sc-if value="{{bCerrado}}" hint-placeholder-val="{{true}}"><span>Sillón · 2 de 4</span></sc-if>
+    </a>
+    <sc-if value="{{bAbierto}}" hint-placeholder-val="{{false}}">
+      <div data-theme="vino" style="position: absolute; left: 16px; top: -60px; box-sizing: border-box; height: 120px; padding: 10px 18px 10px 10px; display: flex; gap: 16px; background: var(--fondo); color: var(--texto)">
+        <img src="./assets/65cd33310f764265095371ab3766bc1f.jpg" alt="" style="display: block; width: 100px; height: 100px; object-fit: cover; object-position: 50% 62%">
+        <div style="display: flex; flex-direction: column; justify-content: space-between; min-width: 136px; padding-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <span>Sillón verde</span>
+            <span style="font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: 0.1em; color: var(--texto-suave)">2 DE 4 · NOGAL</span>
+          </div>
+          <a href="Kit.dc.html" style="align-self: flex-start; padding-bottom: 2px; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">VER EL KIT</a>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <div onMouseEnter="{{entrarC}}" onMouseLeave="{{salir}}" style="position: absolute; left: 38%; top: 74%; width: 0; height: 0; z-index: {{zC}}">
+    <a href="Kit.dc.html" onFocus="{{entrarC}}" onBlur="{{salir}}" style="position: absolute; left: -7px; top: -22px; height: 44px; display: flex; align-items: center; gap: 10px; white-space: nowrap; color: var(--texto)">
+      <span aria-hidden="true" style="box-sizing: border-box; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid currentColor; display: flex; align-items: center; justify-content: center"><span style="width: 6px; height: 6px; border-radius: 50%; background: {{puntoC}}"></span></span>
+      <sc-if value="{{cCerrado}}" hint-placeholder-val="{{true}}"><span>Otomana · 3 de 4</span></sc-if>
+    </a>
+    <sc-if value="{{cAbierto}}" hint-placeholder-val="{{false}}">
+      <div data-theme="vino" style="position: absolute; left: 16px; top: -60px; box-sizing: border-box; height: 120px; padding: 10px 18px 10px 10px; display: flex; gap: 16px; background: var(--fondo); color: var(--texto)">
+        <img src="./assets/157863add1499edc864d5fbaa00f3583.jpg" alt="" style="display: block; width: 100px; height: 100px; object-fit: cover; object-position: 50% 62%">
+        <div style="display: flex; flex-direction: column; justify-content: space-between; min-width: 136px; padding-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <span>Otomana verde</span>
+            <span style="font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: 0.1em; color: var(--texto-suave)">3 DE 4 · NOGAL</span>
+          </div>
+          <a href="Kit.dc.html" style="align-self: flex-start; padding-bottom: 2px; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">VER EL KIT</a>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <div onMouseEnter="{{entrarD}}" onMouseLeave="{{salir}}" style="position: absolute; left: 9%; top: 59%; width: 0; height: 0; z-index: {{zD}}">
+    <a href="Kit.dc.html" onFocus="{{entrarD}}" onBlur="{{salir}}" style="position: absolute; left: -7px; top: -22px; height: 44px; display: flex; align-items: center; gap: 10px; white-space: nowrap; color: var(--texto)">
+      <span aria-hidden="true" style="box-sizing: border-box; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid currentColor; display: flex; align-items: center; justify-content: center"><span style="width: 6px; height: 6px; border-radius: 50%; background: {{puntoD}}"></span></span>
+      <sc-if value="{{dCerrado}}" hint-placeholder-val="{{true}}"><span>Sillón · 4 de 4</span></sc-if>
+    </a>
+    <sc-if value="{{dAbierto}}" hint-placeholder-val="{{false}}">
+      <div data-theme="vino" style="position: absolute; left: 16px; top: -60px; box-sizing: border-box; height: 120px; padding: 10px 18px 10px 10px; display: flex; gap: 16px; background: var(--fondo); color: var(--texto)">
+        <img src="./assets/86cb8d44e0e5c71eb3264c3e56aa1514.jpg" alt="" style="display: block; width: 100px; height: 100px; object-fit: cover; object-position: 50% 62%">
+        <div style="display: flex; flex-direction: column; justify-content: space-between; min-width: 136px; padding-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <span>Sillón gris</span>
+            <span style="font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: 0.1em; color: var(--texto-suave)">4 DE 4 · NOGAL</span>
+          </div>
+          <a href="Kit.dc.html" style="align-self: flex-start; padding-bottom: 2px; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">VER EL KIT</a>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="position: absolute; left: 10%; top: 44px; max-width: 440px; display: flex; flex-direction: column; align-items: flex-start">
+    <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--acento)">KIT NO. 0151 · $46,800 MXN</div>
+    <h2 style="margin: 12px 0 0; font-size: 34px; line-height: 40px; font-weight: 400">Sala Copenhague</h2>
+    <p style="margin: 14px 0 0; font-size: 15px; line-height: 23px">Sofá de tres plazas, sillón verde, otomana verde y sillón gris, de nogal, restaurados como un conjunto. Se venden juntos.</p>
+    <a href="Kit.dc.html" style="margin-top: 26px; padding-bottom: 3px; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">VER EL KIT</a>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS: foto a la izquierda, texto a la derecha -->
+<section style="box-sizing: border-box; padding: 136px 10% 0; display: flex; flex-wrap: wrap; align-items: center">
+  <div style="flex: 1 1 420px; min-width: 0">
+    <img src="./assets/cbceca5b5792edbeace2cede5b1e4930.jpg" alt="Sillón de nogal con cojines verdes" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: var(--fondo-alt)">
+  </div>
+  <div style="flex: 1 1 420px; min-width: 0; box-sizing: border-box; padding: 48px 0 48px 2.6%; display: flex; flex-direction: column; align-items: flex-start">
+    <div style="font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.12em; color: var(--acento)">QUIÉNES SOMOS</div>
+    <h2 style="margin: 16px 0 0; font-size: 56px; line-height: 60px; font-weight: 400">El tiempo también suma valor</h2>
+    <p style="margin: 26px 0 0; max-width: 660px; font-size: 15px; line-height: 23px">Creemos en la transformación. Encontramos valor en restaurar materiales nobles, restaurar con intención y devolverle sentido a aquello que merece seguir existiendo.</p>
+    <a href="Nosotros.dc.html" style="margin-top: 40px; padding: 12px 0 3px; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--acento)">CONOCE ACHE</a>
+  </div>
+</section>
+
+<!-- VIDEO DEL TALLER: a sangre, con el texto abajo a la izquierda -->
+<section aria-label="Video del taller" data-theme="vino" style="position: relative; margin-top: 136px; aspect-ratio: 1903 / 890; min-height: 560px; overflow: hidden; background: var(--fondo); color: var(--texto)">
+  <img src="./assets/73a76e202ac46a43797e9225686c21a5.jpg" alt="Detalle de la veta de una madera restaurada" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%">
+  <div aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(25, 1, 0, 0.42)"></div>
+  <div style="position: absolute; left: 10%; bottom: 56px; max-width: 520px; display: flex; flex-direction: column; align-items: flex-start">
+    <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">EL TALLER · 2:40 MIN</div>
+    <h2 style="margin: 12px 0 0; font-size: 34px; line-height: 40px; font-weight: 400">Lo que hay detrás de cada mueble</h2>
+    <p style="margin: 14px 0 0; font-size: 15px; line-height: 23px">Un recorrido por nuestro taller en Guadalajara: así restauramos cada pieza antes de que llegue a tu casa.</p>
+    <button type="button" data-theme="crema" style="margin-top: 28px; box-sizing: border-box; height: 44px; padding: 0 34px; border: 0; background: var(--fondo); color: var(--texto); font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; cursor: pointer">REPRODUCIR VIDEO</button>
+  </div>
+</section>
+
+<!-- CONTADOR E ILUSTRACIONES -->
+<section data-theme="azul" style="box-sizing: border-box; padding: 88px 10%; background: var(--fondo); color: var(--texto); display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 48px">
+  <div style="display: flex; flex-direction: column; gap: 12px">
+    <div style="font-size: 88px; line-height: 88px">312</div>
+    <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">MUEBLES CON UNA SEGUNDA VIDA</div>
+  </div>
+  <div style="display: flex; align-items: flex-end; gap: 48px; flex-wrap: wrap">
+    <img src="./assets/db28ff92900f433998b7431fe4fdba8c.svg" alt="" style="height: 128px; display: block">
+    <img src="./assets/415921b5e14a02cba09d780543275b0a.svg" alt="" style="height: 128px; display: block">
+    <img src="./assets/e58b4579814200d283a0efae6e5f4fa4.svg" alt="" style="height: 96px; display: block">
+    <img src="./assets/474c32fb0bae1b8f5a9a9648f65d59c0.svg" alt="" style="height: 128px; display: block">
+    <img src="./assets/fb9e489493baadb46fe6a21879924409.svg" alt="" style="height: 112px; display: block">
+  </div>
+</section>
+
+<!-- PIE -->
+<footer data-theme="vino" style="box-sizing: border-box; padding: 80px 10% 32px; background: var(--fondo); color: var(--texto); display: flex; flex-direction: column; gap: 64px">
+  <div style="display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between">
+    <div style="flex: 1 1 300px; max-width: 380px; display: flex; flex-direction: column; gap: 20px">
+      <img src="./assets/b4f546f58f012a1ac9033d258d007004.svg" alt="Ache" style="height: 32px; display: block; align-self: flex-start">
+      <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">MENOS REEMPLAZAR, MÁS RESTAURAR</div>
+      <form style="margin-top: 12px; display: flex; align-items: center; border-bottom: 1px solid var(--linea)">
+        <label for="correo-pie" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%)">Tu correo</label>
+        <input id="correo-pie" type="email" placeholder="Tu correo para avisarte de piezas nuevas" style="flex-grow: 1; min-width: 0; height: 44px; padding: 0; border: 0; background: none; color: var(--texto); font-family: var(--font-sans); font-size: 14px">
+        <button type="submit" aria-label="Suscribirme" style="width: 44px; height: 44px; padding: 0; border: 0; background: none; color: var(--texto); font-family: var(--font-sans); font-size: 20px; text-align: right; cursor: pointer">→</button>
+      </form>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">TIENDA</div>
+      <a href="Catalogo.dc.html" style="padding: 12px 0">Catálogo</a>
+      <a href="Catalogo.dc.html" style="padding: 12px 0">Recién llegados</a>
+      <a href="Kits.dc.html" style="padding: 12px 0">Kits</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">CLIENTES</div>
+      <a href="#" style="padding: 12px 0">Entregas y flete</a>
+      <a href="#" style="padding: 12px 0">Formas de pago</a>
+      <a href="#" style="padding: 12px 0">Políticas</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">ACHE</div>
+      <a href="Nosotros.dc.html" style="padding: 12px 0">Quiénes somos</a>
+      <a href="Nosotros.dc.html" style="padding: 12px 0">Reseñas</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">CONTACTO</div>
+      <a href="#" style="padding: 12px 0">WhatsApp</a>
+      <a href="#" style="padding: 12px 0">hola@estudioache.mx</a>
+      <a href="#" style="padding: 12px 0">Instagram</a>
+    </div>
+  </div>
+  <div style="padding-top: 24px; border-top: 1px solid var(--linea-suave); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">
+    <span>© 2026 ACHE · GUADALAJARA, MÉXICO</span>
+    <span>TARJETA · APPLE PAY · GOOGLE PAY · PAYPAL · TRANSFERENCIA · OXXO</span>
+    <span>SITIO POR CRAFTEO</span>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"suscripcion":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":5129}}'>
+class Component extends DCLogic {
+componentDidMount() {
+  var self = this;
+  this._y = 0;
+  this._alBajar = function () {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    var bajo = y > 8;
+    var oculto = y > 420 && y > self._y;
+    self._y = y;
+    var st = self.state || {};
+    if (st.bajo !== bajo || st.oculto !== oculto) self.setState({ bajo: bajo, oculto: oculto });
+  };
+  window.addEventListener('scroll', this._alBajar, { passive: true });
+  this._carrusel = setInterval(function () {
+    var st = self.state || {};
+    self.setState({ slide: ((st.slide || 0) + 1) % 3 });
+  }, 6500);
+  this._aviso = setTimeout(function () { self.setState({ popup: true }); }, 2000);
+}
+componentWillUnmount() {
+  window.removeEventListener('scroll', this._alBajar);
+  clearInterval(this._carrusel);
+  clearTimeout(this._aviso);
+}
+renderVals() {
+  var self = this;
+  var st = this.state || {};
+  var slide = st.slide || 0;
+  var bajo = !!st.bajo;
+  var punto = st.punto || '';
+
+  var datos = [
+    ["473ac44a95925e928fa063ec24f1df0a", "Credenza antigua de roble de cuatro puertas con tableros tallados", "Credenza de roble", "$38,600", "NO. 0191 · ROBLE", "buros", 0, 0],
+    ["dd75acb22776024569d2701b6c6a2087", "Alacena rústica de pino con dos cajones y dos puertas", "Alacena rústica", "$24,900", "NO. 0188 · PINO", "armarios", 0, 0],
+    ["6257d5d6d85ec2c3465d25c9ebdcdae0", "Armario antiguo de pino pintado de amarillo con dos puertas", "Armario amarillo", "$32,500", "NO. 0187 · PINO", "armarios", 0, 0],
+    ["52da8b43e5593f0702c00f85327570a3", "Buró de nogal de tres cajones con veta continua", "Buró de tres cajones", "$10,400", "NO. 0190 · NOGAL", "buros", 0, 0],
+    ["018861b7dbf3e28d5e69c7f524c617e7", "Mesa antigua de roble con dos cajones y patas torneadas", "Mesa de patas torneadas", "$21,800", "NO. 0184 · ROBLE", "mesas", 0, 0],
+    ["b6e22aeab185551e6d644b4382331dbd", "Tocador de nogal con cubierta abatible y marquetería", "Tocador de marquetería", "$14,200", "NO. 0189 · NOGAL", "mesas", 0, 0],
+    ["de18ad06e5d63d49fe803a33d19ec52c", "Par de sillas de haya con brazos curvos y asiento verde olivo", "Par de sillas de brazos", "$13,200", "KIT NO. 0196 · HAYA · 2 PIEZAS", "kits", 0, 1],
+    ["4cc72096c0fec7a6b307b72149741187", "Gabinete de roble de dos puertas con charolas interiores", "Gabinete de roble", "$18,400", "NO. 0195 · ROBLE", "buros", 0, 0],
+    ["25f08ec505adcfb42661259c0213078f", "Armario de pino de cuatro puertas con pintura original desgastada", "Armario de cuatro puertas", "$29,800", "NO. 0192 · PINO", "armarios", 0, 0],
+    ["101d23ebec0372e5af4688a2cec8d0ea", "Par de sillas rústicas de encino con asiento de tule", "Par de sillas rústicas", "$9,800", "KIT NO. 0198 · ENCINO · 2 PIEZAS", "kits", 0, 1]
+  ];
+  var tipo = st.tipo || 'todo';
+  var lista = datos.filter(function (d) { return tipo === 'todo' || d[5] === tipo; }).map(function (d) {
+    return { foto: './assets/' + d[0] + '.jpg', alt: d[1], nombre: d[2], precio: d[3], dato: d[4], vendido: !!d[6], kit: !!d[7] && !d[6], href: d[7] ? 'Kit.dc.html' : 'Pieza.dc.html' };
+  });
+  var max = Math.max(0, lista.length - 4);
+  var off = Math.min(st.offset || 0, max);
+  var tipos = [["todo", "TODO"], ["mesas", "MESAS"], ["buros", "BURÓS Y CREDENZAS"], ["armarios", "ARMARIOS Y ALACENAS"], ["kits", "KITS"]].map(function (t) {
+    var on = t[0] === tipo;
+    return {
+      nombre: t[1], marcado: on ? 'true' : 'false',
+      color: on ? 'var(--texto)' : 'var(--texto-suave)',
+      punto: on ? 'currentColor' : 'transparent',
+      elegir: function () { self.setState({ tipo: t[0], offset: 0 }); }
+    };
+  });
+  function ir(n) { return function () { self.setState({ slide: n }); }; }
+  function op(n) { return slide === n ? 1 : 0; }
+  function z(n) { return slide === n ? 2 : 1; }
+  function ind(n) { return slide === n ? 'var(--texto)' : 'var(--linea-suave)'; }
+  return {
+    hdrFondo: bajo ? 'var(--fondo)' : 'transparent',
+    hdrLinea: bajo ? 'var(--linea-suave)' : 'transparent',
+    hdrMover: st.oculto ? 'translateY(-100%)' : 'translateY(0)',
+    op1: op(0), op2: op(1), op3: op(2), z1: z(0), z2: z(1), z3: z(2),
+    ind1: ind(0), ind2: ind(1), ind3: ind(2), ir1: ir(0), ir2: ir(1), ir3: ir(2),
+    popup: (this.props.suscripcion ?? true) && !!st.popup && !st.cerrada,
+    cerrar: function () { self.setState({ cerrada: true }); },
+    tipos: tipos,
+    piezas: lista,
+    pista: 'translateX(calc(' + (-off) + ' * (25% + 6px)))',
+    haySiguiente: off < max,
+    hayAnterior: off > 0,
+    siguiente: function () { self.setState({ offset: Math.min(off + 1, max) }); },
+    anterior: function () { self.setState({ offset: Math.max(off - 1, 0) }); },
+    aAbierto: punto === 'a', aCerrado: punto !== 'a', puntoA: punto === 'a' ? 'currentColor' : 'transparent', zA: punto === 'a' ? 3 : 2,
+    bAbierto: punto === 'b', bCerrado: punto !== 'b', puntoB: punto === 'b' ? 'currentColor' : 'transparent', zB: punto === 'b' ? 3 : 2,
+    cAbierto: punto === 'c', cCerrado: punto !== 'c', puntoC: punto === 'c' ? 'currentColor' : 'transparent', zC: punto === 'c' ? 3 : 2,
+    dAbierto: punto === 'd', dCerrado: punto !== 'd', puntoD: punto === 'd' ? 'currentColor' : 'transparent', zD: punto === 'd' ? 3 : 2,
+    entrarA: function () { self.setState({ punto: 'a' }); },
+    entrarB: function () { self.setState({ punto: 'b' }); },
+    entrarC: function () { self.setState({ punto: 'c' }); },
+    entrarD: function () { self.setState({ punto: 'd' }); },
+    salir: function () { self.setState({ punto: '' }); }
+  };
+}
+}
+</script>
+</body>
+</html>

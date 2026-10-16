@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ache · Quiénes somos</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ache/tokens.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+:root{--u:calc(100vw / 1920)}
+html{scrollbar-width:none}
+html::-webkit-scrollbar{display:none}
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:inherit}
+input{font:inherit;color:inherit}
+input::placeholder{color:var(--texto-suave);opacity:1}
+:focus-visible{outline:2px solid var(--foco);outline-offset:2px}
+.m{font-family:var(--font-mono);font-weight:400;letter-spacing:0}
+.nav a:hover,.nav button:hover{opacity:.55}
+.nav{text-shadow:0 0 10px color-mix(in srgb, var(--fondo) 55%, transparent)}
+.nav a,.nav button{transition:opacity .25s ease}
+.enlace{position:relative;display:flex;align-items:center;justify-content:space-between;overflow:hidden}
+.enlace::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:var(--texto);transform:scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.7,0,.2,1)}
+.enlace:hover::before,.enlace:focus-within::before{transform:scaleX(1)}
+.enlace > *{position:relative;transition:color .3s ease,transform .55s cubic-bezier(.7,0,.2,1)}
+.enlace:hover > *,.enlace:focus-within > *{color:var(--fondo)}
+.enlace:hover .enlace-t,.enlace:focus-within .enlace-t{transform:translateX(calc(22 * var(--u)))}
+.grande:hover .flecha{transform:translate(calc(10 * var(--u)),0)}
+.flecha{display:inline-block;transition:transform .4s ease}
+.pieza img{transition:filter .5s ease}
+.pieza:hover img{filter:brightness(.94)}
+.boton{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;border:1px solid var(--linea);font-family:var(--font-mono);font-weight:400;letter-spacing:.02em;text-transform:uppercase;transition:background-color .35s ease,color .35s ease}
+.boton:hover{background:var(--texto);color:var(--fondo)}
+.boton-lleno{background:var(--texto);color:var(--fondo)}
+.boton-lleno:hover{background:transparent;color:var(--texto)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[data-arrastre]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+
+.linea{transform:scaleX(0);transform-origin:left center;transition:transform 1.3s cubic-bezier(.2,.7,.2,1)}
+.linea.ver{transform:scaleX(1)}
+.aparece{opacity:.15;transition:opacity 1.2s ease}
+.aparece.ver{opacity:1}
+.paso .marco img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.paso:hover .marco img{transform:scale(1.06)}
+.madera{transition:color .5s ease}
+</style>
+</helmet>
+<div data-theme="{{tema}}" style="position: relative; background: var(--fondo); color: var(--texto); font-family: var(--font-sans); font-weight: 500; letter-spacing: -0.01em; transition: background-color .6s ease, color .6s ease">
+
+<!-- VELO: oscurece la página cuando hay un panel abierto -->
+<div aria-hidden="true" onClick="{{cerrarTodo}}" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 55; background: var(--fondo); opacity: {{velo}}; pointer-events: {{veloPE}}; transition: opacity .8s ease"></div>
+
+<!-- PANEL QUIÉNES SOMOS: baja desde arriba y empuja la página -->
+<aside data-theme="{{temaInv}}" aria-label="Quiénes somos" aria-hidden="{{panelOculto}}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 70; box-sizing: border-box; height: calc(716 * var(--u)); background: var(--fondo); color: var(--texto); transform: {{panelY}}; visibility: {{panelVis}}; transition: {{panelTrans}}">
+  <p class="m" style="position: absolute; left: calc(29 * var(--u)); top: calc(28 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: 1; letter-spacing: 0.02em; color: var(--texto-suave)">(SOBRE ACHE)</p>
+  <p style="position: absolute; left: calc(29 * var(--u)); top: calc(74 * var(--u)); width: calc(560 * var(--u)); margin: 0; font-size: calc(27 * var(--u)); line-height: calc(34 * var(--u)); letter-spacing: -0.015em">Ache es un taller en Guadalajara que rescata muebles con buena estructura y madera noble. Los restauramos a mano para darles una segunda vida. Cada pieza es única: cuando se vende, no se repite.</p>
+  <p class="m" style="position: absolute; left: calc(790 * var(--u)); top: calc(29 * var(--u)); margin: 0; font-size: calc(17 * var(--u)); line-height: 1; letter-spacing: 0.02em; color: var(--texto-suave)">MADERAS</p>
+  <ul style="position: absolute; left: calc(790 * var(--u)); top: calc(52 * var(--u)); margin: 0; padding: 0; list-style: none; font-size: calc(18 * var(--u)); line-height: calc(26 * var(--u))">
+    <li>Nogal</li><li>Roble</li><li>Teca</li><li>Cedro</li><li>Parota</li>
+  </ul>
+  <button type="button" onClick="{{cerrarPanel}}" style="position: absolute; right: calc(29 * var(--u)); top: calc(24 * var(--u)); font-size: calc(27 * var(--u)); line-height: 1">(Cerrar)</button>
+  <img src="{{ilusPanel}}" alt="Ilustración de línea de una lámpara de pie junto a un sillón" style="position: absolute; left: calc(1222 * var(--u)); top: calc(250 * var(--u)); width: auto; height: calc(300 * var(--u))">
+  <img src="./assets/688226a01776cd6915166a9c5c30ef82.jpg" alt="Silla de nogal de respaldo alto" style="position: absolute; right: calc(29 * var(--u)); bottom: calc(28 * var(--u)); width: calc(262 * var(--u)); height: calc(356 * var(--u)); object-fit: cover">
+  <div style="position: absolute; left: calc(29 * var(--u)); right: calc(393 * var(--u)); bottom: calc(28 * var(--u)); display: flex; align-items: flex-end; font-size: calc(17 * var(--u)); line-height: calc(17 * var(--u))">
+    <p style="margin: 0; width: calc(330 * var(--u))">Muebles restaurados<br>y piezas únicas</p>
+    <p style="margin: 0; width: calc(253 * var(--u))">Taller en<br>Guadalajara, Jal.</p>
+    <p style="margin: 0; width: calc(262 * var(--u))">Correo<br><a href="#">hola@estudioache.mx</a></p>
+    <p style="margin: 0; width: calc(246 * var(--u))">WhatsApp<br><a href="#">33 1234 5678</a></p>
+    <a href="Nosotros.dc.html" class="grande" style="margin-left: auto; font-size: calc(27 * var(--u)); line-height: 1">Conoce nuestra historia <span class="flecha m" style="font-weight: 300; font-size: calc(20 * var(--u))">→</span></a>
+  </div>
+</aside>
+
+<!-- PANEL CARRITO: mismo comportamiento que el de Quiénes somos -->
+<aside data-theme="{{temaInv}}" aria-label="Carrito" aria-hidden="{{carroOculto}}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 71; box-sizing: border-box; height: calc(716 * var(--u)); background: var(--fondo); color: var(--texto); transform: {{carroY}}; visibility: {{carroVis}}; transition: {{carroTrans}}">
+  <p class="m" style="position: absolute; left: calc(29 * var(--u)); top: calc(28 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: 1; letter-spacing: 0.02em; color: var(--texto-suave)">(CARRITO · {{carritoN}})</p>
+  <button type="button" onClick="{{cerrarCarro}}" style="position: absolute; right: calc(29 * var(--u)); top: calc(24 * var(--u)); font-size: calc(27 * var(--u)); line-height: 1">(Cerrar)</button>
+  <sc-if value="{{carritoVacio}}" hint-placeholder-val="{{true}}">
+    <div style="position: absolute; left: calc(29 * var(--u)); top: calc(74 * var(--u)); width: calc(600 * var(--u))">
+      <p style="margin: 0; font-size: calc(27 * var(--u)); line-height: calc(34 * var(--u)); letter-spacing: -0.015em">Tu carrito está vacío. Cada pieza es única: en cuanto la pagas, deja de estar disponible para los demás.</p>
+      <a href="Catalogo.dc.html" class="grande" style="display: inline-block; margin-top: calc(40 * var(--u)); font-size: calc(27 * var(--u)); line-height: 1">Ver el catálogo <span class="flecha m" style="font-weight: 300; font-size: calc(20 * var(--u))">→</span></a>
+    </div>
+    <img src="{{ilusCarro}}" alt="Ilustración de línea de un sillón" style="position: absolute; left: calc(1222 * var(--u)); top: calc(210 * var(--u)); width: auto; height: calc(330 * var(--u))">
+  </sc-if>
+  <sc-if value="{{carritoLleno}}" hint-placeholder-val="{{false}}">
+    <ul style="position: absolute; left: calc(29 * var(--u)); top: calc(74 * var(--u)); width: calc(1031 * var(--u)); max-height: calc(500 * var(--u)); overflow-y: auto; margin: 0; padding: 0; list-style: none; border-bottom: 1px solid var(--linea)">
+      <sc-for list="{{carritoItems}}" as="p" hint-placeholder-count="1">
+        <li style="display: flex; align-items: flex-start; padding: calc(18 * var(--u)) 0; border-top: 1px solid var(--linea)">
+          <img src="{{p.foto}}" alt="{{p.alt}}" style="display: block; flex: 0 0 auto; width: calc(92 * var(--u)); height: calc(122 * var(--u)); object-fit: cover">
+          <div style="flex: 1 1 auto; margin-left: calc(24 * var(--u))">
+            <p class="m" style="margin: 0; font-size: calc(17 * var(--u)); line-height: 1; color: var(--texto-suave)">{{p.codigo}}</p>
+            <p style="margin: calc(12 * var(--u)) 0 0; font-size: calc(27 * var(--u)); line-height: 1; letter-spacing: -0.015em">{{p.nombre}}</p>
+            <p class="m" style="margin: calc(12 * var(--u)) 0 0; font-size: calc(17 * var(--u)); line-height: 1; color: var(--texto-suave)">{{p.detalle}}</p>
+          </div>
+          <div style="text-align: right">
+            <p style="margin: 0; font-size: calc(27 * var(--u)); line-height: 1; font-variant-numeric: tabular-nums">{{p.precio}}</p>
+            <button type="button" onClick="{{p.quitar}}" class="m" style="margin-top: calc(14 * var(--u)); font-size: calc(17 * var(--u)); line-height: 1; color: var(--texto-suave)">QUITAR</button>
+          </div>
+        </li>
+      </sc-for>
+    </ul>
+    <div style="position: absolute; left: calc(1363 * var(--u)); right: calc(29 * var(--u)); top: calc(74 * var(--u)); font-size: calc(18 * var(--u)); line-height: calc(22 * var(--u))">
+      <div style="display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; height: calc(57 * var(--u)); border-top: 1px solid var(--linea)"><span>Subtotal</span><span style="font-variant-numeric: tabular-nums">{{subtotal}}</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; height: calc(57 * var(--u)); border-top: 1px solid var(--linea)"><span>Flete</span><span style="color: var(--texto-suave)">Se cotiza aparte</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; height: calc(57 * var(--u)); border-top: 1px solid var(--linea)"><span>Cupones y referidos</span><span style="color: var(--texto-suave)">Se aplican al pagar</span></div>
+      <a href="#" class="boton boton-lleno" style="height: calc(69 * var(--u)); font-size: calc(18 * var(--u))">Pagar · {{subtotal}} <span aria-hidden="true" style="margin-left: calc(12 * var(--u)); font-weight: 300">→</span></a>
+      <p style="margin: calc(18 * var(--u)) 0 0; font-size: calc(16 * var(--u)); line-height: calc(20 * var(--u)); color: var(--texto-suave)">El flete se calcula por tamaño, distancia y piso. Te contactamos para coordinar la entrega.</p>
+    </div>
+  </sc-if>
+  <div style="position: absolute; left: calc(29 * var(--u)); right: calc(29 * var(--u)); bottom: calc(28 * var(--u)); display: flex; align-items: flex-end; font-size: calc(17 * var(--u)); line-height: calc(17 * var(--u))">
+    <p style="margin: 0; width: calc(330 * var(--u))">Pagos<br><span style="color: var(--texto-suave)">Tarjeta, Apple Pay, Google Pay,</span><br><span style="color: var(--texto-suave)">PayPal, transferencia y OXXO</span></p>
+    <p style="margin: 0; width: calc(253 * var(--u))">Envíos<br><span style="color: var(--texto-suave)">Zona Metropolitana</span><br><span style="color: var(--texto-suave)">de Guadalajara</span></p>
+    <p style="margin: 0; width: calc(262 * var(--u))">Entrega<br><span style="color: var(--texto-suave)">De 3 a 5 días hábiles,</span><br><span style="color: var(--texto-suave)">con flete propio</span></p>
+    <a href="#" class="grande" style="margin-left: auto; font-size: calc(27 * var(--u)); line-height: 1">¿Dudas? Escríbenos por WhatsApp <span class="flecha m" style="font-weight: 300; font-size: calc(20 * var(--u))">→</span></a>
+  </div>
+</aside>
+
+<!-- ENCABEZADO -->
+<header class="nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 60; box-sizing: border-box; height: calc(77 * var(--u)); padding: 0 calc(29 * var(--u)); display: flex; align-items: center; justify-content: space-between; font-size: calc(23 * var(--u)); line-height: 1; transform: {{empuje}}; opacity: {{hdrOp}}; transition: transform .8s cubic-bezier(.7,0,.2,1), opacity .6s ease; pointer-events: none">
+  <div style="display: flex; align-items: center; pointer-events: auto">
+    <a href="Main.dc.html" aria-label="Ache, inicio" style="display: block; margin-right: calc(24 * var(--u))"><img src="{{logo}}" alt="Ache" style="display: block; height: 32px; width: auto; filter: drop-shadow(0 0 8px color-mix(in srgb, var(--fondo) 50%, transparent))"></a>
+    <span class="m" aria-label="Hora en Guadalajara" style="font-size: calc(21 * var(--u)); color: var(--texto-suave)">{{hh}}<span style="opacity: {{dosPuntos}}">:</span>{{mm}}</span>
+    <span style="margin-left: calc(14 * var(--u))">Guadalajara, Jal.</span>
+    <span aria-hidden="true" style="margin-left: calc(48 * var(--u)); font-variant-numeric: tabular-nums">{{pct}}%</span>
+  </div>
+  <p aria-live="polite" class="m" style="position: absolute; left: 34%; top: 50%; transform: translateY(-50%); margin: 0; font-size: calc(21 * var(--u)); color: var(--texto-suave); white-space: nowrap; pointer-events: none">{{piezaHeader}}</p>
+  <nav aria-label="Principal" style="display: flex; align-items: center; gap: calc(36 * var(--u)); pointer-events: auto">
+    <a href="Main.dc.html"><span class="m" style="font-size: calc(21 * var(--u)); color: var(--texto-suave)">1.</span> Inicio</a>
+    <a href="Catalogo.dc.html" onClick="{{irCatalogo}}"><span class="m" style="font-size: calc(21 * var(--u)); color: var(--texto-suave)">2.</span> Catálogo</a>
+    <a href="Catalogo.dc.html" onClick="{{irKits}}"><span class="m" style="font-size: calc(21 * var(--u)); color: var(--texto-suave)">3.</span> Kits</a>
+    <button type="button" onClick="{{alternarPanel}}" aria-expanded="{{panelAbierto}}"><span class="m" style="font-size: calc(21 * var(--u)); color: var(--texto-suave)">4.</span> Quiénes somos</button>
+    <button type="button" onClick="{{alternarCarro}}" aria-expanded="{{carroAbierto}}">Carrito ({{carritoN}})</button>
+    <button type="button" onClick="{{alternarTema}}" aria-label="{{temaEtiqueta}}" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0 -14px"><span aria-hidden="true" style="display: block; width: calc(15 * var(--u)); height: calc(15 * var(--u)); border-radius: 50%; background: currentColor"></span></button>
+  </nav>
+</header>
+
+
+<main style="transform: {{empuje}}; transition: transform .8s cubic-bezier(.7,0,.2,1)">
+
+  <!-- GALERÍA DEL TALLER: avanza sola, se arrastra y se amplía con doble clic -->
+  <section aria-label="Fotos del taller" style="position: relative; margin-top: calc(88 * var(--u)); height: calc(686 * var(--u)); overflow: hidden">
+    <div data-arrastre="" onPointerDown="{{galBajar}}" onPointerMove="{{galMover}}" onPointerUp="{{galSoltar}}" onPointerCancel="{{galSoltar}}" onDoubleClick="{{galAmpliar}}" onMouseEnter="{{galEntrar}}" onMouseLeave="{{galSalir}}" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; cursor: grab; touch-action: pan-y">
+      <div ref="{{galPista}}" style="display: flex; width: max-content; height: 100%; will-change: transform">
+        <sc-for list="{{galFotos}}" as="g" hint-placeholder-count="10">
+          <img src="{{g.foto}}" alt="{{g.alt}}" draggable="false" style="display: block; flex: 0 0 auto; width: calc(686 * var(--u)); height: calc(686 * var(--u)); object-fit: cover; pointer-events: none">
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- TÍTULO -->
+  <div style="position: relative; margin-top: calc(4.4 * var(--u)); height: calc(68 * var(--u)); font-size: calc(68 * var(--u)); line-height: 1; letter-spacing: -0.04em">
+    <h1 style="position: absolute; left: calc(29 * var(--u)); top: 0; margin: 0; font: inherit">Quiénes somos</h1>
+    <p style="position: absolute; left: calc(682 * var(--u)); top: 0; margin: 0">Taller en Guadalajara</p>
+    <p class="m" aria-label="Foto {{galN}} de 5" style="position: absolute; right: calc(29 * var(--u)); top: calc(7.8 * var(--u)); margin: 0; font-size: calc(20 * var(--u)); line-height: calc(20 * var(--u)); letter-spacing: 0; color: var(--texto-suave)">{{galN}}/5</p>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; margin: calc(94.8 * var(--u)) calc(29 * var(--u)) 0; font-size: calc(44 * var(--u)); line-height: 1; letter-spacing: -0.03em">
+    <p style="margin: 0; color: var(--texto-suave)">Historia</p>
+    <p style="margin: 0">Desliza</p>
+  </div>
+
+  <!-- HISTORIA: por qué nace Ache y datos del taller; a la derecha, compra de muebles y suscripción -->
+  <section aria-label="Historia" style="display: flex; box-sizing: border-box; margin: calc(52.8 * var(--u)) calc(29 * var(--u)) 0; min-height: calc(1612 * var(--u)); border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea)">
+    <div style="flex: 0 0 auto; width: calc(1191 * var(--u))">
+      <p style="margin: calc(26 * var(--u)) 0 0; font-size: calc(20 * var(--u)); line-height: calc(20 * var(--u))">(Por qué nace Ache)</p>
+      <p style="margin: calc(69.3 * var(--u)) 0 0; width: calc(988 * var(--u)); font-size: calc(51 * var(--u)); line-height: calc(54 * var(--u)); letter-spacing: -0.03em">Ache nace en Guadalajara para devolverle el valor a los muebles bien hechos. Rescatamos piezas con buena estructura y madera noble, las restauramos a mano y las entregamos listas para una segunda vida.</p>
+      <div style="margin-top: calc(125.7 * var(--u))">
+        <div style="position: relative; width: calc(1001 * var(--u)); height: calc(117.5 * var(--u))">
+          <span data-linea="" class="linea" aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--linea)"></span>
+          <p class="m" style="position: absolute; left: 0; top: calc(16.5 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: calc(18 * var(--u))">(TALLER)</p>
+          <p style="position: absolute; right: 0; top: calc(31.8 * var(--u)); margin: 0; text-align: right; font-size: calc(46 * var(--u)); line-height: calc(46 * var(--u)); letter-spacing: -0.02em">Guadalajara, Jal.</p>
+        </div>
+        <div style="position: relative; width: calc(1001 * var(--u)); height: calc(117.5 * var(--u))">
+          <span data-linea="" class="linea" aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--linea)"></span>
+          <p class="m" style="position: absolute; left: 0; top: calc(16.5 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: calc(18 * var(--u))">(PIEZAS NUEVAS AL MES)</p>
+          <p style="position: absolute; right: 0; top: calc(31.8 * var(--u)); margin: 0; text-align: right; font-size: calc(46 * var(--u)); line-height: calc(46 * var(--u)); letter-spacing: -0.02em">40 a 50</p>
+        </div>
+        <div style="position: relative; width: calc(1001 * var(--u)); height: calc(294 * var(--u))">
+          <span data-linea="" class="linea" aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--linea)"></span>
+          <p class="m" style="position: absolute; left: 0; top: calc(16.5 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: calc(18 * var(--u))">(MADERAS)</p>
+          <p style="position: absolute; right: 0; top: calc(26.8 * var(--u)); margin: 0; text-align: right; font-size: calc(46 * var(--u)); line-height: calc(44 * var(--u)); letter-spacing: -0.02em">
+            <sc-for list="{{maderas}}" as="w" hint-placeholder-count="5"><span class="madera" style="display: block; color: {{w.color}}">{{w.nombre}}</span></sc-for>
+          </p>
+        </div>
+        <div style="position: relative; width: calc(1001 * var(--u)); height: calc(117.5 * var(--u))">
+          <span data-linea="" class="linea" aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--linea)"></span>
+          <p class="m" style="position: absolute; left: 0; top: calc(16.5 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: calc(18 * var(--u))">(MUEBLES CON CASA NUEVA)</p>
+          <p style="position: absolute; right: 0; top: calc(31.8 * var(--u)); margin: 0; text-align: right; font-size: calc(46 * var(--u)); line-height: calc(46 * var(--u)); letter-spacing: -0.02em">312</p>
+        </div>
+        <div style="position: relative; width: calc(1001 * var(--u)); height: calc(117.5 * var(--u))">
+          <span data-linea="" class="linea" aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--linea)"></span>
+          <p class="m" style="position: absolute; left: 0; top: calc(16.5 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: calc(18 * var(--u))">(ENTREGAS)</p>
+          <p style="position: absolute; right: 0; top: calc(31.8 * var(--u)); margin: 0; text-align: right; font-size: calc(46 * var(--u)); line-height: calc(46 * var(--u)); letter-spacing: -0.02em">Zona Metropolitana de Guadalajara</p>
+        </div>
+        <div style="position: relative; width: calc(1001 * var(--u)); height: calc(117.5 * var(--u))">
+          <span data-linea="" class="linea" aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--linea)"></span>
+          <p class="m" style="position: absolute; left: 0; top: calc(16.5 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: calc(18 * var(--u))">(HECHO)</p>
+          <p style="position: absolute; right: 0; top: calc(31.8 * var(--u)); margin: 0; text-align: right; font-size: calc(46 * var(--u)); line-height: calc(46 * var(--u)); letter-spacing: -0.02em">A mano, en madera maciza</p>
+        </div>
+        <div style="position: relative; width: calc(1001 * var(--u)); height: calc(208 * var(--u))">
+          <span data-linea="" class="linea" aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--linea)"></span>
+          <p class="m" style="position: absolute; left: 0; top: calc(16.5 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); line-height: calc(18 * var(--u))">(ATENCIÓN)</p>
+          <p style="position: absolute; right: 0; top: calc(31.8 * var(--u)); margin: 0; text-align: right; font-size: calc(46 * var(--u)); line-height: calc(46 * var(--u)); letter-spacing: -0.02em">Directa, por WhatsApp</p>
+        </div>
+      </div>
+    </div>
+    <div style="flex: 1 1 auto; display: flex; flex-direction: column; align-items: flex-end; border-left: 1px solid var(--linea)">
+      <p class="m" style="margin: calc(70.5 * var(--u)) 0 0; font-size: calc(18 * var(--u)); line-height: calc(18 * var(--u))">(MANIFIESTO)</p>
+      <p style="margin: calc(78.3 * var(--u)) 0 0; text-align: right; font-size: calc(46 * var(--u)); line-height: calc(46 * var(--u)); letter-spacing: -0.02em; color: var(--texto-suave)">Menos reemplazar,<br>más restaurar.</p>
+      <div style="position: relative; margin-top: calc(81.2 * var(--u)); box-sizing: border-box; width: calc(219 * var(--u)); height: calc(275 * var(--u)); border: 1px solid var(--linea); display: flex; align-items: center; justify-content: center">
+        <img src="{{selloTiempo}}" alt="Sello de Ache: El tiempo también suma valor, con un comedor" style="display: block; height: calc(236 * var(--u)); width: auto">
+      </div>
+      <div style="position: sticky; top: calc(82 * var(--u)); margin-top: calc(96 * var(--u)); width: calc(492 * var(--u)); z-index: 3">
+        <div data-theme="{{temaInv}}" style="background: var(--fondo); color: var(--texto)">
+          <button type="button" onClick="{{alternarVende}}" aria-expanded="{{vendeAbierto}}" style="display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; width: 100%; height: calc(68 * var(--u)); padding: 0 calc(21 * var(--u))">
+            <span class="m" style="font-size: calc(17 * var(--u)); letter-spacing: 0.02em">¿TIENES UN MUEBLE?</span>
+            <span style="font-size: calc(28 * var(--u)); line-height: 1; letter-spacing: -0.02em">Lo compramos <span aria-hidden="true" style="display: inline-block; font-size: calc(15 * var(--u)); transform: {{vendeFlecha}}; transition: transform .3s ease">▼</span></span>
+          </button>
+          <div style="overflow: hidden; height: {{vendeAlto}}; transition: height .45s cubic-bezier(.7,0,.2,1)">
+            <p style="margin: 0; box-sizing: border-box; border-top: 1px solid var(--linea); padding: calc(20 * var(--u)) calc(21 * var(--u)) calc(22 * var(--u)); font-size: calc(22 * var(--u)); line-height: calc(28 * var(--u)); letter-spacing: -0.01em">Si ya no lo usas, mándanos unas fotos por WhatsApp. Te respondemos en un par de días.</p>
+          </div>
+        </div>
+        <a href="#" class="boton" style="margin-top: calc(19 * var(--u)); height: calc(69 * var(--u)); font-size: calc(17 * var(--u))">ESCRÍBENOS POR WHATSAPP</a>
+        <p class="m" style="margin: calc(44 * var(--u)) 0 0; font-size: calc(17 * var(--u)); line-height: calc(17 * var(--u))">(PIEZAS NUEVAS EN TU CORREO)</p>
+        <sc-if value="{{sinSuscribir}}" hint-placeholder-val="{{true}}">
+          <form onSubmit="{{suscribir}}" style="margin-top: calc(18 * var(--u))">
+            <label style="display: block"><span class="sr">Correo electrónico</span><input type="email" required="" placeholder="Tu correo electrónico" style="display: block; box-sizing: border-box; width: 100%; height: calc(69 * var(--u)); padding: 0 calc(21 * var(--u)); border: 1px solid var(--linea); border-radius: 0; background: transparent; font-size: calc(22 * var(--u)); outline-offset: 2px"></label>
+            <button type="submit" class="boton boton-lleno" style="margin-top: calc(12 * var(--u)); height: calc(69 * var(--u)); font-size: calc(17 * var(--u))">SUSCRIBIRME</button>
+          </form>
+        </sc-if>
+        <sc-if value="{{suscrito}}" hint-placeholder-val="{{false}}">
+          <p class="m" style="margin: calc(18 * var(--u)) 0 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center; height: calc(69 * var(--u)); border: 1px solid var(--linea); font-size: calc(17 * var(--u))">LISTO. TE AVISAREMOS DE CADA PIEZA NUEVA.</p>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASÍ TRANSFORMAMOS CADA PIEZA: los cinco íconos de proceso de Origen -->
+  <section aria-label="Así transformamos cada pieza" style="margin: calc(178 * var(--u)) calc(29 * var(--u)) 0">
+    <div class="m" style="display: flex; justify-content: space-between; font-size: calc(20 * var(--u)); line-height: calc(20 * var(--u))">
+      <h2 style="margin: 0; font: inherit">ASÍ TRANSFORMAMOS CADA PIEZA</h2>
+      <span style="color: var(--texto-suave)">05 PASOS</span>
+    </div>
+    <ol style="margin: calc(73.4 * var(--u)) 0 0; padding: 0; list-style: none; display: flex; justify-content: space-between">
+      <sc-for list="{{pasos}}" as="p" hint-placeholder-count="5">
+        <li class="paso" data-aparece="" style="flex: 0 0 auto; width: calc(348 * var(--u))">
+          <span class="m" style="display: flex; justify-content: space-between; height: calc(17 * var(--u)); font-size: calc(17 * var(--u)); line-height: calc(17 * var(--u)); color: var(--texto-suave)"><span>PASO {{p.n}}</span><span>{{p.n}} / 05</span></span>
+          <span class="marco" style="display: flex; align-items: center; justify-content: center; margin-top: calc(7.4 * var(--u)); height: calc(465 * var(--u)); overflow: hidden; background: var(--fondo-alt)">
+            <img src="{{p.icono}}" alt="" style="display: block; width: calc(190 * var(--u)); height: calc(170 * var(--u)); object-fit: contain">
+          </span>
+          <span style="margin-top: calc(19 * var(--u)); display: flex; justify-content: space-between; font-size: calc(20 * var(--u)); line-height: calc(20 * var(--u))"><span class="m">{{p.n}}</span><span>{{p.nombre}}</span></span>
+          <span style="display: block; margin-top: calc(14 * var(--u)); font-size: calc(18 * var(--u)); line-height: calc(22 * var(--u)); color: var(--texto-suave)">{{p.texto}}</span>
+        </li>
+      </sc-for>
+    </ol>
+  </section>
+
+  <!-- VIDEO: lo que hay detrás de cada mueble -->
+  <section aria-label="Video del proceso" style="margin: calc(180 * var(--u)) calc(29 * var(--u)) 0">
+    <p style="margin: 0; display: flex; justify-content: space-between; font-size: calc(20 * var(--u)); line-height: calc(20 * var(--u))"><span><span class="m" style="color: var(--texto-suave)">006</span> / <span class="m">VIDEO DEL PROCESO</span></span><span>Lo que hay detrás de cada mueble</span></p>
+    <div data-aparece="" class="aparece" style="position: relative; margin-top: calc(22 * var(--u)); width: 100%; aspect-ratio: 1862 / 1057; overflow: hidden">
+      <button type="button" onClick="{{alternarVideo}}" onMouseEnter="{{videoEntrar}}" onMouseLeave="{{salir}}" aria-label="{{videoAria}}" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: block; cursor: pointer">
+        <img src="./assets/24448a3979dbb0f66aa14a74369fdb02.jpg" alt="Dos sillas de nogal restauradas en el taller, con luz de la tarde" style="display: block; width: 100%; height: 100%; object-fit: cover; transform: {{videoZoom}}; transition: {{videoTrans}}">
+        <span aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: calc(260 * var(--u)); background: linear-gradient(to top, rgba(25,1,0,.55), rgba(25,1,0,0))"></span>
+        <span style="position: absolute; left: calc(29 * var(--u)); bottom: calc(58 * var(--u)); color: #f3f2e8; font-size: calc(46 * var(--u)); line-height: 1; letter-spacing: -0.02em; text-align: left">Un mueble, tres semanas de taller</span>
+        <span class="m" style="position: absolute; right: calc(29 * var(--u)); bottom: calc(60 * var(--u)); color: #f3f2e8; font-size: calc(18 * var(--u)); line-height: 1; letter-spacing: 0.02em">{{videoTxt}}</span>
+        <span aria-hidden="true" style="position: absolute; left: calc(29 * var(--u)); right: calc(29 * var(--u)); bottom: calc(32 * var(--u)); height: 1px; background: rgba(243,242,232,.35)"><span style="display: block; height: 100%; width: {{videoPct}}; background: #f3f2e8"></span></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <section aria-label="Catálogo" style="margin: calc(180 * var(--u)) calc(29 * var(--u)) 0; border-top: 1px solid var(--linea); padding-top: calc(24 * var(--u))">
+    <p style="margin: 0; font-size: calc(20 * var(--u)); line-height: calc(20 * var(--u))">(Catálogo)</p>
+    <a href="Catalogo.dc.html" onClick="{{irCatalogo}}" class="grande" style="margin-top: calc(51 * var(--u)); display: flex; justify-content: space-between; align-items: baseline; font-size: calc(120 * var(--u)); line-height: 1; letter-spacing: -0.04em">
+      <span>Ver todas las piezas <span class="flecha m" style="font-weight: 300; font-size: calc(60 * var(--u)); vertical-align: calc(14 * var(--u))">→</span></span>
+      <span>0_41</span>
+    </a>
+  </section>
+
+  <!-- RESEÑAS -->
+  <section aria-label="Reseñas" style="margin-top: calc(180 * var(--u))">
+    <div style="position: relative; padding: 0 calc(29 * var(--u)); display: flex; justify-content: space-between; align-items: flex-start; font-size: calc(70 * var(--u)); line-height: 1; letter-spacing: -0.035em">
+      <h2 style="margin: 0; font: inherit">Lo que dicen</h2>
+      <p style="position: absolute; left: 50%; top: calc(-4 * var(--u)); transform: translateX(-50%); margin: 0; text-align: center; letter-spacing: 0">
+        <span class="m" style="display: block; font-size: calc(17 * var(--u)); line-height: calc(20 * var(--u)); color: var(--texto-suave)">4.9 DE 5</span>
+        <span style="display: block; font-size: calc(20 * var(--u)); line-height: calc(22 * var(--u))">37 calificaciones</span>
+      </p>
+      <p aria-hidden="true" style="margin: 0">nuestros clientes</p>
+    </div>
+    <div style="margin: calc(78 * var(--u)) calc(29 * var(--u)) 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: calc(30 * var(--u)); row-gap: calc(80 * var(--u))">
+      <sc-for list="{{resenas}}" as="r" hint-placeholder-count="5">
+        <figure style="position: relative; margin: 0; padding-top: calc(24 * var(--u)); min-height: calc(330 * var(--u))">
+          <span data-linea="" class="linea" aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--linea)"></span>
+          <span class="m" style="display: flex; justify-content: space-between; font-size: calc(17 * var(--u)); line-height: calc(17 * var(--u))"><span style="color: var(--acento)">({{r.nota}})</span><span style="color: var(--texto-suave)">{{r.fecha}}</span></span>
+          <blockquote style="margin: calc(40 * var(--u)) 0 0; font-size: calc(30 * var(--u)); line-height: calc(36 * var(--u)); letter-spacing: -0.015em">{{r.texto}}</blockquote>
+          <figcaption class="m" style="margin-top: calc(36 * var(--u)); font-size: calc(17 * var(--u)); line-height: calc(22 * var(--u)); color: var(--texto-suave)">{{r.autor}}</figcaption>
+        </figure>
+      </sc-for>
+      <div data-aparece="" class="aparece" style="position: relative; display: flex; align-items: center; justify-content: center; min-height: calc(330 * var(--u))">
+        <img src="{{selloTimeless}}" alt="Sello de Ache: Timeless Matter, con un sillón" style="display: block; height: calc(300 * var(--u)); width: auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- PIE -->
+  <footer style="position: relative; margin-top: calc(184 * var(--u)); height: calc(61 * var(--u)); padding-bottom: calc(29 * var(--u)); font-size: calc(19 * var(--u)); line-height: calc(22 * var(--u))">
+    <p style="position: absolute; left: calc(29 * var(--u)); bottom: calc(29 * var(--u)); margin: 0">Muebles restaurados<br>y piezas únicas</p>
+    <p style="position: absolute; left: calc(401 * var(--u)); bottom: calc(29 * var(--u)); margin: 0">ACHE®<br>Derechos reservados 2026</p>
+    <p style="position: absolute; left: calc(681 * var(--u)); bottom: calc(29 * var(--u)); margin: 0">Correo<br><a href="#">hola@estudioache.mx</a></p>
+    <p style="position: absolute; left: calc(1147 * var(--u)); bottom: calc(29 * var(--u)); margin: 0">Taller en<br>Guadalajara, Jal.</p>
+    <a href="#" class="grande" style="position: absolute; left: calc(1463 * var(--u)); bottom: calc(32 * var(--u)); font-size: calc(28 * var(--u)); line-height: 1">Instagram <span class="flecha m" style="font-weight: 300; font-size: calc(20 * var(--u))">→</span></a>
+    <a href="#" class="grande" style="position: absolute; right: calc(29 * var(--u)); bottom: calc(32 * var(--u)); font-size: calc(28 * var(--u)); line-height: 1">WhatsApp <span class="flecha m" style="font-weight: 300; font-size: calc(20 * var(--u))">→</span></a>
+  </footer>
+</main>
+
+<!-- FOTO AMPLIADA -->
+<sc-if value="{{luzAbierta}}" hint-placeholder-val="{{false}}">
+  <div role="dialog" aria-modal="true" aria-label="Foto ampliada" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 85; background: var(--fondo); display: flex; align-items: center; justify-content: center">
+    <img src="{{luzFoto}}" alt="{{luzAlt}}" style="display: block; max-width: 70%; max-height: 82%; object-fit: contain">
+    <button type="button" aria-label="Foto anterior" onClick="{{luzAnterior}}" onMouseEnter="{{luzEtqAnt}}" onMouseLeave="{{salir}}" style="position: absolute; left: 0; top: 0; bottom: 0; width: 50%; cursor: pointer"></button>
+    <button type="button" aria-label="Foto siguiente" onClick="{{luzSiguiente}}" onMouseEnter="{{luzEtqSig}}" onMouseLeave="{{salir}}" style="position: absolute; right: 0; top: 0; bottom: 0; width: 50%; cursor: pointer"></button>
+    <p class="m" style="position: absolute; left: calc(29 * var(--u)); bottom: calc(26 * var(--u)); margin: 0; font-size: calc(20 * var(--u)); line-height: 1; color: var(--texto-suave)">EL TALLER · GUADALAJARA, JAL.</p>
+    <p class="m" style="position: absolute; right: calc(29 * var(--u)); bottom: calc(26 * var(--u)); margin: 0; font-size: calc(20 * var(--u)); line-height: 1">{{luzN}}/5</p>
+    <button type="button" onClick="{{cerrarLuz}}" style="position: absolute; right: calc(29 * var(--u)); top: calc(24.8 * var(--u)); z-index: 2; font-size: calc(46 * var(--u)); line-height: 1; letter-spacing: -0.02em">Cerrar</button>
+  </div>
+</sc-if>
+
+
+<!-- TELÓN ENTRE PÁGINAS -->
+<div aria-hidden="true" data-theme="{{temaInv}}" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 92; overflow: hidden; background: var(--fondo); color: var(--texto); transform: {{telonT}}; visibility: {{telonVis}}; transition: {{telonTrans}}; pointer-events: {{telonPE}}">
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; transform: {{telonTi}}; transition: {{telonTrans}}">
+    <div style="position: absolute; left: calc(29 * var(--u)); right: calc(29 * var(--u)); top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; align-items: center; font-size: calc(22 * var(--u)); line-height: calc(21 * var(--u)); opacity: {{telonTxtOp}}; transition: opacity .35s ease">
+      <p style="margin: 0">Muebles restaurados<br>y piezas únicas</p>
+      <img src="{{telonIlus}}" alt="" style="display: block; height: calc(150 * var(--u)); width: auto">
+      <p style="margin: 0; text-align: right">Restaurado a mano en<br>Guadalajara, Jal.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CURSOR: cruz que sigue al puntero, con rótulo -->
+<div ref="{{cursorRef}}" aria-hidden="true" style="position: fixed; top: 0; left: 0; z-index: 100; width: 0; height: 0; pointer-events: none; color: var(--texto)">
+  <span style="position: absolute; left: calc(-13 * var(--u)); top: 0; width: calc(26 * var(--u)); height: 1px; background: currentColor; box-shadow: 0 0 0 1px color-mix(in srgb, var(--fondo) 45%, transparent)"></span>
+  <span style="position: absolute; left: 0; top: calc(-13 * var(--u)); width: 1px; height: calc(26 * var(--u)); background: currentColor; box-shadow: 0 0 0 1px color-mix(in srgb, var(--fondo) 45%, transparent)"></span>
+  <span class="m" style="position: absolute; left: 50%; top: calc(16 * var(--u)); transform: translateX(-50%); font-weight: 400; font-size: calc(17 * var(--u)); line-height: 1; letter-spacing: 0.02em; white-space: nowrap; text-shadow: 0 0 2px var(--fondo), 0 0 8px var(--fondo)">{{etiqueta}}</span>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"temaInicial": {"editor": "enum", "options": ["vino", "crema"], "default": "vino"}, "$preview": {"width": 1440, "height": 4947}}'>
+var PAGINA = "Nosotros";
+var LOGO_CREMA = "./assets/755d057cc81957185f5a10b2bbb4673a.svg";
+var LOGO_NEGRO = "./assets/c66ad7214c46e56ca12b847f601a477f.svg";
+var ILUS = {"sillon": ["./assets/52b5167dd3330152fc3fd818e7c8bccf.svg", "./assets/63274264ca4178173fc0519c58fae787.svg"], "lampara": ["./assets/7174d68a83717b397f16aca20a25dbcf.svg", "./assets/ff1e4d84371fd56f1da9ba13093a6ecb.svg"], "mesa": ["./assets/a75bb0ec799207e28638301151cf863f.svg", "./assets/adbd59ca62be57c40d73ccc2cdc8db9d.svg"], "florero": ["./assets/9133fe1115202be3396c0b9fb91458bc.svg", "./assets/e36debc4dddc83b4236077ea957aded7.svg"], "comedor": ["./assets/d3da365fe647962802d4408a5954c52a.svg", "./assets/823f3bbb1927e9d8e7d349157443ddbc.svg"]};
+var GALERIA = [["43f4517d9be8d6797ad8efdc95156404", "Tablones de madera apilados en el taller"], ["19d14ed50cd80caae362979fc16cdc6a", "Muestras de acabados de madera en tonos oscuros y naturales"], ["7ae37f7e6c6cad436d6143fd573d1741", "Sala de exhibición con muebles restaurados y una mesa larga de madera"], ["4ad273438ea8b2461da1ff3f98fc37e0", "Dos sillas de nogal de respaldo alto"], ["f6dac86a70f8ea2ea702b6ca49c68fd6", "Veta de madera vista de cerca"]];
+var PASOS = [["781041b94651cd4f9dd184bf9934b5d5", "13014d6f82ddb02a6de15897d2042328", "Recibimos", "Todo empieza con unas fotos. Vemos la estructura, la madera y lo que se puede rescatar."], ["eb8c0d1d9b0d4da226ad318ae486c5e2", "107f9a30ea7bb6f3f65fff4bc54e4da9", "Analizamos", "Revisamos cada unión, cada cajón y cada pata antes de decidir si vale la pena."], ["8a8d86e2450b4969ac41336365304292", "a59dde6408f8fe4b6d64c1378a9a7653", "Validamos", "Medimos la pieza y confirmamos que su estructura aguanta muchos años más."], ["b3d6dbd9bb1dc6f4565e8ec0206e1e4c", "393d2be76329c2106ab0316af8d4ab9e", "Recolectamos", "Vamos por ella con nuestro flete y la llevamos al taller en Guadalajara."], ["d8e019977e88fd51a682bf5ef4a64337", "d66d22c6d5dcb2b330c5a39ff082d2bc", "Transformamos", "Lijamos, reparamos, retapizamos y aceitamos a mano. Luego la fotografiamos tal como llegará a tu casa."]];
+var RESENAS = [["5/5", "SEP 2026", "El sofá llegó idéntico a las fotos. Se nota el trabajo en cada costura y la madera se ve como nueva.", "ANA SOFÍA R. · SOFÁ DE DOS PLAZAS · ZAPOPAN"], ["5/5", "AGO 2026", "Compramos las dos sillas y la entrega fue puntual. Nos avisaron por WhatsApp en cada paso.", "RODRIGO T. · SILLAS MILÁN · GUADALAJARA"], ["5/5", "AGO 2026", "Me daba miedo comprar un mueble usado en línea, pero la ficha decía todo: medidas, madera y estado.", "FERNANDA L. · SILLA DE ESTUDIO · TLAQUEPAQUE"], ["4/5", "JUL 2026", "Muy buena atención. El flete se cotizó aparte, pero me explicaron el costo desde el principio.", "JORGE M. · BANCO REDONDO · TLAJOMULCO"], ["5/5", "JUN 2026", "Les vendí la mesa de mi abuela y ahora vive en otra casa. Me gustó saber que no terminó olvidada.", "PATRICIA V. · VENDIÓ UNA MESA · GUADALAJARA"]];
+var MADERAS = ["Nogal", "Roble", "Teca", "Cedro", "Parota"];
+class Component extends DCLogic {
+
+_ini() {
+  if (this._listo) return;
+  this._listo = true;
+  this._cur = { current: null };
+  var via = false, dest = null, tema = null;
+  try { var t = +window.sessionStorage.getItem('ache-v3-telon'); via = !!t && (Date.now() - t) < 6000; dest = window.sessionStorage.getItem('ache-v3-destino'); } catch (e) {}
+  try { tema = window.localStorage.getItem('ache-v3-tema'); } catch (e) {}
+  this._via = via;
+  this._destino0 = dest || PAGINA;
+  this._tema0 = (tema === 'vino' || tema === 'crema') ? tema : null;
+  this._carro0 = this._leerCarrito();
+  this._telon0 = via ? 'cubre' : this._telonSinVia();
+  if (this._iniPagina) this._iniPagina();
+}
+_telonSinVia() { return 'cubre'; }
+_leerCarrito() {
+  try { var c = JSON.parse(window.localStorage.getItem('ache-v3-carrito') || '[]'); return Array.isArray(c) ? c : []; } catch (e) { return []; }
+}
+_guardarCarrito(c) {
+  try { window.localStorage.setItem('ache-v3-carrito', JSON.stringify(c)); } catch (e) {}
+  this.setState({ carrito: c });
+}
+_fondoBody(tema) {
+  try { document.body.style.background = (tema || 'vino') === 'vino' ? '#411f25' : '#f3f2e8'; } catch (e) {}
+}
+_montarBase() {
+  var self = this;
+  this._ini();
+  try { window.sessionStorage.removeItem('ache-v3-telon'); } catch (e) {}
+  var W = window.innerWidth || 1440;
+  this._W = W; this._u = W / 1920;
+  this._H = Math.min(window.innerHeight || 900, Math.round(W * 0.62));
+  this._vista = (window.innerHeight || 900) < 1500;
+  this.setState({ altoVista: this._H });
+  this._fondoBody(this._tema0 || this.props.temaInicial || 'vino');
+  this._tt = [];
+  if (this._telon0 === 'cubre') {
+    this._tt.push(setTimeout(function () { self.setState({ telon: 'sube', telonAnim: true }); }, self._via ? 260 : 480));
+    this._tt.push(setTimeout(function () { self.setState({ telon: 'oculto', telonAnim: false }); }, self._via ? 1050 : 1270));
+  }
+  // cursor
+  this._mx = -100; this._my = -100; this._cx = -100; this._cy = -100;
+  this._mover = function (e) { self._mx = e.clientX; self._my = e.clientY; };
+  this._fuera = function (e) { if (!e.relatedTarget) { self._mx = -100; self._my = -100; self._cx = -100; self._cy = -100; } };
+  window.addEventListener('mousemove', this._mover, { passive: true });
+  document.addEventListener('mouseout', this._fuera);
+  this._tick = function () {
+    self._cx += (self._mx - self._cx) * 0.2;
+    self._cy += (self._my - self._cy) * 0.2;
+    var el = self._cur && self._cur.current;
+    if (el) el.style.transform = 'translate3d(' + self._cx.toFixed(1) + 'px,' + self._cy.toFixed(1) + 'px,0)';
+    self._raf = requestAnimationFrame(self._tick);
+  };
+  this._raf = requestAnimationFrame(this._tick);
+  // reloj de Guadalajara
+  this._reloj = setInterval(function () { self.setState({ ahora: Date.now() }); }, 1000);
+  // enlaces internos: el telón sube, cubre y luego navega
+  this._clic = function (e) {
+    if (self._yendo) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    if (self._movido) { e.preventDefault(); e.stopPropagation(); return; }
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var href = a.getAttribute('href') || '';
+    if (!/\.dc\.html$/.test(href) || a.getAttribute('target') === '_blank' || a.getAttribute('data-local') === 'si') return;
+    e.preventDefault(); e.stopPropagation();
+    var dest = href.replace('.dc.html', '');
+    if (dest === PAGINA) {
+      e.preventDefault(); e.stopPropagation();
+      self.setState({ panel: false, carro: false });
+      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (err) { window.scrollTo(0, 0); }
+      return;
+    }
+    self.setState({ telon: 'oculto', telonAnim: false, telonDest: dest, panel: false, carro: false });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.setState({ telon: 'cubre', telonAnim: true }); }); });
+    self._tt.push(setTimeout(function () {
+      try { window.sessionStorage.setItem('ache-v3-telon', String(Date.now())); window.sessionStorage.setItem('ache-v3-destino', dest); } catch (err) {}
+      self._yendo = true;
+      a.click();
+      self._tt.push(setTimeout(function () { self._yendo = false; }, 400));
+      // si la navegación no ocurrió, se vuelve a mostrar la página
+      self._tt.push(setTimeout(function () { if (!self._salio) self.setState({ telon: 'sube', telonAnim: true }); }, 2600));
+    }, 720));
+  };
+  this._salida = function () { self._salio = true; };
+  document.addEventListener('click', this._clic, true);
+  window.addEventListener('pagehide', this._salida);
+  this._tecla = function (e) { if (e.key === 'Escape') self.setState({ panel: false, carro: false }); };
+  window.addEventListener('keydown', this._tecla);
+}
+_desmontarBase() {
+  window.removeEventListener('mousemove', this._mover);
+  document.removeEventListener('mouseout', this._fuera);
+  document.removeEventListener('click', this._clic, true);
+  window.removeEventListener('pagehide', this._salida);
+  window.removeEventListener('keydown', this._tecla);
+  cancelAnimationFrame(this._raf);
+  clearInterval(this._reloj);
+  (this._tt || []).forEach(function (t) { clearTimeout(t); });
+}
+_pctPagina() {
+  var y = window.scrollY || document.documentElement.scrollTop || 0;
+  var max = (document.documentElement.scrollHeight || 1) - (window.innerHeight || 1);
+  return max > 0 ? Math.max(0, Math.min(100, Math.round(100 * y / max))) : 0;
+}
+_precio(n) { return '$' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+_valsBase() {
+  var self = this;
+  this._ini();
+  var st = this.state || {};
+  var tema = st.tema || this._tema0 || this.props.temaInicial || 'vino';
+  var inv = tema === 'vino' ? 'crema' : 'vino';
+  var panel = !!st.panel, carro = !!st.carro, algo = panel || carro;
+  var hh = '0', mm = '00';
+  try {
+    var partes = new Intl.DateTimeFormat('es-MX', { timeZone: 'America/Mexico_City', hour: 'numeric', minute: '2-digit', hour12: false }).formatToParts(new Date());
+    partes.forEach(function (p) { if (p.type === 'hour') hh = String(+p.value % 24); if (p.type === 'minute') mm = p.value; });
+  } catch (e) {}
+  var seg = Math.floor((st.ahora || Date.now()) / 1000);
+  var carrito = st.carrito || this._carro0 || [];
+  var subtotal = 0; carrito.forEach(function (p) { subtotal += p.precio || 0; });
+  var telon = st.telon || this._telon0;
+  var dest = st.telonDest || this._destino0 || PAGINA;
+  var mapa = { Main: 'sillon', Catalogo: 'mesa', Pieza: 'lampara', Kit: 'comedor', Nosotros: 'florero' };
+  var il = ILUS[mapa[dest] || 'sillon'];
+  var trans = function (abierto) { return 'transform .8s cubic-bezier(.7,0,.2,1), background-color .6s ease, visibility 0s linear ' + (abierto ? '0s' : '.8s'); };
+  var pct = st.pct || 0;
+  return {
+    tema: tema, temaInv: inv,
+    logo: tema === 'vino' ? LOGO_CREMA : LOGO_NEGRO,
+    temaEtiqueta: tema === 'vino' ? 'Cambiar a fondo crema' : 'Cambiar a fondo vino',
+    alternarTema: function () {
+      var t = tema === 'vino' ? 'crema' : 'vino';
+      try { window.localStorage.setItem('ache-v3-tema', t); } catch (e) {}
+      self._fondoBody(t);
+      self.setState({ tema: t });
+    },
+    hh: hh, mm: mm, dosPuntos: seg % 2 ? 1 : 0.15,
+    pct: pct < 10 ? '0' + pct : String(pct),
+    piezaHeader: st.piezaHeader || '', etiqueta: st.etiqueta || '',
+    salir: function () { self.setState({ etiqueta: '', piezaHeader: '' }); },
+    panelAbierto: panel ? 'true' : 'false', panelOculto: panel ? 'false' : 'true',
+    panelY: panel ? 'translateY(0)' : 'translateY(-101%)', panelVis: panel ? 'visible' : 'hidden', panelTrans: trans(panel),
+    alternarPanel: function () { self.setState({ panel: !panel, carro: false }); },
+    cerrarPanel: function () { self.setState({ panel: false }); },
+    ilusPanel: inv === 'vino' ? ILUS.lampara[0] : ILUS.lampara[1],
+    ilusCarro: inv === 'vino' ? ILUS.sillon[0] : ILUS.sillon[1],
+    carroAbierto: carro ? 'true' : 'false', carroOculto: carro ? 'false' : 'true',
+    carroY: carro ? 'translateY(0)' : 'translateY(-101%)', carroVis: carro ? 'visible' : 'hidden', carroTrans: trans(carro),
+    alternarCarro: function () { self.setState({ carro: !carro, panel: false }); },
+    cerrarCarro: function () { self.setState({ carro: false }); },
+    cerrarTodo: function () { self.setState({ panel: false, carro: false }); },
+    empuje: algo ? 'translateY(calc(716 * var(--u)))' : 'none',
+    velo: algo ? 0.6 : 0, veloPE: algo ? 'auto' : 'none',
+    carritoN: carrito.length,
+    carritoVacio: carrito.length === 0, carritoLleno: carrito.length > 0,
+    carritoItems: carrito.map(function (p, i) {
+      return { foto: p.foto, alt: p.alt || p.nombre, codigo: p.codigo, nombre: p.nombre, detalle: p.detalle || '', precio: self._precio(p.precio || 0),
+        quitar: function () { var c = carrito.slice(); c.splice(i, 1); self._guardarCarrito(c); } };
+    }),
+    subtotal: this._precio(subtotal),
+    irKits: function (e) { try { window.localStorage.setItem('ache-v3-filtro', 'kits'); } catch (err) {} if (self._filtroLocal) { if (e && e.preventDefault) e.preventDefault(); self._filtroLocal('kits'); } },
+    irCatalogo: function (e) { try { window.localStorage.setItem('ache-v3-filtro', 'todo'); } catch (err) {} if (self._filtroLocal) { if (e && e.preventDefault) e.preventDefault(); self._filtroLocal('todo'); } },
+    telonT: telon === 'cubre' ? 'translateY(0)' : (telon === 'sube' ? 'translateY(-100%)' : 'translateY(100%)'),
+    telonTi: telon === 'cubre' ? 'translateY(0)' : (telon === 'sube' ? 'translateY(100%)' : 'translateY(-100%)'),
+    telonTrans: st.telonAnim ? 'transform .7s cubic-bezier(.7,0,.2,1)' : 'none',
+    telonTxtOp: telon === 'sube' ? 0 : 1,
+    telonPE: telon === 'cubre' ? 'auto' : 'none',
+    telonVis: telon === 'oculto' && !st.telonAnim ? 'hidden' : 'visible',
+    telonIlus: inv === 'vino' ? il[0] : il[1],
+    altoVista: st.altoVista || this._H || 900,
+    cursorRef: this._cur,
+    hdrOp: 1
+  };
+}
+
+_refs() { if (!this._galP) this._galP = { current: null }; }
+componentDidMount() {
+  var self = this;
+  this._refs();
+  this._montarBase();
+  var u = this._u, N = GALERIA.length;
+  this._off = 0; this._t0 = null;
+  var quieto = false;
+  try { quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  var setW = N * 686 * u;
+  this._galTick = function (t) {
+    if (self._t0 == null) self._t0 = t;
+    var dt = Math.min(0.05, (t - self._t0) / 1000); self._t0 = t;
+    var st = self.state || {};
+    if (!quieto && !self._galArr && !st.luz) self._off += 144 * u * dt;
+    self._off = ((self._off % setW) + setW) % setW;
+    var p = self._galP.current;
+    if (p) p.style.transform = 'translate3d(' + (-self._off).toFixed(2) + 'px,0,0)';
+    var n = Math.floor(((self._off + (window.innerWidth || 1440) / 2) / (686 * u)) % N) + 1;
+    if (n !== self._galN) { self._galN = n; self.setState({ galN: n }); }
+    self._galRaf = requestAnimationFrame(self._galTick);
+  };
+  this._galRaf = requestAnimationFrame(this._galTick);
+  // la madera resaltada cambia cada 1.6 s
+  this._madInt = setInterval(function () { var st = self.state || {}; self.setState({ madI: ((st.madI || 0) + 1) % MADERAS.length }); }, 1600);
+  try {
+    this._io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('ver'); self._io.unobserve(en.target); } });
+    }, { threshold: 0.15 });
+    this._observar = function () { document.querySelectorAll('[data-linea]:not(.ver),[data-aparece]:not(.ver)').forEach(function (el) { self._io.observe(el); }); };
+    this._observar();
+    this._tt.push(setTimeout(this._observar, 300));
+  } catch (e) { document.querySelectorAll('[data-linea],[data-aparece]').forEach(function (el) { el.classList.add('ver'); }); }
+  this._alBajar = function () { var pct = self._pctPagina(); if ((self.state || {}).pct !== pct) self.setState({ pct: pct }); };
+  window.addEventListener('scroll', this._alBajar, { passive: true });
+  this._alBajar();
+  this._teclaNos = function (e) {
+    var st = self.state || {};
+    if (!st.luz) return;
+    if (e.key === 'ArrowRight') self.setState({ luz: (st.luz % N) + 1 });
+    if (e.key === 'ArrowLeft') self.setState({ luz: ((st.luz + N - 2) % N) + 1 });
+    if (e.key === 'Escape') self.setState({ luz: null });
+  };
+  window.addEventListener('keydown', this._teclaNos);
+}
+componentWillUnmount() {
+  this._desmontarBase();
+  cancelAnimationFrame(this._galRaf);
+  clearInterval(this._madInt); clearInterval(this._vidInt);
+  window.removeEventListener('scroll', this._alBajar);
+  window.removeEventListener('keydown', this._teclaNos);
+  try { this._io.disconnect(); } catch (e) {}
+}
+renderVals() {
+  var self = this;
+  this._refs();
+  var base = this._valsBase();
+  var st = this.state || {};
+  var u = this._u || ((typeof window !== 'undefined' ? window.innerWidth : 1440) / 1920);
+  var N = GALERIA.length;
+  var vino = base.tema === 'vino';
+  var vs = st.vidS || 0, play = !!st.video, DUR = 135;
+  function mmss(s) { s = Math.round(s); return ('0' + Math.floor(s / 60)).slice(-2) + ':' + ('0' + (s % 60)).slice(-2); }
+  var madI = st.madI || 0;
+  return Object.assign(base, {
+    galPista: this._galP,
+    galFotos: GALERIA.concat(GALERIA).map(function (g) { return { foto: './assets/' + g[0] + '.jpg', alt: g[1] }; }),
+    galN: st.galN || 1,
+    galBajar: function (e) { if (e.button != null && e.button !== 0) return; self._galArr = { x: e.clientX, o: self._off }; self._movido = false; },
+    galMover: function (e) { if (!self._galArr) return; var d = e.clientX - self._galArr.x; if (Math.abs(d) > 4) self._movido = true; self._off = self._galArr.o - d; },
+    galSoltar: function () { self._galArr = null; setTimeout(function () { self._movido = false; }, 60); },
+    galEntrar: function () { self.setState({ etiqueta: 'DOBLE CLIC PARA AMPLIAR', piezaHeader: '' }); },
+    galSalir: function () { self._galArr = null; self.setState({ etiqueta: '' }); },
+    galAmpliar: function (e) { var i = Math.floor(((self._off + (e.clientX || 0)) / (686 * u)) % N); self.setState({ luz: i + 1, etiqueta: '' }); },
+    luzAbierta: !!st.luz,
+    luzFoto: st.luz ? './assets/' + GALERIA[st.luz - 1][0] + '.jpg' : '', luzAlt: st.luz ? GALERIA[st.luz - 1][1] : '',
+    luzN: st.luz || 1,
+    luzAnterior: function () { self.setState({ luz: ((st.luz + N - 2) % N) + 1 }); },
+    luzSiguiente: function () { self.setState({ luz: (st.luz % N) + 1 }); },
+    luzEtqAnt: function () { self.setState({ etiqueta: 'ANTERIOR' }); },
+    luzEtqSig: function () { self.setState({ etiqueta: 'SIGUIENTE' }); },
+    cerrarLuz: function () { self.setState({ luz: null, etiqueta: '' }); },
+    maderas: MADERAS.map(function (m, i) { return { nombre: m, color: i === madI ? 'var(--texto)' : 'var(--texto-suave)' }; }),
+    selloTiempo: vino ? './assets/2a550f426feae92913c50b05c78110de.svg' : './assets/73ce77106d4cd2d7a8529ec0fe5e20ed.svg',
+    selloTimeless: vino ? './assets/1f323923fd373cde4bbc8284197bf8d6.svg' : './assets/9ef459e7e7fb0f09d7be8e27bc05fec1.svg',
+    vendeAbierto: st.vende ? 'true' : 'false',
+    vendeFlecha: st.vende ? 'rotate(180deg)' : 'none',
+    vendeAlto: st.vende ? 'calc(127 * var(--u))' : '0px',
+    alternarVende: function () { self.setState({ vende: !st.vende }); },
+    sinSuscribir: !st.suscrito, suscrito: !!st.suscrito,
+    suscribir: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ suscrito: true }); },
+    pasos: PASOS.map(function (p, i) { return { n: '0' + (i + 1), icono: './assets/' + (vino ? p[0] : p[1]) + '.jpg', nombre: p[2], texto: p[3] }; }),
+    resenas: RESENAS.map(function (r) { return { nota: r[0], fecha: r[1], texto: r[2], autor: r[3] }; }),
+    alternarVideo: function () {
+      if (self.state && self.state.video) { clearInterval(self._vidInt); self.setState({ video: false, etiqueta: 'REPRODUCIR' }); return; }
+      var ini = (self.state && self.state.vidS) || 0; if (ini >= DUR) ini = 0;
+      var t0 = Date.now() - ini * 1000;
+      self.setState({ video: true, vidS: ini, etiqueta: 'PAUSAR' });
+      clearInterval(self._vidInt);
+      self._vidInt = setInterval(function () {
+        var s = (Date.now() - t0) / 1000;
+        if (s >= DUR) { clearInterval(self._vidInt); self.setState({ video: false, vidS: DUR }); return; }
+        self.setState({ vidS: s });
+      }, 250);
+    },
+    videoEntrar: function () { self.setState({ etiqueta: (self.state && self.state.video) ? 'PAUSAR' : 'REPRODUCIR', piezaHeader: '' }); },
+    videoAria: play ? 'Pausar el video del proceso' : 'Reproducir el video del proceso',
+    videoTxt: (play ? 'PAUSAR · ' : 'REPRODUCIR · ') + mmss(vs) + ' / ' + mmss(DUR),
+    videoPct: (100 * vs / DUR).toFixed(2) + '%',
+    videoZoom: play ? 'scale(1.08)' : 'scale(1)',
+    videoTrans: play ? 'transform ' + (DUR - vs).toFixed(1) + 's linear' : 'transform .6s ease'
+  });
+}
+
+}
+</script>
+</body>
+</html>
