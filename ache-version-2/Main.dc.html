@@ -3,10 +3,202 @@
 <head>
 <meta charset="utf-8">
 <title>Ache · Inicio</title>
+<script>/* exportable: imágenes */ (function () {
+  // Solo en el HTML descargado: ahí window.__resources trae una copia de cada imagen subida.
+  var m = window.__resources;
+  if (!m || typeof Element === 'undefined' || Element.prototype.setAttribute.__ache) return;
+  var original = Element.prototype.setAttribute;
+  var mapa = function (v) { var r = m[v]; return typeof r === 'string' && r ? r : v; };
+  var cambiado = function (n, v) {
+    if (typeof v === 'string' && v.lastIndexOf('/_blob/', 0) === 0) v = mapa(v);
+    return original.call(this, n, v);
+  };
+  cambiado.__ache = true;
+  Element.prototype.setAttribute = cambiado;
+  var fijar = function (el) {
+    if (!el || el.nodeType !== 1) return;
+    var nodos = [el].concat([].slice.call(el.querySelectorAll('[src^="/_blob/"],[href^="/_blob/"],[poster^="/_blob/"],[style*="/_blob/"]')));
+    for (var i = 0; i < nodos.length; i++) {
+      var n = nodos[i];
+      for (var a = 0, at = ['src', 'href', 'poster']; a < at.length; a++) {
+        var v = n.getAttribute(at[a]);
+        if (v && v.lastIndexOf('/_blob/', 0) === 0) { var r = mapa(v); if (r !== v) original.call(n, at[a], r); }
+      }
+      var st = n.getAttribute('style');
+      if (st && st.indexOf('/_blob/') >= 0) {
+        var st2 = st.replace(/\/_blob\/[0-9a-f]{32}/g, mapa);
+        if (st2 !== st) original.call(n, 'style', st2);
+      }
+    }
+  };
+  new MutationObserver(function (cambios) {
+    for (var i = 0; i < cambios.length; i++) {
+      var c = cambios[i];
+      if (c.type === 'attributes') fijar(c.target);
+      else for (var k = 0; k < c.addedNodes.length; k++) fijar(c.addedNodes[k]);
+    }
+  }).observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ['src', 'href', 'poster', 'style'] });
+})();</script>
 <script src="./vendor/react.js"></script>
 <script src="./vendor/react-dom.js"></script>
 <script src="./support.js"></script>
 <link rel="stylesheet" href="ds/ache/tokens.css">
+<meta name="ext-resource-dependency" content="./assets/01375a3605aa7efa536c2ea7d67eb16c.svg" data-resource-id="./assets/01375a3605aa7efa536c2ea7d67eb16c.svg">
+<meta name="ext-resource-dependency" content="./assets/019ad99bb93daa027a8cd4afa6fcd178.pdf" data-resource-id="./assets/019ad99bb93daa027a8cd4afa6fcd178.pdf">
+<meta name="ext-resource-dependency" content="./assets/04766d07c89f4df2a83afda1d29fc5e2.jpg" data-resource-id="./assets/04766d07c89f4df2a83afda1d29fc5e2.jpg">
+<meta name="ext-resource-dependency" content="./assets/064906eb5bc4ed0f2054e2165f12882f.jpg" data-resource-id="./assets/064906eb5bc4ed0f2054e2165f12882f.jpg">
+<meta name="ext-resource-dependency" content="./assets/09e51e1c7da2235a801f7edb7c30962a.jpg" data-resource-id="./assets/09e51e1c7da2235a801f7edb7c30962a.jpg">
+<meta name="ext-resource-dependency" content="./assets/0a981c5395c55592ce9c43b624a37a90.pdf" data-resource-id="./assets/0a981c5395c55592ce9c43b624a37a90.pdf">
+<meta name="ext-resource-dependency" content="./assets/0ecd2de30fffc145822be70637bec493.jpg" data-resource-id="./assets/0ecd2de30fffc145822be70637bec493.jpg">
+<meta name="ext-resource-dependency" content="./assets/0f0e9b9666df9922753d52ca1638af88.jpg" data-resource-id="./assets/0f0e9b9666df9922753d52ca1638af88.jpg">
+<meta name="ext-resource-dependency" content="./assets/10824675bf1977dad7bc8b0e5e5ea9cd.jpg" data-resource-id="./assets/10824675bf1977dad7bc8b0e5e5ea9cd.jpg">
+<meta name="ext-resource-dependency" content="./assets/119573ffbc8154123ad00ffc09ed4b48.jpg" data-resource-id="./assets/119573ffbc8154123ad00ffc09ed4b48.jpg">
+<meta name="ext-resource-dependency" content="./assets/11b26f4240e9e417a59253218499d575.jpg" data-resource-id="./assets/11b26f4240e9e417a59253218499d575.jpg">
+<meta name="ext-resource-dependency" content="./assets/140e4ac5aa457069ec3d99a6f1564ab6.jpg" data-resource-id="./assets/140e4ac5aa457069ec3d99a6f1564ab6.jpg">
+<meta name="ext-resource-dependency" content="./assets/1423aeebc2669788a317635e3def27d5.jpg" data-resource-id="./assets/1423aeebc2669788a317635e3def27d5.jpg">
+<meta name="ext-resource-dependency" content="./assets/1463f527ecc778607655d10d87e523a1.pdf" data-resource-id="./assets/1463f527ecc778607655d10d87e523a1.pdf">
+<meta name="ext-resource-dependency" content="./assets/1650cc78d75e637ee187a2f9c6153a9b.jpg" data-resource-id="./assets/1650cc78d75e637ee187a2f9c6153a9b.jpg">
+<meta name="ext-resource-dependency" content="./assets/17f1754c8c9bc97bc5367a586882c175.jpg" data-resource-id="./assets/17f1754c8c9bc97bc5367a586882c175.jpg">
+<meta name="ext-resource-dependency" content="./assets/19700bf1ab07f0860b9046ed6c28d77f.pdf" data-resource-id="./assets/19700bf1ab07f0860b9046ed6c28d77f.pdf">
+<meta name="ext-resource-dependency" content="./assets/1df66f9339fcce99ea1f89e307c91d7e.pdf" data-resource-id="./assets/1df66f9339fcce99ea1f89e307c91d7e.pdf">
+<meta name="ext-resource-dependency" content="./assets/1f4ac47e359e9f7f2320f5701a4e46b3.jpg" data-resource-id="./assets/1f4ac47e359e9f7f2320f5701a4e46b3.jpg">
+<meta name="ext-resource-dependency" content="./assets/1fe2fb9672a51dd9be325918990179d7.jpg" data-resource-id="./assets/1fe2fb9672a51dd9be325918990179d7.jpg">
+<meta name="ext-resource-dependency" content="./assets/20ad59fe89c9bdc5559a79afbe832cbb.jpg" data-resource-id="./assets/20ad59fe89c9bdc5559a79afbe832cbb.jpg">
+<meta name="ext-resource-dependency" content="./assets/21404c661abfe367467554149c15297b.jpg" data-resource-id="./assets/21404c661abfe367467554149c15297b.jpg">
+<meta name="ext-resource-dependency" content="./assets/21be69a3255e551a31f39ba14e9346c6.jpg" data-resource-id="./assets/21be69a3255e551a31f39ba14e9346c6.jpg">
+<meta name="ext-resource-dependency" content="./assets/22318c4ae15adb42882f503c37c1859d.jpg" data-resource-id="./assets/22318c4ae15adb42882f503c37c1859d.jpg">
+<meta name="ext-resource-dependency" content="./assets/257ae2d060f732b7cc20f38691462011.jpg" data-resource-id="./assets/257ae2d060f732b7cc20f38691462011.jpg">
+<meta name="ext-resource-dependency" content="./assets/26d68efcc71dffc8344c75885046d325.jpg" data-resource-id="./assets/26d68efcc71dffc8344c75885046d325.jpg">
+<meta name="ext-resource-dependency" content="./assets/2f424b62250609eb88d912f03f14f99b.jpg" data-resource-id="./assets/2f424b62250609eb88d912f03f14f99b.jpg">
+<meta name="ext-resource-dependency" content="./assets/2f569a4fe9255dbc8fdd3688d8d4f18b.jpg" data-resource-id="./assets/2f569a4fe9255dbc8fdd3688d8d4f18b.jpg">
+<meta name="ext-resource-dependency" content="./assets/3072808978824b6b891892df6ac24efe.jpg" data-resource-id="./assets/3072808978824b6b891892df6ac24efe.jpg">
+<meta name="ext-resource-dependency" content="./assets/30a6d8e352878c0b45195ca938fce31c.jpg" data-resource-id="./assets/30a6d8e352878c0b45195ca938fce31c.jpg">
+<meta name="ext-resource-dependency" content="./assets/3326ed7b5da4daa45caead191da73023.jpg" data-resource-id="./assets/3326ed7b5da4daa45caead191da73023.jpg">
+<meta name="ext-resource-dependency" content="./assets/3afc40de16230915ec983ab0a8842ad9.jpg" data-resource-id="./assets/3afc40de16230915ec983ab0a8842ad9.jpg">
+<meta name="ext-resource-dependency" content="./assets/3c35d1c8cff100ef3355546033948876.jpg" data-resource-id="./assets/3c35d1c8cff100ef3355546033948876.jpg">
+<meta name="ext-resource-dependency" content="./assets/3d7dc9e882def4f9a2f3334054b1ca08.jpg" data-resource-id="./assets/3d7dc9e882def4f9a2f3334054b1ca08.jpg">
+<meta name="ext-resource-dependency" content="./assets/3e76bb2ff92950fa3472ddcf51035414.jpg" data-resource-id="./assets/3e76bb2ff92950fa3472ddcf51035414.jpg">
+<meta name="ext-resource-dependency" content="./assets/3f4ef5b4fe1cb6fae563f871d0ce8e5f.pdf" data-resource-id="./assets/3f4ef5b4fe1cb6fae563f871d0ce8e5f.pdf">
+<meta name="ext-resource-dependency" content="./assets/409478c1fa21ba10efaf1b5aec44718d.jpg" data-resource-id="./assets/409478c1fa21ba10efaf1b5aec44718d.jpg">
+<meta name="ext-resource-dependency" content="./assets/4185c7d5ad2a272d6862e1e916e5ddad.jpg" data-resource-id="./assets/4185c7d5ad2a272d6862e1e916e5ddad.jpg">
+<meta name="ext-resource-dependency" content="./assets/4239f675ed102b7fb13f420ba4fb2d0d.pdf" data-resource-id="./assets/4239f675ed102b7fb13f420ba4fb2d0d.pdf">
+<meta name="ext-resource-dependency" content="./assets/44148b1b32d53e5251dba5cc38b04795.jpg" data-resource-id="./assets/44148b1b32d53e5251dba5cc38b04795.jpg">
+<meta name="ext-resource-dependency" content="./assets/4851a06931d3e6ce6fcd3a54e62f7313.jpg" data-resource-id="./assets/4851a06931d3e6ce6fcd3a54e62f7313.jpg">
+<meta name="ext-resource-dependency" content="./assets/4866617ee88526dbb29924ca15de159d.pdf" data-resource-id="./assets/4866617ee88526dbb29924ca15de159d.pdf">
+<meta name="ext-resource-dependency" content="./assets/4b3511096cb9b7493662ad101711db62.jpg" data-resource-id="./assets/4b3511096cb9b7493662ad101711db62.jpg">
+<meta name="ext-resource-dependency" content="./assets/4bbcb3fee9b6639cb0c9533687f0098b.pdf" data-resource-id="./assets/4bbcb3fee9b6639cb0c9533687f0098b.pdf">
+<meta name="ext-resource-dependency" content="./assets/4d7987d96d099ed008f8ff7d7faa0083.jpg" data-resource-id="./assets/4d7987d96d099ed008f8ff7d7faa0083.jpg">
+<meta name="ext-resource-dependency" content="./assets/4ef230df0d9374ae083ba19e92918577.jpg" data-resource-id="./assets/4ef230df0d9374ae083ba19e92918577.jpg">
+<meta name="ext-resource-dependency" content="./assets/5214dcbd78b65d5dd2b79098ff40bbff.jpg" data-resource-id="./assets/5214dcbd78b65d5dd2b79098ff40bbff.jpg">
+<meta name="ext-resource-dependency" content="./assets/53d5608339626b38a9e47c7d1e390178.jpg" data-resource-id="./assets/53d5608339626b38a9e47c7d1e390178.jpg">
+<meta name="ext-resource-dependency" content="./assets/54975d925e0419855e8dc532d1fc95fe.jpg" data-resource-id="./assets/54975d925e0419855e8dc532d1fc95fe.jpg">
+<meta name="ext-resource-dependency" content="./assets/572ea9d9043a06e6900e303db9a6eef0.jpg" data-resource-id="./assets/572ea9d9043a06e6900e303db9a6eef0.jpg">
+<meta name="ext-resource-dependency" content="./assets/58ff92e0a3631263f74ea0ebd7eaafae.pdf" data-resource-id="./assets/58ff92e0a3631263f74ea0ebd7eaafae.pdf">
+<meta name="ext-resource-dependency" content="./assets/5945e9b69f15d3e77b3ec5cad521ebc3.pdf" data-resource-id="./assets/5945e9b69f15d3e77b3ec5cad521ebc3.pdf">
+<meta name="ext-resource-dependency" content="./assets/5d251c1b033f0f248a40ffbbe46831c0.pdf" data-resource-id="./assets/5d251c1b033f0f248a40ffbbe46831c0.pdf">
+<meta name="ext-resource-dependency" content="./assets/5e7bb1312fb2a73a57b0b5c4cad3404a.pdf" data-resource-id="./assets/5e7bb1312fb2a73a57b0b5c4cad3404a.pdf">
+<meta name="ext-resource-dependency" content="./assets/5f5faccac7cbff41333c612f3faeddab.pdf" data-resource-id="./assets/5f5faccac7cbff41333c612f3faeddab.pdf">
+<meta name="ext-resource-dependency" content="./assets/5f63f9c81ffbb159cbdaf33955f560f9.jpg" data-resource-id="./assets/5f63f9c81ffbb159cbdaf33955f560f9.jpg">
+<meta name="ext-resource-dependency" content="./assets/60fa6b1aeb29547304227c70a5d947db.jpg" data-resource-id="./assets/60fa6b1aeb29547304227c70a5d947db.jpg">
+<meta name="ext-resource-dependency" content="./assets/6230aeafea2c605cd7a6249bfc7eb14a.svg" data-resource-id="./assets/6230aeafea2c605cd7a6249bfc7eb14a.svg">
+<meta name="ext-resource-dependency" content="./assets/62befc967c6fee088b139028714c31eb.pdf" data-resource-id="./assets/62befc967c6fee088b139028714c31eb.pdf">
+<meta name="ext-resource-dependency" content="./assets/652758de2335e8d2bf69736f76cfe1c8.pdf" data-resource-id="./assets/652758de2335e8d2bf69736f76cfe1c8.pdf">
+<meta name="ext-resource-dependency" content="./assets/677e0cbcdb990926981e7d95bf1acb79.pdf" data-resource-id="./assets/677e0cbcdb990926981e7d95bf1acb79.pdf">
+<meta name="ext-resource-dependency" content="./assets/69a2db0182eee0a000ada55707c919d2.jpg" data-resource-id="./assets/69a2db0182eee0a000ada55707c919d2.jpg">
+<meta name="ext-resource-dependency" content="./assets/6ac05c087754f4ddf0339fbdc5bd8a43.jpg" data-resource-id="./assets/6ac05c087754f4ddf0339fbdc5bd8a43.jpg">
+<meta name="ext-resource-dependency" content="./assets/6b8da60500aa653ea82825c779d3b03f.jpg" data-resource-id="./assets/6b8da60500aa653ea82825c779d3b03f.jpg">
+<meta name="ext-resource-dependency" content="./assets/6d7bfc3629230a4c4cfe75ca3abb66ec.jpg" data-resource-id="./assets/6d7bfc3629230a4c4cfe75ca3abb66ec.jpg">
+<meta name="ext-resource-dependency" content="./assets/6ddc8f998f7f3027fd448a7fefde8815.jpg" data-resource-id="./assets/6ddc8f998f7f3027fd448a7fefde8815.jpg">
+<meta name="ext-resource-dependency" content="./assets/6f166b732caddaf7650975b298d2cd5c.pdf" data-resource-id="./assets/6f166b732caddaf7650975b298d2cd5c.pdf">
+<meta name="ext-resource-dependency" content="./assets/737917cc6955bafe172a05cd954dfadf.pdf" data-resource-id="./assets/737917cc6955bafe172a05cd954dfadf.pdf">
+<meta name="ext-resource-dependency" content="./assets/73ec9362bd8b8bf2d9e1bf0f99482e18.pdf" data-resource-id="./assets/73ec9362bd8b8bf2d9e1bf0f99482e18.pdf">
+<meta name="ext-resource-dependency" content="./assets/74a6d9c6c8e5fd3a103bbff5410f9d84.jpg" data-resource-id="./assets/74a6d9c6c8e5fd3a103bbff5410f9d84.jpg">
+<meta name="ext-resource-dependency" content="./assets/74db477e96e23f093a6c666665b528f6.jpg" data-resource-id="./assets/74db477e96e23f093a6c666665b528f6.jpg">
+<meta name="ext-resource-dependency" content="./assets/758eb9c150b7063954516dbe6c9ffa03.jpg" data-resource-id="./assets/758eb9c150b7063954516dbe6c9ffa03.jpg">
+<meta name="ext-resource-dependency" content="./assets/766189e43964f07bdd16c8256a92f30a.jpg" data-resource-id="./assets/766189e43964f07bdd16c8256a92f30a.jpg">
+<meta name="ext-resource-dependency" content="./assets/78cdda5b765a7d4a8a9d170756a1dcf8.jpg" data-resource-id="./assets/78cdda5b765a7d4a8a9d170756a1dcf8.jpg">
+<meta name="ext-resource-dependency" content="./assets/78ffe3b548942ea9eb3997c4625702ff.pdf" data-resource-id="./assets/78ffe3b548942ea9eb3997c4625702ff.pdf">
+<meta name="ext-resource-dependency" content="./assets/7acdebb1094c56efd264b454ea761c76.pdf" data-resource-id="./assets/7acdebb1094c56efd264b454ea761c76.pdf">
+<meta name="ext-resource-dependency" content="./assets/7e6a35ae580c8fb0fd9717b854a859d2.jpg" data-resource-id="./assets/7e6a35ae580c8fb0fd9717b854a859d2.jpg">
+<meta name="ext-resource-dependency" content="./assets/7fb61c8606278f6f0e7eaa80af7ddd06.jpg" data-resource-id="./assets/7fb61c8606278f6f0e7eaa80af7ddd06.jpg">
+<meta name="ext-resource-dependency" content="./assets/808d26414eefa44cb881600255826295.jpg" data-resource-id="./assets/808d26414eefa44cb881600255826295.jpg">
+<meta name="ext-resource-dependency" content="./assets/8091580ab6f5b86c60c1a42cb1e869da.jpg" data-resource-id="./assets/8091580ab6f5b86c60c1a42cb1e869da.jpg">
+<meta name="ext-resource-dependency" content="./assets/80e93dfa1fe7873995a46b9a1087ad13.jpg" data-resource-id="./assets/80e93dfa1fe7873995a46b9a1087ad13.jpg">
+<meta name="ext-resource-dependency" content="./assets/8147022b8f74ebe4aa257b46f5798b46.jpg" data-resource-id="./assets/8147022b8f74ebe4aa257b46f5798b46.jpg">
+<meta name="ext-resource-dependency" content="./assets/818c03f64c2781b464c4a65fef9b7475.jpg" data-resource-id="./assets/818c03f64c2781b464c4a65fef9b7475.jpg">
+<meta name="ext-resource-dependency" content="./assets/82ccae95345230bc9123f79b1c49b1ea.jpg" data-resource-id="./assets/82ccae95345230bc9123f79b1c49b1ea.jpg">
+<meta name="ext-resource-dependency" content="./assets/8642b47f7e644fc21119534f74e3bc27.jpg" data-resource-id="./assets/8642b47f7e644fc21119534f74e3bc27.jpg">
+<meta name="ext-resource-dependency" content="./assets/8eaee317b3d61367537c5498bba51dcf.jpg" data-resource-id="./assets/8eaee317b3d61367537c5498bba51dcf.jpg">
+<meta name="ext-resource-dependency" content="./assets/8f77d0e5256ca524f941d101b893f6ed.jpg" data-resource-id="./assets/8f77d0e5256ca524f941d101b893f6ed.jpg">
+<meta name="ext-resource-dependency" content="./assets/90fcd341b8516910ab4c81fc00c87c41.jpg" data-resource-id="./assets/90fcd341b8516910ab4c81fc00c87c41.jpg">
+<meta name="ext-resource-dependency" content="./assets/932e459f264ce436ac97d8b163c3458c.pdf" data-resource-id="./assets/932e459f264ce436ac97d8b163c3458c.pdf">
+<meta name="ext-resource-dependency" content="./assets/9423a8012ac45e63c72a7b0583d37658.pdf" data-resource-id="./assets/9423a8012ac45e63c72a7b0583d37658.pdf">
+<meta name="ext-resource-dependency" content="./assets/968a3d01b12b51cd8faaafee5f3abdec.jpg" data-resource-id="./assets/968a3d01b12b51cd8faaafee5f3abdec.jpg">
+<meta name="ext-resource-dependency" content="./assets/982e37f658fd95565e94b72b0555459f.svg" data-resource-id="./assets/982e37f658fd95565e94b72b0555459f.svg">
+<meta name="ext-resource-dependency" content="./assets/98b8114c0ad99c41e28687388a8882c1.jpg" data-resource-id="./assets/98b8114c0ad99c41e28687388a8882c1.jpg">
+<meta name="ext-resource-dependency" content="./assets/9af17c3ee5fb628e3be58a4d8626174d.jpg" data-resource-id="./assets/9af17c3ee5fb628e3be58a4d8626174d.jpg">
+<meta name="ext-resource-dependency" content="./assets/9b645627868aa667a4933e6393e04a62.pdf" data-resource-id="./assets/9b645627868aa667a4933e6393e04a62.pdf">
+<meta name="ext-resource-dependency" content="./assets/9bed3f319f1f583b5f64be8c81a43412.jpg" data-resource-id="./assets/9bed3f319f1f583b5f64be8c81a43412.jpg">
+<meta name="ext-resource-dependency" content="./assets/9bef806cbb5cdbb03afb4adce33c15b5.jpg" data-resource-id="./assets/9bef806cbb5cdbb03afb4adce33c15b5.jpg">
+<meta name="ext-resource-dependency" content="./assets/9c017721e9e6ad07cfedbe347a615d86.jpg" data-resource-id="./assets/9c017721e9e6ad07cfedbe347a615d86.jpg">
+<meta name="ext-resource-dependency" content="./assets/9e52996ad4f96e8afed37b893e7c8318.svg" data-resource-id="./assets/9e52996ad4f96e8afed37b893e7c8318.svg">
+<meta name="ext-resource-dependency" content="./assets/9e7e16f0bb258000ab84de75911638fa.jpg" data-resource-id="./assets/9e7e16f0bb258000ab84de75911638fa.jpg">
+<meta name="ext-resource-dependency" content="./assets/9f0950719f35e421d1125ee54a14820b.jpg" data-resource-id="./assets/9f0950719f35e421d1125ee54a14820b.jpg">
+<meta name="ext-resource-dependency" content="./assets/a19d62e8ea3498adda3edff647ef7f8e.jpg" data-resource-id="./assets/a19d62e8ea3498adda3edff647ef7f8e.jpg">
+<meta name="ext-resource-dependency" content="./assets/a2bb3a8785ac4e59e02106f6ef190930.pdf" data-resource-id="./assets/a2bb3a8785ac4e59e02106f6ef190930.pdf">
+<meta name="ext-resource-dependency" content="./assets/a3f073e21b45ea11571b7d46439cd9f3.pdf" data-resource-id="./assets/a3f073e21b45ea11571b7d46439cd9f3.pdf">
+<meta name="ext-resource-dependency" content="./assets/a61946fa50528b951aeb7984f70b6443.jpg" data-resource-id="./assets/a61946fa50528b951aeb7984f70b6443.jpg">
+<meta name="ext-resource-dependency" content="./assets/ad58a00fdf8f616537258b20f611f2b8.jpg" data-resource-id="./assets/ad58a00fdf8f616537258b20f611f2b8.jpg">
+<meta name="ext-resource-dependency" content="./assets/ad81faef215d4aba17e21f36169fafca.jpg" data-resource-id="./assets/ad81faef215d4aba17e21f36169fafca.jpg">
+<meta name="ext-resource-dependency" content="./assets/adfbc3e3cda2662c2e40602d30be5cc8.jpg" data-resource-id="./assets/adfbc3e3cda2662c2e40602d30be5cc8.jpg">
+<meta name="ext-resource-dependency" content="./assets/ae355b8e9da819b256882f82dc63eb3a.jpg" data-resource-id="./assets/ae355b8e9da819b256882f82dc63eb3a.jpg">
+<meta name="ext-resource-dependency" content="./assets/b0ea2bdecf34d3c7292fb7c01952f044.jpg" data-resource-id="./assets/b0ea2bdecf34d3c7292fb7c01952f044.jpg">
+<meta name="ext-resource-dependency" content="./assets/b1b1b4db19cbd24c8f9cc5c231c83dac.jpg" data-resource-id="./assets/b1b1b4db19cbd24c8f9cc5c231c83dac.jpg">
+<meta name="ext-resource-dependency" content="./assets/b3c08938d575139e68509f3485aaae3e.pdf" data-resource-id="./assets/b3c08938d575139e68509f3485aaae3e.pdf">
+<meta name="ext-resource-dependency" content="./assets/b606ec2de61f2b4b11ee8de69c83049d.pdf" data-resource-id="./assets/b606ec2de61f2b4b11ee8de69c83049d.pdf">
+<meta name="ext-resource-dependency" content="./assets/b99dc9d040324e28003b28c6017ac492.jpg" data-resource-id="./assets/b99dc9d040324e28003b28c6017ac492.jpg">
+<meta name="ext-resource-dependency" content="./assets/bb1fbb5539dd8dd990785a639cd180f7.pdf" data-resource-id="./assets/bb1fbb5539dd8dd990785a639cd180f7.pdf">
+<meta name="ext-resource-dependency" content="./assets/bc5ceda51b2c9c68d5a2e1e4fbb27196.jpg" data-resource-id="./assets/bc5ceda51b2c9c68d5a2e1e4fbb27196.jpg">
+<meta name="ext-resource-dependency" content="./assets/c0e72b67db88ff29be50895c096a5640.pdf" data-resource-id="./assets/c0e72b67db88ff29be50895c096a5640.pdf">
+<meta name="ext-resource-dependency" content="./assets/c12ef90c7c056ba871387e9e973e503f.pdf" data-resource-id="./assets/c12ef90c7c056ba871387e9e973e503f.pdf">
+<meta name="ext-resource-dependency" content="./assets/c1bafb528c93280f081941ab88da9cd6.jpg" data-resource-id="./assets/c1bafb528c93280f081941ab88da9cd6.jpg">
+<meta name="ext-resource-dependency" content="./assets/c4bd1e21b8c7085b5f0a016b0a52e9d2.jpg" data-resource-id="./assets/c4bd1e21b8c7085b5f0a016b0a52e9d2.jpg">
+<meta name="ext-resource-dependency" content="./assets/c4eb2362240f917f3ba0b55306a75837.jpg" data-resource-id="./assets/c4eb2362240f917f3ba0b55306a75837.jpg">
+<meta name="ext-resource-dependency" content="./assets/c5c32227e8be96e220a7a09a86d3834a.jpg" data-resource-id="./assets/c5c32227e8be96e220a7a09a86d3834a.jpg">
+<meta name="ext-resource-dependency" content="./assets/c5f3a915e57ec862046f8fa3b14507f4.jpg" data-resource-id="./assets/c5f3a915e57ec862046f8fa3b14507f4.jpg">
+<meta name="ext-resource-dependency" content="./assets/c67180f627df70ee9606b1980d1579fb.pdf" data-resource-id="./assets/c67180f627df70ee9606b1980d1579fb.pdf">
+<meta name="ext-resource-dependency" content="./assets/c7c7f2ee893a7d46fca2deeede07be72.jpg" data-resource-id="./assets/c7c7f2ee893a7d46fca2deeede07be72.jpg">
+<meta name="ext-resource-dependency" content="./assets/c7e90282d0555be8685674bd3557254d.jpg" data-resource-id="./assets/c7e90282d0555be8685674bd3557254d.jpg">
+<meta name="ext-resource-dependency" content="./assets/ca6fb9b9aa325aed55129e2767539bb1.jpg" data-resource-id="./assets/ca6fb9b9aa325aed55129e2767539bb1.jpg">
+<meta name="ext-resource-dependency" content="./assets/cda9a63aab019c70b5ffdec2fb7f17a4.jpg" data-resource-id="./assets/cda9a63aab019c70b5ffdec2fb7f17a4.jpg">
+<meta name="ext-resource-dependency" content="./assets/cf2ac45f0174c50603b9140147b79f5e.pdf" data-resource-id="./assets/cf2ac45f0174c50603b9140147b79f5e.pdf">
+<meta name="ext-resource-dependency" content="./assets/cfed801306c0b194c612fab58989976d.pdf" data-resource-id="./assets/cfed801306c0b194c612fab58989976d.pdf">
+<meta name="ext-resource-dependency" content="./assets/d13371259887d345c42837152e300047.jpg" data-resource-id="./assets/d13371259887d345c42837152e300047.jpg">
+<meta name="ext-resource-dependency" content="./assets/d1d238143479254b4a0e2d25d375b2c6.jpg" data-resource-id="./assets/d1d238143479254b4a0e2d25d375b2c6.jpg">
+<meta name="ext-resource-dependency" content="./assets/d53dfe1a422b4286ceadbadb104bd7d6.jpg" data-resource-id="./assets/d53dfe1a422b4286ceadbadb104bd7d6.jpg">
+<meta name="ext-resource-dependency" content="./assets/d6ef05669f2e461d471abc6b38dfafc1.jpg" data-resource-id="./assets/d6ef05669f2e461d471abc6b38dfafc1.jpg">
+<meta name="ext-resource-dependency" content="./assets/d8239ab11495a69ea0e88e80f5aa420e.jpg" data-resource-id="./assets/d8239ab11495a69ea0e88e80f5aa420e.jpg">
+<meta name="ext-resource-dependency" content="./assets/d969f00269b8ea24c360fd59fba7d938.jpg" data-resource-id="./assets/d969f00269b8ea24c360fd59fba7d938.jpg">
+<meta name="ext-resource-dependency" content="./assets/d9a4083f172e4021e4b53253241fe58e.jpg" data-resource-id="./assets/d9a4083f172e4021e4b53253241fe58e.jpg">
+<meta name="ext-resource-dependency" content="./assets/dc905d591ec6cdb116fcd0a0cc95002c.jpg" data-resource-id="./assets/dc905d591ec6cdb116fcd0a0cc95002c.jpg">
+<meta name="ext-resource-dependency" content="./assets/e046b55b6e80f80d5e8f678460986aff.jpg" data-resource-id="./assets/e046b55b6e80f80d5e8f678460986aff.jpg">
+<meta name="ext-resource-dependency" content="./assets/e095330b58f419807649acc317a4124c.jpg" data-resource-id="./assets/e095330b58f419807649acc317a4124c.jpg">
+<meta name="ext-resource-dependency" content="./assets/e13442c2e95636d6170d5ffbdcf49010.jpg" data-resource-id="./assets/e13442c2e95636d6170d5ffbdcf49010.jpg">
+<meta name="ext-resource-dependency" content="./assets/e1cc90eaa033b57aea670890df8ab5cf.jpg" data-resource-id="./assets/e1cc90eaa033b57aea670890df8ab5cf.jpg">
+<meta name="ext-resource-dependency" content="./assets/e69b2b243334a5831802b7fc40bb3422.jpg" data-resource-id="./assets/e69b2b243334a5831802b7fc40bb3422.jpg">
+<meta name="ext-resource-dependency" content="./assets/e6fdd4d59882dd77ac201bd0ac465b16.pdf" data-resource-id="./assets/e6fdd4d59882dd77ac201bd0ac465b16.pdf">
+<meta name="ext-resource-dependency" content="./assets/eb32719438bda7597ae55798e82ec663.jpg" data-resource-id="./assets/eb32719438bda7597ae55798e82ec663.jpg">
+<meta name="ext-resource-dependency" content="./assets/ebb157c4f73dde053df85c10927ce26c.pdf" data-resource-id="./assets/ebb157c4f73dde053df85c10927ce26c.pdf">
+<meta name="ext-resource-dependency" content="./assets/f294146f3d12a729f6fdde018ee52013.jpg" data-resource-id="./assets/f294146f3d12a729f6fdde018ee52013.jpg">
+<meta name="ext-resource-dependency" content="./assets/f34a47faf74d1867773145cc0ad3d80e.jpg" data-resource-id="./assets/f34a47faf74d1867773145cc0ad3d80e.jpg">
+<meta name="ext-resource-dependency" content="./assets/f36041e40d79da6551fd0c920542745b.pdf" data-resource-id="./assets/f36041e40d79da6551fd0c920542745b.pdf">
+<meta name="ext-resource-dependency" content="./assets/f4ba0bee38160ecfe3a739bb3dad38f9.svg" data-resource-id="./assets/f4ba0bee38160ecfe3a739bb3dad38f9.svg">
+<meta name="ext-resource-dependency" content="./assets/f5fdc233891a6cdfd80a8007f4803f21.jpg" data-resource-id="./assets/f5fdc233891a6cdfd80a8007f4803f21.jpg">
+<meta name="ext-resource-dependency" content="./assets/f6ba84b9ddc45d05e6268c7dfe1efbf7.jpg" data-resource-id="./assets/f6ba84b9ddc45d05e6268c7dfe1efbf7.jpg">
+<meta name="ext-resource-dependency" content="./assets/f9694a615ea98576988670f343ed2c03.jpg" data-resource-id="./assets/f9694a615ea98576988670f343ed2c03.jpg">
+<meta name="ext-resource-dependency" content="./assets/f996e33492b2641a329f0effb846b0d9.pdf" data-resource-id="./assets/f996e33492b2641a329f0effb846b0d9.pdf">
+<meta name="ext-resource-dependency" content="./assets/fb128bf13ca2f3d920145e28847dc7b1.jpg" data-resource-id="./assets/fb128bf13ca2f3d920145e28847dc7b1.jpg">
+<meta name="ext-resource-dependency" content="./assets/fe386380689e49fbe0898bb2ab4d28d8.jpg" data-resource-id="./assets/fe386380689e49fbe0898bb2ab4d28d8.jpg">
 </head>
 <body>
 <x-dc>
@@ -271,6 +463,26 @@ input::placeholder{color:var(--texto-suave);opacity:1}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3589}}'>
+/* exportable: imágenes */
+// Cuando la página corre desde el HTML descargado, window.__resources trae una copia de cada imagen subida.
+var __acheRecursos = (typeof window !== 'undefined' && window.__resources) || null;
+function __acheMapa(v, d) {
+  if (typeof v === 'string') {
+    if (v.lastIndexOf('/_blob/', 0) !== 0) return v;
+    var r = __acheRecursos[v];
+    return typeof r === 'string' && r ? r : v;
+  }
+  if (!v || typeof v !== 'object' || d > 8) return v;
+  var lista = Array.isArray(v);
+  if (!lista && Object.getPrototypeOf(v) !== Object.prototype) return v;
+  var claves = lista ? null : Object.keys(v), n = lista ? v.length : claves.length, fuera = null;
+  for (var i = 0; i < n; i++) {
+    var k = lista ? i : claves[i], x = v[k], y = __acheMapa(x, d + 1);
+    if (y !== x) { if (!fuera) fuera = lista ? v.slice() : Object.assign({}, v); fuera[k] = y; }
+  }
+  return fuera || v;
+}
+
 var CODIGOS = ["NO. 0157", "NO. 0154", "NO. 0150", "NO. 0138", "NO. 0147", "NO. 0141", "NO. 0163", "NO. 0164", "NO. 0165", "NO. 0167", "NO. 0171", "NO. 0173", "NO. 0158", "NO. 0153", "NO. 0144", "NO. 0176", "NO. 0179", "NO. 0156", "NO. 0152", "NO. 0148", "NO. 0145", "NO. 0140", "NO. 0135", "NO. 0166", "NO. 0168", "NO. 0169", "NO. 0174", "NO. 0175", "NO. 0177", "NO. 0178", "NO. 0155", "NO. 0136", "NO. 0134", "NO. 0139", "NO. 0170", "NO. 0137", "NO. 0162", "NO. 0172", "KIT NO. 0151", "KIT NO. 0180", "KIT NO. 0181", "KIT NO. 0182", "KIT NO. 0183", "NO. 0149"];
 class Component extends DCLogic {
 componentDidMount() {
@@ -322,22 +534,22 @@ renderVals() {
   var solido = !!st.solido;
   var menu = st.menu || '';
   var datos = [
-    ["b99dc9d040324e28003b28c6017ac492", "Mesa de roble con cubierta de parquet, del kit Comedor Bergen", "Comedor Bergen", "5 PIEZAS · $52,800", 0, 1, "KIT NO. 0180"],
-    ["17f1754c8c9bc97bc5367a586882c175", "Silla de teca con respaldo de madera y asiento de rejilla", "Silla de rejilla", "NO. 0179 · $7,200", 0, 0, "NO. 0179"],
-    ["9bed3f319f1f583b5f64be8c81a43412", "Sillón de teca con patas en tijera, asiento y respaldo de rejilla", "Sillón de rejilla en tijera", "NO. 0173 · $14,300", 0, 0, "NO. 0173"],
-    ["3afc40de16230915ec983ab0a8842ad9", "Silla de nogal con brazos, respaldo de rejilla y asiento blanco, del kit Sillas Lisboa", "Sillas Lisboa", "6 PIEZAS · $41,400", 0, 1, "KIT NO. 0181"],
-    ["90fcd341b8516910ab4c81fc00c87c41", "Lámpara de pie con base de teca calada y pantalla de fibra", "Lámpara de pie de teca", "NO. 0172 · $8,600", 0, 0, "NO. 0172"],
-    ["9e7e16f0bb258000ab84de75911638fa", "Mesa de centro de roble con cubierta triangular", "Mesa de centro triangular", "NO. 0178 · $11,400", 0, 0, "NO. 0178"],
-    ["d53dfe1a422b4286ceadbadb104bd7d6", "Silla escalonada de nogal con cojines grises, del kit Escalón en nogal", "Escalón en nogal", "2 PIEZAS · $16,800", 0, 1, "KIT NO. 0182"],
-    ["d6ef05669f2e461d471abc6b38dfafc1", "Sillón bajo de teca con patas cruzadas y rejilla", "Sillón de patas cruzadas", "NO. 0171 · $15,400", 0, 0, "NO. 0171"],
-    ["04766d07c89f4df2a83afda1d29fc5e2", "Silla de teca con patas cruzadas y asiento de rejilla", "Silla plegable de rejilla", "NO. 0176 · $6,800", 0, 0, "NO. 0176"],
-    ["f9694a615ea98576988670f343ed2c03", "Mesa de centro redonda de fresno ebonizado", "Mesa de centro negra", "NO. 0175 · $13,900", 0, 0, "NO. 0175"],
-    ["968a3d01b12b51cd8faaafee5f3abdec", "Banco alto de teca con aro reposapiés de latón", "Banco alto con aro de latón", "NO. 0170 · $6,900", 0, 0, "NO. 0170"],
-    ["54975d925e0419855e8dc532d1fc95fe", "Consola de teca con dos cajones y patas en V", "Consola de dos cajones", "NO. 0169 · $11,800", 0, 0, "NO. 0169"]
+    ["./assets/b99dc9d040324e28003b28c6017ac492.jpg", "Mesa de roble con cubierta de parquet, del kit Comedor Bergen", "Comedor Bergen", "5 PIEZAS · $52,800", 0, 1, "KIT NO. 0180"],
+    ["./assets/17f1754c8c9bc97bc5367a586882c175.jpg", "Silla de teca con respaldo de madera y asiento de rejilla", "Silla de rejilla", "NO. 0179 · $7,200", 0, 0, "NO. 0179"],
+    ["./assets/9bed3f319f1f583b5f64be8c81a43412.jpg", "Sillón de teca con patas en tijera, asiento y respaldo de rejilla", "Sillón de rejilla en tijera", "NO. 0173 · $14,300", 0, 0, "NO. 0173"],
+    ["./assets/3afc40de16230915ec983ab0a8842ad9.jpg", "Silla de nogal con brazos, respaldo de rejilla y asiento blanco, del kit Sillas Lisboa", "Sillas Lisboa", "6 PIEZAS · $41,400", 0, 1, "KIT NO. 0181"],
+    ["./assets/90fcd341b8516910ab4c81fc00c87c41.jpg", "Lámpara de pie con base de teca calada y pantalla de fibra", "Lámpara de pie de teca", "NO. 0172 · $8,600", 0, 0, "NO. 0172"],
+    ["./assets/9e7e16f0bb258000ab84de75911638fa.jpg", "Mesa de centro de roble con cubierta triangular", "Mesa de centro triangular", "NO. 0178 · $11,400", 0, 0, "NO. 0178"],
+    ["./assets/d53dfe1a422b4286ceadbadb104bd7d6.jpg", "Silla escalonada de nogal con cojines grises, del kit Escalón en nogal", "Escalón en nogal", "2 PIEZAS · $16,800", 0, 1, "KIT NO. 0182"],
+    ["./assets/d6ef05669f2e461d471abc6b38dfafc1.jpg", "Sillón bajo de teca con patas cruzadas y rejilla", "Sillón de patas cruzadas", "NO. 0171 · $15,400", 0, 0, "NO. 0171"],
+    ["./assets/04766d07c89f4df2a83afda1d29fc5e2.jpg", "Silla de teca con patas cruzadas y asiento de rejilla", "Silla plegable de rejilla", "NO. 0176 · $6,800", 0, 0, "NO. 0176"],
+    ["./assets/f9694a615ea98576988670f343ed2c03.jpg", "Mesa de centro redonda de fresno ebonizado", "Mesa de centro negra", "NO. 0175 · $13,900", 0, 0, "NO. 0175"],
+    ["./assets/968a3d01b12b51cd8faaafee5f3abdec.jpg", "Banco alto de teca con aro reposapiés de latón", "Banco alto con aro de latón", "NO. 0170 · $6,900", 0, 0, "NO. 0170"],
+    ["./assets/54975d925e0419855e8dc532d1fc95fe.jpg", "Consola de teca con dos cajones y patas en V", "Consola de dos cajones", "NO. 0169 · $11,800", 0, 0, "NO. 0169"]
   ];
   var piezas = datos.map(function (d) {
     return {
-      foto: './assets/' + d[0] + '.jpg', alt: d[1], nombre: d[2], dato: d[3],
+      foto: d[0], alt: d[1], nombre: d[2], dato: d[3],
       vendido: !!d[4], kit: !!d[5],
       colorDato: d[4] ? 'var(--acento)' : 'var(--texto-suave)',
       abrir: abrirFicha(d[6])
@@ -386,6 +598,15 @@ renderVals() {
     claro: claro
   };
 }
+}
+
+if (__acheRecursos && typeof Component === 'function' && typeof Component.prototype.renderVals === 'function' && !Component.prototype.renderVals.__ache) {
+  (function () {
+    var rv = Component.prototype.renderVals;
+    var cambiado = function () { return __acheMapa(rv.apply(this, arguments), 0); };
+    cambiado.__ache = true;
+    Component.prototype.renderVals = cambiado;
+  })();
 }
 </script>
 </body>

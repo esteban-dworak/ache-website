@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ache · Quiénes somos (escritorio)</title>
+<script>/* exportable: imágenes */ (function () {
+  // Solo en el HTML descargado: ahí window.__resources trae una copia de cada imagen subida.
+  var m = window.__resources;
+  if (!m || typeof Element === 'undefined' || Element.prototype.setAttribute.__ache) return;
+  var original = Element.prototype.setAttribute;
+  var mapa = function (v) { var r = m[v]; return typeof r === 'string' && r ? r : v; };
+  var cambiado = function (n, v) {
+    if (typeof v === 'string' && v.lastIndexOf('/_blob/', 0) === 0) v = mapa(v);
+    return original.call(this, n, v);
+  };
+  cambiado.__ache = true;
+  Element.prototype.setAttribute = cambiado;
+  var fijar = function (el) {
+    if (!el || el.nodeType !== 1) return;
+    var nodos = [el].concat([].slice.call(el.querySelectorAll('[src^="/_blob/"],[href^="/_blob/"],[poster^="/_blob/"],[style*="/_blob/"]')));
+    for (var i = 0; i < nodos.length; i++) {
+      var n = nodos[i];
+      for (var a = 0, at = ['src', 'href', 'poster']; a < at.length; a++) {
+        var v = n.getAttribute(at[a]);
+        if (v && v.lastIndexOf('/_blob/', 0) === 0) { var r = mapa(v); if (r !== v) original.call(n, at[a], r); }
+      }
+      var st = n.getAttribute('style');
+      if (st && st.indexOf('/_blob/') >= 0) {
+        var st2 = st.replace(/\/_blob\/[0-9a-f]{32}/g, mapa);
+        if (st2 !== st) original.call(n, 'style', st2);
+      }
+    }
+  };
+  new MutationObserver(function (cambios) {
+    for (var i = 0; i < cambios.length; i++) {
+      var c = cambios[i];
+      if (c.type === 'attributes') fijar(c.target);
+      else for (var k = 0; k < c.addedNodes.length; k++) fijar(c.addedNodes[k]);
+    }
+  }).observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ['src', 'href', 'poster', 'style'] });
+})();</script>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ache/tokens.css">
+<meta name="ext-resource-dependency" content="./assets/0c05473ae1d388e6d80bb450e6f98cb2.jpg" data-resource-id="./assets/0c05473ae1d388e6d80bb450e6f98cb2.jpg">
+<meta name="ext-resource-dependency" content="./assets/1611cb17427f953d4ae62e65e669fa9c.jpg" data-resource-id="./assets/1611cb17427f953d4ae62e65e669fa9c.jpg">
+<meta name="ext-resource-dependency" content="./assets/2cd10156aabe6db6da849c6a26cec225.svg" data-resource-id="./assets/2cd10156aabe6db6da849c6a26cec225.svg">
+<meta name="ext-resource-dependency" content="./assets/2fbd3b18fd9bd2c30b4f148f014ca43f.jpg" data-resource-id="./assets/2fbd3b18fd9bd2c30b4f148f014ca43f.jpg">
+<meta name="ext-resource-dependency" content="./assets/35783b7299e6fba82cd9c0362c2123b0.jpg" data-resource-id="./assets/35783b7299e6fba82cd9c0362c2123b0.jpg">
+<meta name="ext-resource-dependency" content="./assets/415921b5e14a02cba09d780543275b0a.svg" data-resource-id="./assets/415921b5e14a02cba09d780543275b0a.svg">
+<meta name="ext-resource-dependency" content="./assets/63d8d96978a7edaef7b82a7a896759ac.jpg" data-resource-id="./assets/63d8d96978a7edaef7b82a7a896759ac.jpg">
+<meta name="ext-resource-dependency" content="./assets/73a76e202ac46a43797e9225686c21a5.jpg" data-resource-id="./assets/73a76e202ac46a43797e9225686c21a5.jpg">
+<meta name="ext-resource-dependency" content="./assets/76eb2481528a9eb10bb84a496025ee3c.svg" data-resource-id="./assets/76eb2481528a9eb10bb84a496025ee3c.svg">
+<meta name="ext-resource-dependency" content="./assets/b4f546f58f012a1ac9033d258d007004.svg" data-resource-id="./assets/b4f546f58f012a1ac9033d258d007004.svg">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--acento)}
+</style>
+</helmet>
+<div data-theme="crema" style="background: var(--fondo); color: var(--texto); font-family: var(--font-sans); font-size: 16px; line-height: 24px">
+
+<!-- ENCABEZADO: fijo; se oculta al bajar y vuelve al subir -->
+<header style="position: sticky; top: 0; z-index: 50; box-sizing: border-box; height: 68px; padding: 0 10%; display: flex; align-items: center; justify-content: space-between; gap: 32px; background: var(--fondo); border-bottom: 1px solid var(--linea-suave); transform: {{hdrMover}}; transition: transform 350ms ease">
+  <a href="Main.dc.html" aria-label="Ache, inicio" style="display: flex; align-items: center; height: 44px">
+    <img src="./assets/76eb2481528a9eb10bb84a496025ee3c.svg" alt="Ache" style="display: block; height: 32px">
+  </a>
+  <nav aria-label="Principal" style="display: flex; align-items: center; gap: clamp(26px, 2.9vw, 56px); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.1em">
+    <a href="Catalogo.dc.html" style="padding: 14px 0">CATÁLOGO</a>
+    <a href="Catalogo.dc.html" style="padding: 14px 0">RECIÉN LLEGADOS</a>
+    <a href="Kits.dc.html" style="padding: 14px 0">KITS</a>
+    <a href="Nosotros.dc.html" aria-current="page" style="padding: 14px 0 3px; border-bottom: 1px solid currentColor">QUIÉNES SOMOS</a>
+    <a href="#" style="padding: 14px 0">WHATSAPP</a>
+    <a href="#" style="padding: 14px 0">BUSCAR</a>
+    <a href="#" style="padding: 14px 0">CUENTA</a>
+    <a href="#" style="padding: 14px 0">CARRITO (0)</a>
+  </nav>
+</header>
+
+<!-- FOTO GRANDE DE APERTURA -->
+<section style="box-sizing: border-box; padding: 82px 10% 0">
+  <img src="./assets/73a76e202ac46a43797e9225686c21a5.jpg" alt="Detalle de la veta de una madera restaurada" style="display: block; width: 100%; aspect-ratio: 1520 / 700; object-fit: cover; object-position: 50% 40%; background: var(--fondo-alt)">
+</section>
+
+<!-- QUIÉNES SOMOS: foto alta a la izquierda, texto a la derecha -->
+<section style="box-sizing: border-box; padding: 96px 10% 0; display: flex; flex-wrap: wrap; align-items: center">
+  <div style="flex: 1.42 1 480px; min-width: 0">
+    <img src="./assets/2fbd3b18fd9bd2c30b4f148f014ca43f.jpg" alt="Buró de nogal restaurado en nuestro taller" style="display: block; width: 100%; aspect-ratio: 892 / 1000; object-fit: cover; background: var(--fondo-alt)">
+  </div>
+  <div style="flex: 1 1 340px; min-width: 0; box-sizing: border-box; padding: 48px 0 48px 2.6%; display: flex; flex-direction: column; align-items: flex-start">
+    <h1 style="margin: 0; font-family: var(--font-mono); font-size: 13px; line-height: 20px; font-weight: 400; letter-spacing: 0.12em; color: var(--acento)">QUIÉNES SOMOS</h1>
+    <p style="margin: 14px 0 0; font-size: 15px; line-height: 22.5px">ACHE restaura e interviene muebles de madera desde Guadalajara. Creemos en la transformación: encontramos valor en restaurar materiales nobles, restaurar con intención y devolverle sentido a aquello que merece seguir existiendo. ACHE nace de la convicción de que las cosas no deberían diseñarse para durar poco.</p>
+  </div>
+</section>
+
+<!-- FRASE A LA IZQUIERDA, FOTO DE DETALLE A LA DERECHA -->
+<section style="box-sizing: border-box; padding: 96px 10% 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4%">
+  <div style="flex: 1.47 1 480px; min-width: 0; display: flex; flex-direction: column; align-items: flex-start">
+    <p style="margin: 0; font-size: 34px; line-height: 41px">Porque un mueble no debería perder valor con los años; al contrario: cuando está bien hecho, el tiempo se convierte en parte de su historia.</p>
+    <a href="Catalogo.dc.html" style="margin-top: 36px; padding: 12px 0 3px; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--acento)">VER CATÁLOGO</a>
+  </div>
+  <figure style="flex: 1 1 340px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 22px">
+    <img src="./assets/63d8d96978a7edaef7b82a7a896759ac.jpg" alt="Sillón de terciopelo rosa con estructura de nogal" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: var(--fondo-alt)">
+    <figcaption style="font-size: 15px; line-height: 22px">Cada pieza conserva la esencia de lo que fue.</figcaption>
+  </figure>
+</section>
+
+<!-- EL MÉTODO: texto y tres pasos en zigzag con fotos -->
+<section style="box-sizing: border-box; padding: 150px 14% 0">
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 11%; row-gap: 80px; align-items: start">
+
+    <div style="display: flex; flex-direction: column; align-items: flex-start; padding-top: 68px">
+      <div style="font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.12em; color: var(--acento)">EL TALLER</div>
+      <h2 style="margin: 14px 0 0; font-size: 56px; line-height: 60px; font-weight: 400">El método Ache</h2>
+      <p style="margin: 26px 0 0; max-width: 620px; font-size: 15px; line-height: 22.5px">Reinterpretamos piezas valiosas desde una perspectiva atemporal, con una mirada contemporánea. Cada mueble pasa por las mismas manos y el mismo cuidado antes de llegar al catálogo.</p>
+      <a href="#" style="margin-top: 36px; padding: 12px 0 3px; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--acento)">VER VIDEO DEL TALLER</a>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 30px">
+      <img src="./assets/35783b7299e6fba82cd9c0362c2123b0.jpg" alt="Mesa larga de madera" style="flex: 0 0 46%; width: 46%; min-width: 0; aspect-ratio: 264 / 331; object-fit: cover; background: var(--fondo-alt)">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <div style="font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.12em; color: var(--acento)">1. LA SELECCIÓN</div>
+        <p style="margin: 0; font-size: 15px; line-height: 22.5px">Buscamos piezas bien hechas, de madera maciza, que merecen seguir existiendo. Revisamos su estructura, sus uniones y su historia antes de traerlas al taller.</p>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 30px">
+      <img src="./assets/1611cb17427f953d4ae62e65e669fa9c.jpg" alt="Detalle de la veta de la madera" style="flex: 0 0 48%; width: 48%; min-width: 0; aspect-ratio: 315 / 420; object-fit: cover; background: var(--fondo-alt)">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <div style="font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.12em; color: var(--acento)">2. LA RESTAURACIÓN</div>
+        <p style="margin: 0; font-size: 15px; line-height: 22.5px">Desarmamos, limpiamos y reparamos cada pieza a mano. Recuperamos la madera, reforzamos sus uniones y la protegemos con acabados que dejan ver la veta.</p>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 30px; margin-top: 32px">
+      <img src="./assets/0c05473ae1d388e6d80bb450e6f98cb2.jpg" alt="Credenza de cuatro puertas iluminada por la luz de una ventana" style="flex: 0 0 46%; width: 46%; min-width: 0; aspect-ratio: 264 / 331; object-fit: cover; background: var(--fondo-alt)">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <div style="font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.12em; color: var(--acento)">3. LA INTERVENCIÓN</div>
+        <p style="margin: 0; font-size: 15px; line-height: 22.5px">Eliminamos ornamentos y tendencias vacías, y le damos a cada mueble una nueva forma de habitar el presente. Cuando está listo, le asignamos su número de pieza.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VENTA DE MUEBLES USADOS: párrafo breve con WhatsApp -->
+<section data-theme="azul" style="margin-top: 150px; box-sizing: border-box; padding: 80px 10%; background: var(--fondo); color: var(--texto); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 48px">
+  <div style="flex: 1 1 420px; max-width: 620px; display: flex; flex-direction: column; align-items: flex-start">
+    <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">COMPRAMOS MUEBLES USADOS</div>
+    <h2 style="margin: 14px 0 0; font-size: 40px; line-height: 44px; font-weight: 400">Dale una segunda vida a tu mueble</h2>
+    <p style="margin: 18px 0 0; font-size: 15px; line-height: 22.5px">Compramos muebles de madera para restaurarlos. Escríbenos por WhatsApp, envíanos fotografías de tu pieza y te respondemos.</p>
+    <a href="#" style="margin-top: 28px; box-sizing: border-box; height: 44px; padding: 0 34px; display: inline-flex; align-items: center; background: var(--texto); color: var(--fondo); font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em">ESCRÍBENOS POR WHATSAPP</a>
+  </div>
+  <img src="./assets/415921b5e14a02cba09d780543275b0a.svg" alt="" style="height: 220px; display: block">
+</section>
+
+<!-- RESEÑAS: al final -->
+<section style="box-sizing: border-box; padding: 112px 10% 0; display: flex; flex-direction: column; gap: 56px">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.12em; color: var(--acento)">RESEÑAS · 4.9 DE 5 · 37 CALIFICACIONES</div>
+      <h2 style="margin: 0; font-size: 40px; line-height: 44px; font-weight: 400">Lo que dicen nuestros clientes</h2>
+    </div>
+    <img src="./assets/2cd10156aabe6db6da849c6a26cec225.svg" alt="Sello Menos reemplazar, más restaurar" style="height: 104px; display: block">
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid var(--linea)">
+      <div style="font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em">5 / 5</div>
+      <p style="margin: 0; font-size: 20px; line-height: 30px">Llegó tal como en las fotos y la coordinación de la entrega fue directa y puntual. Se nota el trabajo en cada detalle.</p>
+      <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">MARIANA G. · CREDENZA · ZAPOPAN</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid var(--linea)">
+      <div style="font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em">5 / 5</div>
+      <p style="margin: 0; font-size: 20px; line-height: 30px">Buscábamos una mesa con historia y la encontramos. La madera quedó impecable.</p>
+      <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">RODRIGO T. · MESA · GUADALAJARA</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid var(--linea)">
+      <div style="font-family: var(--font-mono); font-size: 13px; line-height: 20px; letter-spacing: 0.06em">5 / 5</div>
+      <p style="margin: 0; font-size: 20px; line-height: 30px">Compré un par de sillas y volví por el sillón. Piezas únicas y muy bien restauradas.</p>
+      <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">FERNANDA L. · SILLÓN · TLAQUEPAQUE</div>
+    </div>
+  </div>
+</section>
+
+<!-- PIE -->
+<footer data-theme="vino" style="margin-top: 112px; box-sizing: border-box; padding: 80px 10% 32px; background: var(--fondo); color: var(--texto); display: flex; flex-direction: column; gap: 64px">
+  <div style="display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between">
+    <div style="flex: 1 1 300px; max-width: 380px; display: flex; flex-direction: column; gap: 20px">
+      <img src="./assets/b4f546f58f012a1ac9033d258d007004.svg" alt="Ache" style="height: 32px; display: block; align-self: flex-start">
+      <div style="font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">MENOS REEMPLAZAR, MÁS RESTAURAR</div>
+      <form style="margin-top: 12px; display: flex; align-items: center; border-bottom: 1px solid var(--linea)">
+        <label for="correo-pie" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%)">Tu correo</label>
+        <input id="correo-pie" type="email" placeholder="Tu correo para avisarte de piezas nuevas" style="flex-grow: 1; min-width: 0; height: 44px; padding: 0; border: 0; background: none; color: var(--texto); font-family: var(--font-sans); font-size: 14px">
+        <button type="submit" aria-label="Suscribirme" style="width: 44px; height: 44px; padding: 0; border: 0; background: none; color: var(--texto); font-family: var(--font-sans); font-size: 20px; text-align: right; cursor: pointer">→</button>
+      </form>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">TIENDA</div>
+      <a href="Catalogo.dc.html" style="padding: 12px 0">Catálogo</a>
+      <a href="Catalogo.dc.html" style="padding: 12px 0">Recién llegados</a>
+      <a href="Kits.dc.html" style="padding: 12px 0">Kits</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">CLIENTES</div>
+      <a href="#" style="padding: 12px 0">Entregas y flete</a>
+      <a href="#" style="padding: 12px 0">Formas de pago</a>
+      <a href="#" style="padding: 12px 0">Políticas</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">ACHE</div>
+      <a href="Nosotros.dc.html" style="padding: 12px 0">Quiénes somos</a>
+      <a href="Nosotros.dc.html" style="padding: 12px 0">Reseñas</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+      <div style="margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">CONTACTO</div>
+      <a href="#" style="padding: 12px 0">WhatsApp</a>
+      <a href="#" style="padding: 12px 0">hola@estudioache.mx</a>
+      <a href="#" style="padding: 12px 0">Instagram</a>
+    </div>
+  </div>
+  <div style="padding-top: 24px; border-top: 1px solid var(--linea-suave); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-family: var(--font-mono); font-size: 12px; line-height: 16px; letter-spacing: 0.12em; color: var(--texto-suave)">
+    <span>© 2026 ACHE · GUADALAJARA, MÉXICO</span>
+    <span>TARJETA · APPLE PAY · GOOGLE PAY · PAYPAL · TRANSFERENCIA · OXXO</span>
+    <span>SITIO POR CRAFTEO</span>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4529}}'>
+/* exportable: imágenes */
+// Cuando la página corre desde el HTML descargado, window.__resources trae una copia de cada imagen subida.
+var __acheRecursos = (typeof window !== 'undefined' && window.__resources) || null;
+function __acheMapa(v, d) {
+  if (typeof v === 'string') {
+    if (v.lastIndexOf('/_blob/', 0) !== 0) return v;
+    var r = __acheRecursos[v];
+    return typeof r === 'string' && r ? r : v;
+  }
+  if (!v || typeof v !== 'object' || d > 8) return v;
+  var lista = Array.isArray(v);
+  if (!lista && Object.getPrototypeOf(v) !== Object.prototype) return v;
+  var claves = lista ? null : Object.keys(v), n = lista ? v.length : claves.length, fuera = null;
+  for (var i = 0; i < n; i++) {
+    var k = lista ? i : claves[i], x = v[k], y = __acheMapa(x, d + 1);
+    if (y !== x) { if (!fuera) fuera = lista ? v.slice() : Object.assign({}, v); fuera[k] = y; }
+  }
+  return fuera || v;
+}
+
+class Component extends DCLogic {
+componentDidMount() {
+  var self = this;
+  this._y = 0;
+  this._alBajar = function () {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    var oculto = y > 420 && y > self._y;
+    self._y = y;
+    if ((self.state || {}).oculto !== oculto) self.setState({ oculto: oculto });
+  };
+  window.addEventListener('scroll', this._alBajar, { passive: true });
+}
+componentWillUnmount() { window.removeEventListener('scroll', this._alBajar); }
+renderVals() {
+  var st = this.state || {};
+  return { hdrMover: st.oculto ? 'translateY(-100%)' : 'translateY(0)' };
+}
+}
+
+if (__acheRecursos && typeof Component === 'function' && typeof Component.prototype.renderVals === 'function' && !Component.prototype.renderVals.__ache) {
+  (function () {
+    var rv = Component.prototype.renderVals;
+    var cambiado = function () { return __acheMapa(rv.apply(this, arguments), 0); };
+    cambiado.__ache = true;
+    Component.prototype.renderVals = cambiado;
+  })();
+}
+</script>
+</body>
+</html>
