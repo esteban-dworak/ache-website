@@ -1,4 +1,5 @@
 <!doctype html>
+<meta charset="utf-8"><style data-dc-design-system-vars>@layer{:root{--crema:#f3f2e8;--negro:#190100;--ocre:#ca863a;--oxido:#7f332c;--vino:#411f25;--azul:#83aab8;--fondo:#f3f2e8;--fondo-alt:#e6e4da;--texto:#190100;--texto-suave:#655551;--linea:#190100;--linea-suave:#ccc7be;--acento:#7f332c;--sobre-acento:#f3f2e8;--resalte:#ca863a;--sobre-resalte:#190100;--marca:#190100;--foco:#7f332c;--ocre-10:#faf3eb;--ocre-20:#f4e7d8;--ocre-30:#efdbc4;--ocre-40:#eacfb0;--ocre-50:#e4c29c;--ocre-60:#dfb689;--ocre-70:#daaa75;--ocre-80:#d59e61;--ocre-90:#cf924e;--oxido-10:#f2ebea;--oxido-20:#e5d6d5;--oxido-30:#d9c2c0;--oxido-40:#ccadab;--oxido-50:#bf9996;--oxido-60:#b28580;--oxido-70:#a5706b;--oxido-80:#995c56;--oxido-90:#8c4741;--vino-10:#ece9e9;--vino-20:#d9d2d3;--vino-30:#c6bcbe;--vino-40:#b3a5a8;--vino-50:#a08f92;--vino-60:#8d797c;--vino-70:#7a6266;--vino-80:#674c51;--vino-90:#54353b;--azul-10:#f3f6f8;--azul-20:#e6eef1;--azul-30:#dae6ea;--azul-40:#cddde3;--azul-50:#c1d4dc;--azul-60:#b5ccd4;--azul-70:#a8c4cd;--azul-80:#9cbbc6;--azul-90:#8fb2bf;--espacio-1:4px;--espacio-2:8px;--espacio-3:12px;--espacio-4:16px;--espacio-6:24px;--espacio-8:32px;--espacio-12:48px;--espacio-16:64px;--espacio-24:96px;--espacio-32:128px;--radio-0:0px;--borde-fino:1px;--borde-foco:2px;--logo-min:32px;--monograma-min:37px;--contenido-max:1440px;--lectura-max:640px;--margen:48px;--margen-movil:16px;--font-sans:"Neue Haas Unica Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;--font-mono:"DM Mono", ui-monospace, Menlo, Consolas, monospace;--text-display:400 88px/88px var(--font-sans);--text-titulo-1:400 56px/60px var(--font-sans);--text-titulo-2:400 40px/44px var(--font-sans);--text-titulo-3:400 28px/34px var(--font-sans);--text-enfasis:700 24px/30px var(--font-sans);--text-cuerpo-lg:400 20px/30px var(--font-sans);--text-cuerpo:400 16px/24px var(--font-sans);--text-cuerpo-sm:400 14px/20px var(--font-sans);--text-precio:500 16px/24px var(--font-sans);--text-subtitulo:300 18px/26px var(--font-mono);--text-etiqueta:400 12px/16px var(--font-mono);--text-dato:400 13px/20px var(--font-mono);}}</style>
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -43,7 +44,6 @@
 <script src="./vendor/react-dom.js"></script>
 <script src="./support.js"></script>
 <link rel="stylesheet" href="ds/ache/tokens.css">
-<meta name="ext-resource-dependency" content="./assets/01375a3605aa7efa536c2ea7d67eb16c.svg" data-resource-id="./assets/01375a3605aa7efa536c2ea7d67eb16c.svg">
 <meta name="ext-resource-dependency" content="./assets/019ad99bb93daa027a8cd4afa6fcd178.pdf" data-resource-id="./assets/019ad99bb93daa027a8cd4afa6fcd178.pdf">
 <meta name="ext-resource-dependency" content="./assets/04766d07c89f4df2a83afda1d29fc5e2.jpg" data-resource-id="./assets/04766d07c89f4df2a83afda1d29fc5e2.jpg">
 <meta name="ext-resource-dependency" content="./assets/064906eb5bc4ed0f2054e2165f12882f.jpg" data-resource-id="./assets/064906eb5bc4ed0f2054e2165f12882f.jpg">
@@ -100,7 +100,6 @@
 <meta name="ext-resource-dependency" content="./assets/5f5faccac7cbff41333c612f3faeddab.pdf" data-resource-id="./assets/5f5faccac7cbff41333c612f3faeddab.pdf">
 <meta name="ext-resource-dependency" content="./assets/5f63f9c81ffbb159cbdaf33955f560f9.jpg" data-resource-id="./assets/5f63f9c81ffbb159cbdaf33955f560f9.jpg">
 <meta name="ext-resource-dependency" content="./assets/60fa6b1aeb29547304227c70a5d947db.jpg" data-resource-id="./assets/60fa6b1aeb29547304227c70a5d947db.jpg">
-<meta name="ext-resource-dependency" content="./assets/6230aeafea2c605cd7a6249bfc7eb14a.svg" data-resource-id="./assets/6230aeafea2c605cd7a6249bfc7eb14a.svg">
 <meta name="ext-resource-dependency" content="./assets/62befc967c6fee088b139028714c31eb.pdf" data-resource-id="./assets/62befc967c6fee088b139028714c31eb.pdf">
 <meta name="ext-resource-dependency" content="./assets/652758de2335e8d2bf69736f76cfe1c8.pdf" data-resource-id="./assets/652758de2335e8d2bf69736f76cfe1c8.pdf">
 <meta name="ext-resource-dependency" content="./assets/677e0cbcdb990926981e7d95bf1acb79.pdf" data-resource-id="./assets/677e0cbcdb990926981e7d95bf1acb79.pdf">
@@ -236,7 +235,7 @@ input::placeholder{color:var(--texto-suave);opacity:1}
 <!-- ENCABEZADO: transparente sobre la portada; crema con el monograma al pasarla; se oculta al bajar y vuelve al subir -->
 <header style="position: sticky; top: 0; z-index: 50; box-sizing: border-box; height: 71px; padding: 0 31px 0 32px; display: flex; align-items: center; justify-content: space-between; background: {{hdrFondo}}; color: {{hdrTexto}}; border-bottom: 1px solid {{hdrLinea}}; transform: {{hdrMover}}; transition: transform 350ms ease, background-color 250ms ease, color 250ms ease, border-color 250ms ease">
   <a href="Main.dc.html" aria-label="Ache, inicio" style="display: flex; align-items: center; height: 44px; opacity: {{logoOp}}; transition: opacity 250ms ease">
-    <img src="./assets/6230aeafea2c605cd7a6249bfc7eb14a.svg" alt="" style="display: block; height: 37px">
+    <img src="./assets/9e52996ad4f96e8afed37b893e7c8318.svg" alt="" style="display: block; height: 32px">
   </a>
   <nav class="nav" aria-label="Principal" style="display: flex; align-items: center; gap: 20px; font-family: var(--font-mono); font-size: 14px; line-height: 16px; letter-spacing: 0.04em">
     <div onMouseEnter="{{abrirNosotros}}" onMouseLeave="{{cerrarMenu}}" style="position: relative">
@@ -313,20 +312,16 @@ input::placeholder{color:var(--texto-suave);opacity:1}
       </sc-if>
     </div>
     <a href="Kits.dc.html" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">KITS</span></a>
-    <a href="Catalogo.dc.html" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">RECIÉN LLEGADOS</span></a>
     <a href="Contacto.dc.html" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">CONTACTO</span></a>
-    <a href="#" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">WHATSAPP</span></a>
-    <a href="#" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">BUSCAR</span></a>
     <a href="#" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">CARRITO ({{carritoN}})</span></a>
   </nav>
 </header>
 
-<!-- PORTADA: foto a sangre en 16:9 con el monograma y el logotipo grandes -->
+<!-- PORTADA: foto a sangre en 16:9 con el logotipo grande -->
 <section aria-label="Portada" style="position: relative; margin-top: -71px; aspect-ratio: 1903 / 1070; overflow: hidden; border-bottom: 1px solid var(--linea); background: #74746f">
   <img src="./assets/ad58a00fdf8f616537258b20f611f2b8.jpg" alt="Biombo de celosía, sillón bajo de rejilla y mesa baja de madera en un patio de concreto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover">
   <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 190px; background: linear-gradient(to bottom, rgba(25, 1, 0, 0.46), rgba(25, 1, 0, 0)); pointer-events: none"></div>
   <h1 style="position: absolute; left: 32px; top: 30px; margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 34px">
-    <img src="./assets/01375a3605aa7efa536c2ea7d67eb16c.svg" alt="" style="display: block; height: 212px">
     <img src="./assets/f4ba0bee38160ecfe3a739bb3dad38f9.svg" alt="Ache" style="display: block; width: 326px">
   </h1>
 </section>
