@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ache · Inicio</title>
+<script>/* exportable: imágenes */ (function () {
+  // Solo en el HTML descargado: ahí window.__resources trae una copia de cada imagen subida.
+  var m = window.__resources;
+  if (!m || typeof Element === 'undefined' || Element.prototype.setAttribute.__ache) return;
+  var original = Element.prototype.setAttribute;
+  var mapa = function (v) { var r = m[v]; return typeof r === 'string' && r ? r : v; };
+  var cambiado = function (n, v) {
+    if (typeof v === 'string' && v.lastIndexOf('/_blob/', 0) === 0) v = mapa(v);
+    return original.call(this, n, v);
+  };
+  cambiado.__ache = true;
+  Element.prototype.setAttribute = cambiado;
+  var fijar = function (el) {
+    if (!el || el.nodeType !== 1) return;
+    var nodos = [el].concat([].slice.call(el.querySelectorAll('[src^="/_blob/"],[href^="/_blob/"],[poster^="/_blob/"],[style*="/_blob/"]')));
+    for (var i = 0; i < nodos.length; i++) {
+      var n = nodos[i];
+      for (var a = 0, at = ['src', 'href', 'poster']; a < at.length; a++) {
+        var v = n.getAttribute(at[a]);
+        if (v && v.lastIndexOf('/_blob/', 0) === 0) { var r = mapa(v); if (r !== v) original.call(n, at[a], r); }
+      }
+      var st = n.getAttribute('style');
+      if (st && st.indexOf('/_blob/') >= 0) {
+        var st2 = st.replace(/\/_blob\/[0-9a-f]{32}/g, mapa);
+        if (st2 !== st) original.call(n, 'style', st2);
+      }
+    }
+  };
+  new MutationObserver(function (cambios) {
+    for (var i = 0; i < cambios.length; i++) {
+      var c = cambios[i];
+      if (c.type === 'attributes') fijar(c.target);
+      else for (var k = 0; k < c.addedNodes.length; k++) fijar(c.addedNodes[k]);
+    }
+  }).observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ['src', 'href', 'poster', 'style'] });
+})();</script>
+<script>/* whatsapp flotante */ (function () {
+  var visible = function (sel) {
+    var l = document.querySelectorAll(sel);
+    for (var i = 0; i < l.length; i++) { if (l[i].offsetHeight > 0) return l[i]; }
+    return null;
+  };
+  var ajustar = function () {
+    var b = document.querySelector('.wa-flotante');
+    if (!b) return;
+    var de = document.documentElement, z = parseFloat(de.style.zoom) || 1;
+    var y = window.scrollY || de.scrollTop || 0, vh = window.innerHeight || de.clientHeight;
+    // franja de abajo, en medidas de la ventana: la suscripción que va justo antes del pie (v2) o el pie
+    var tope = vh;
+    var sus = visible('section[aria-label="Suscripción"]'), pie = visible('footer');
+    if (sus) { var t = sus.getBoundingClientRect().top; if (t >= 0) tope = Math.min(tope, t); }
+    if (pie) {
+      if (getComputedStyle(pie).position === 'fixed') tope = Math.min(tope, vh - Math.max(0, y + vh - (de.scrollHeight - pie.getBoundingClientRect().height)));
+      else tope = Math.min(tope, pie.getBoundingClientRect().top);
+    }
+    var sube = Math.max(0, vh - tope) / z;
+    b.style.transform = sube > 0.5 ? 'translateY(' + (-sube).toFixed(1) + 'px)' : '';
+  };
+  window.addEventListener('scroll', ajustar, { passive: true });
+  window.addEventListener('resize', ajustar);
+  setInterval(ajustar, 400);
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a.wa-flotante') : null;
+    if (a && a.getAttribute('href') === '#') e.preventDefault();
+  }, true);
+})();</script>
+<script src="../support.js"></script>
+<link rel="stylesheet" href="../ds/ache/tokens.css">
+<meta name="ext-resource-dependency" content="../img/019ad99bb93daa027a8cd4afa6fcd178.pdf" data-resource-id="../img/019ad99bb93daa027a8cd4afa6fcd178.pdf">
+<meta name="ext-resource-dependency" content="../img/04766d07c89f4df2a83afda1d29fc5e2.jpg" data-resource-id="../img/04766d07c89f4df2a83afda1d29fc5e2.jpg">
+<meta name="ext-resource-dependency" content="../img/04f46fffba213fb9cff35f5a496a4467.jpg" data-resource-id="../img/04f46fffba213fb9cff35f5a496a4467.jpg">
+<meta name="ext-resource-dependency" content="../img/051b40d96c2c7bff4bba9e9150639559.jpg" data-resource-id="../img/051b40d96c2c7bff4bba9e9150639559.jpg">
+<meta name="ext-resource-dependency" content="../img/052665cfa9f3e7d1e658122dbf0a00af.jpg" data-resource-id="../img/052665cfa9f3e7d1e658122dbf0a00af.jpg">
+<meta name="ext-resource-dependency" content="../img/064906eb5bc4ed0f2054e2165f12882f.jpg" data-resource-id="../img/064906eb5bc4ed0f2054e2165f12882f.jpg">
+<meta name="ext-resource-dependency" content="../img/09e51e1c7da2235a801f7edb7c30962a.jpg" data-resource-id="../img/09e51e1c7da2235a801f7edb7c30962a.jpg">
+<meta name="ext-resource-dependency" content="../img/0a593abf087d6b80f168d4e09fe083fb.pdf" data-resource-id="../img/0a593abf087d6b80f168d4e09fe083fb.pdf">
+<meta name="ext-resource-dependency" content="../img/0a981c5395c55592ce9c43b624a37a90.pdf" data-resource-id="../img/0a981c5395c55592ce9c43b624a37a90.pdf">
+<meta name="ext-resource-dependency" content="../img/0ecd2de30fffc145822be70637bec493.jpg" data-resource-id="../img/0ecd2de30fffc145822be70637bec493.jpg">
+<meta name="ext-resource-dependency" content="../img/0f0e9b9666df9922753d52ca1638af88.jpg" data-resource-id="../img/0f0e9b9666df9922753d52ca1638af88.jpg">
+<meta name="ext-resource-dependency" content="../img/10824675bf1977dad7bc8b0e5e5ea9cd.jpg" data-resource-id="../img/10824675bf1977dad7bc8b0e5e5ea9cd.jpg">
+<meta name="ext-resource-dependency" content="../img/119573ffbc8154123ad00ffc09ed4b48.jpg" data-resource-id="../img/119573ffbc8154123ad00ffc09ed4b48.jpg">
+<meta name="ext-resource-dependency" content="../img/137ce14e2ff7dd2f8a24497b8f47ab9a.svg" data-resource-id="../img/137ce14e2ff7dd2f8a24497b8f47ab9a.svg">
+<meta name="ext-resource-dependency" content="../img/140e4ac5aa457069ec3d99a6f1564ab6.jpg" data-resource-id="../img/140e4ac5aa457069ec3d99a6f1564ab6.jpg">
+<meta name="ext-resource-dependency" content="../img/1423aeebc2669788a317635e3def27d5.jpg" data-resource-id="../img/1423aeebc2669788a317635e3def27d5.jpg">
+<meta name="ext-resource-dependency" content="../img/1463f527ecc778607655d10d87e523a1.pdf" data-resource-id="../img/1463f527ecc778607655d10d87e523a1.pdf">
+<meta name="ext-resource-dependency" content="../img/162ea8f690bcc55e91d058923bf969d9.jpg" data-resource-id="../img/162ea8f690bcc55e91d058923bf969d9.jpg">
+<meta name="ext-resource-dependency" content="../img/1650cc78d75e637ee187a2f9c6153a9b.jpg" data-resource-id="../img/1650cc78d75e637ee187a2f9c6153a9b.jpg">
+<meta name="ext-resource-dependency" content="../img/17f1754c8c9bc97bc5367a586882c175.jpg" data-resource-id="../img/17f1754c8c9bc97bc5367a586882c175.jpg">
+<meta name="ext-resource-dependency" content="../img/191c7289477f780c0a0b0255deab80c4.jpg" data-resource-id="../img/191c7289477f780c0a0b0255deab80c4.jpg">
+<meta name="ext-resource-dependency" content="../img/19700bf1ab07f0860b9046ed6c28d77f.pdf" data-resource-id="../img/19700bf1ab07f0860b9046ed6c28d77f.pdf">
+<meta name="ext-resource-dependency" content="../img/1df66f9339fcce99ea1f89e307c91d7e.pdf" data-resource-id="../img/1df66f9339fcce99ea1f89e307c91d7e.pdf">
+<meta name="ext-resource-dependency" content="../img/1fe2fb9672a51dd9be325918990179d7.jpg" data-resource-id="../img/1fe2fb9672a51dd9be325918990179d7.jpg">
+<meta name="ext-resource-dependency" content="../img/20ad59fe89c9bdc5559a79afbe832cbb.jpg" data-resource-id="../img/20ad59fe89c9bdc5559a79afbe832cbb.jpg">
+<meta name="ext-resource-dependency" content="../img/21404c661abfe367467554149c15297b.jpg" data-resource-id="../img/21404c661abfe367467554149c15297b.jpg">
+<meta name="ext-resource-dependency" content="../img/21be69a3255e551a31f39ba14e9346c6.jpg" data-resource-id="../img/21be69a3255e551a31f39ba14e9346c6.jpg">
+<meta name="ext-resource-dependency" content="../img/22318c4ae15adb42882f503c37c1859d.jpg" data-resource-id="../img/22318c4ae15adb42882f503c37c1859d.jpg">
+<meta name="ext-resource-dependency" content="../img/257ae2d060f732b7cc20f38691462011.jpg" data-resource-id="../img/257ae2d060f732b7cc20f38691462011.jpg">
+<meta name="ext-resource-dependency" content="../img/26d68efcc71dffc8344c75885046d325.jpg" data-resource-id="../img/26d68efcc71dffc8344c75885046d325.jpg">
+<meta name="ext-resource-dependency" content="../img/2a0ea62edae025c4c503191f7710cc99.svg" data-resource-id="../img/2a0ea62edae025c4c503191f7710cc99.svg">
+<meta name="ext-resource-dependency" content="../img/2c5118372fecf0c1922aa7ba221a93de.png" data-resource-id="../img/2c5118372fecf0c1922aa7ba221a93de.png">
+<meta name="ext-resource-dependency" content="../img/2f569a4fe9255dbc8fdd3688d8d4f18b.jpg" data-resource-id="../img/2f569a4fe9255dbc8fdd3688d8d4f18b.jpg">
+<meta name="ext-resource-dependency" content="../img/3072808978824b6b891892df6ac24efe.jpg" data-resource-id="../img/3072808978824b6b891892df6ac24efe.jpg">
+<meta name="ext-resource-dependency" content="../img/3253e6650980ad631065d9a298d15581.pdf" data-resource-id="../img/3253e6650980ad631065d9a298d15581.pdf">
+<meta name="ext-resource-dependency" content="../img/3326ed7b5da4daa45caead191da73023.jpg" data-resource-id="../img/3326ed7b5da4daa45caead191da73023.jpg">
+<meta name="ext-resource-dependency" content="../img/34fe89535bf6301dc07aa23e1abc89d7.svg" data-resource-id="../img/34fe89535bf6301dc07aa23e1abc89d7.svg">
+<meta name="ext-resource-dependency" content="../img/37dc73282da17baa70cdd87ee2d769fe.jpg" data-resource-id="../img/37dc73282da17baa70cdd87ee2d769fe.jpg">
+<meta name="ext-resource-dependency" content="../img/383646a8c09a80050a83b1fda11a3446.jpg" data-resource-id="../img/383646a8c09a80050a83b1fda11a3446.jpg">
+<meta name="ext-resource-dependency" content="../img/3aee69cb62027b03021d815a50fd0603.png" data-resource-id="../img/3aee69cb62027b03021d815a50fd0603.png">
+<meta name="ext-resource-dependency" content="../img/3afc40de16230915ec983ab0a8842ad9.jpg" data-resource-id="../img/3afc40de16230915ec983ab0a8842ad9.jpg">
+<meta name="ext-resource-dependency" content="../img/3c35d1c8cff100ef3355546033948876.jpg" data-resource-id="../img/3c35d1c8cff100ef3355546033948876.jpg">
+<meta name="ext-resource-dependency" content="../img/3d7dc9e882def4f9a2f3334054b1ca08.jpg" data-resource-id="../img/3d7dc9e882def4f9a2f3334054b1ca08.jpg">
+<meta name="ext-resource-dependency" content="../img/3e76bb2ff92950fa3472ddcf51035414.jpg" data-resource-id="../img/3e76bb2ff92950fa3472ddcf51035414.jpg">
+<meta name="ext-resource-dependency" content="../img/3f4ef5b4fe1cb6fae563f871d0ce8e5f.pdf" data-resource-id="../img/3f4ef5b4fe1cb6fae563f871d0ce8e5f.pdf">
+<meta name="ext-resource-dependency" content="../img/4239f675ed102b7fb13f420ba4fb2d0d.pdf" data-resource-id="../img/4239f675ed102b7fb13f420ba4fb2d0d.pdf">
+<meta name="ext-resource-dependency" content="../img/44148b1b32d53e5251dba5cc38b04795.jpg" data-resource-id="../img/44148b1b32d53e5251dba5cc38b04795.jpg">
+<meta name="ext-resource-dependency" content="../img/4632b0beefe8d5b1905c0b902178bb69.png" data-resource-id="../img/4632b0beefe8d5b1905c0b902178bb69.png">
+<meta name="ext-resource-dependency" content="../img/4851a06931d3e6ce6fcd3a54e62f7313.jpg" data-resource-id="../img/4851a06931d3e6ce6fcd3a54e62f7313.jpg">
+<meta name="ext-resource-dependency" content="../img/4866617ee88526dbb29924ca15de159d.pdf" data-resource-id="../img/4866617ee88526dbb29924ca15de159d.pdf">
+<meta name="ext-resource-dependency" content="../img/4b3511096cb9b7493662ad101711db62.jpg" data-resource-id="../img/4b3511096cb9b7493662ad101711db62.jpg">
+<meta name="ext-resource-dependency" content="../img/4bbcb3fee9b6639cb0c9533687f0098b.pdf" data-resource-id="../img/4bbcb3fee9b6639cb0c9533687f0098b.pdf">
+<meta name="ext-resource-dependency" content="../img/4d2e44e6ff716f1a25930b5b33627481.pdf" data-resource-id="../img/4d2e44e6ff716f1a25930b5b33627481.pdf">
+<meta name="ext-resource-dependency" content="../img/4d7987d96d099ed008f8ff7d7faa0083.jpg" data-resource-id="../img/4d7987d96d099ed008f8ff7d7faa0083.jpg">
+<meta name="ext-resource-dependency" content="../img/4ef230df0d9374ae083ba19e92918577.jpg" data-resource-id="../img/4ef230df0d9374ae083ba19e92918577.jpg">
+<meta name="ext-resource-dependency" content="../img/5214dcbd78b65d5dd2b79098ff40bbff.jpg" data-resource-id="../img/5214dcbd78b65d5dd2b79098ff40bbff.jpg">
+<meta name="ext-resource-dependency" content="../img/53d5608339626b38a9e47c7d1e390178.jpg" data-resource-id="../img/53d5608339626b38a9e47c7d1e390178.jpg">
+<meta name="ext-resource-dependency" content="../img/54975d925e0419855e8dc532d1fc95fe.jpg" data-resource-id="../img/54975d925e0419855e8dc532d1fc95fe.jpg">
+<meta name="ext-resource-dependency" content="../img/5878ef6c62351b0dfb648f6e17488313.pdf" data-resource-id="../img/5878ef6c62351b0dfb648f6e17488313.pdf">
+<meta name="ext-resource-dependency" content="../img/58a681e4e59144a4ab13069cfde26564.png" data-resource-id="../img/58a681e4e59144a4ab13069cfde26564.png">
+<meta name="ext-resource-dependency" content="../img/58ff92e0a3631263f74ea0ebd7eaafae.pdf" data-resource-id="../img/58ff92e0a3631263f74ea0ebd7eaafae.pdf">
+<meta name="ext-resource-dependency" content="../img/5945e9b69f15d3e77b3ec5cad521ebc3.pdf" data-resource-id="../img/5945e9b69f15d3e77b3ec5cad521ebc3.pdf">
+<meta name="ext-resource-dependency" content="../img/5d251c1b033f0f248a40ffbbe46831c0.pdf" data-resource-id="../img/5d251c1b033f0f248a40ffbbe46831c0.pdf">
+<meta name="ext-resource-dependency" content="../img/5e7bb1312fb2a73a57b0b5c4cad3404a.pdf" data-resource-id="../img/5e7bb1312fb2a73a57b0b5c4cad3404a.pdf">
+<meta name="ext-resource-dependency" content="../img/5f5faccac7cbff41333c612f3faeddab.pdf" data-resource-id="../img/5f5faccac7cbff41333c612f3faeddab.pdf">
+<meta name="ext-resource-dependency" content="../img/5f63f9c81ffbb159cbdaf33955f560f9.jpg" data-resource-id="../img/5f63f9c81ffbb159cbdaf33955f560f9.jpg">
+<meta name="ext-resource-dependency" content="../img/5f856f78eb914bfef4745098388f6197.pdf" data-resource-id="../img/5f856f78eb914bfef4745098388f6197.pdf">
+<meta name="ext-resource-dependency" content="../img/60fa6b1aeb29547304227c70a5d947db.jpg" data-resource-id="../img/60fa6b1aeb29547304227c70a5d947db.jpg">
+<meta name="ext-resource-dependency" content="../img/622a19dadbdc6846b0b6171c3e79de01.jpg" data-resource-id="../img/622a19dadbdc6846b0b6171c3e79de01.jpg">
+<meta name="ext-resource-dependency" content="../img/62befc967c6fee088b139028714c31eb.pdf" data-resource-id="../img/62befc967c6fee088b139028714c31eb.pdf">
+<meta name="ext-resource-dependency" content="../img/6362478cbbe712119d2d15e175b77984.jpg" data-resource-id="../img/6362478cbbe712119d2d15e175b77984.jpg">
+<meta name="ext-resource-dependency" content="../img/652758de2335e8d2bf69736f76cfe1c8.pdf" data-resource-id="../img/652758de2335e8d2bf69736f76cfe1c8.pdf">
+<meta name="ext-resource-dependency" content="../img/677e0cbcdb990926981e7d95bf1acb79.pdf" data-resource-id="../img/677e0cbcdb990926981e7d95bf1acb79.pdf">
+<meta name="ext-resource-dependency" content="../img/6833d9a9136d8a27876d7cff20aec132.pdf" data-resource-id="../img/6833d9a9136d8a27876d7cff20aec132.pdf">
+<meta name="ext-resource-dependency" content="../img/69a2db0182eee0a000ada55707c919d2.jpg" data-resource-id="../img/69a2db0182eee0a000ada55707c919d2.jpg">
+<meta name="ext-resource-dependency" content="../img/69e9700a1eb17900622e7381f5938cf2.jpg" data-resource-id="../img/69e9700a1eb17900622e7381f5938cf2.jpg">
+<meta name="ext-resource-dependency" content="../img/6ac05c087754f4ddf0339fbdc5bd8a43.jpg" data-resource-id="../img/6ac05c087754f4ddf0339fbdc5bd8a43.jpg">
+<meta name="ext-resource-dependency" content="../img/6b4fb586eb06b93f4ccc5496b015e0d3.jpg" data-resource-id="../img/6b4fb586eb06b93f4ccc5496b015e0d3.jpg">
+<meta name="ext-resource-dependency" content="../img/6d7bfc3629230a4c4cfe75ca3abb66ec.jpg" data-resource-id="../img/6d7bfc3629230a4c4cfe75ca3abb66ec.jpg">
+<meta name="ext-resource-dependency" content="../img/6ddc8f998f7f3027fd448a7fefde8815.jpg" data-resource-id="../img/6ddc8f998f7f3027fd448a7fefde8815.jpg">
+<meta name="ext-resource-dependency" content="../img/6f166b732caddaf7650975b298d2cd5c.pdf" data-resource-id="../img/6f166b732caddaf7650975b298d2cd5c.pdf">
+<meta name="ext-resource-dependency" content="../img/737917cc6955bafe172a05cd954dfadf.pdf" data-resource-id="../img/737917cc6955bafe172a05cd954dfadf.pdf">
+<meta name="ext-resource-dependency" content="../img/73ec9362bd8b8bf2d9e1bf0f99482e18.pdf" data-resource-id="../img/73ec9362bd8b8bf2d9e1bf0f99482e18.pdf">
+<meta name="ext-resource-dependency" content="../img/74a6d9c6c8e5fd3a103bbff5410f9d84.jpg" data-resource-id="../img/74a6d9c6c8e5fd3a103bbff5410f9d84.jpg">
+<meta name="ext-resource-dependency" content="../img/74c6a029ec6ae34ee83f36c6ba98176b.svg" data-resource-id="../img/74c6a029ec6ae34ee83f36c6ba98176b.svg">
+<meta name="ext-resource-dependency" content="../img/74db477e96e23f093a6c666665b528f6.jpg" data-resource-id="../img/74db477e96e23f093a6c666665b528f6.jpg">
+<meta name="ext-resource-dependency" content="../img/7555eb45baee65e418a75396a4c7b031.jpg" data-resource-id="../img/7555eb45baee65e418a75396a4c7b031.jpg">
+<meta name="ext-resource-dependency" content="../img/758eb9c150b7063954516dbe6c9ffa03.jpg" data-resource-id="../img/758eb9c150b7063954516dbe6c9ffa03.jpg">
+<meta name="ext-resource-dependency" content="../img/766189e43964f07bdd16c8256a92f30a.jpg" data-resource-id="../img/766189e43964f07bdd16c8256a92f30a.jpg">
+<meta name="ext-resource-dependency" content="../img/78cdda5b765a7d4a8a9d170756a1dcf8.jpg" data-resource-id="../img/78cdda5b765a7d4a8a9d170756a1dcf8.jpg">
+<meta name="ext-resource-dependency" content="../img/78ffe3b548942ea9eb3997c4625702ff.pdf" data-resource-id="../img/78ffe3b548942ea9eb3997c4625702ff.pdf">
+<meta name="ext-resource-dependency" content="../img/7acdebb1094c56efd264b454ea761c76.pdf" data-resource-id="../img/7acdebb1094c56efd264b454ea761c76.pdf">
+<meta name="ext-resource-dependency" content="../img/7e6a35ae580c8fb0fd9717b854a859d2.jpg" data-resource-id="../img/7e6a35ae580c8fb0fd9717b854a859d2.jpg">
+<meta name="ext-resource-dependency" content="../img/7fb61c8606278f6f0e7eaa80af7ddd06.jpg" data-resource-id="../img/7fb61c8606278f6f0e7eaa80af7ddd06.jpg">
+<meta name="ext-resource-dependency" content="../img/7fb9a5819c4f9810f83693fe123bb71f.pdf" data-resource-id="../img/7fb9a5819c4f9810f83693fe123bb71f.pdf">
+<meta name="ext-resource-dependency" content="../img/8091580ab6f5b86c60c1a42cb1e869da.jpg" data-resource-id="../img/8091580ab6f5b86c60c1a42cb1e869da.jpg">
+<meta name="ext-resource-dependency" content="../img/80dbe9743f602ebe4b920d759bbdd8b2.jpg" data-resource-id="../img/80dbe9743f602ebe4b920d759bbdd8b2.jpg">
+<meta name="ext-resource-dependency" content="../img/80e93dfa1fe7873995a46b9a1087ad13.jpg" data-resource-id="../img/80e93dfa1fe7873995a46b9a1087ad13.jpg">
+<meta name="ext-resource-dependency" content="../img/8147022b8f74ebe4aa257b46f5798b46.jpg" data-resource-id="../img/8147022b8f74ebe4aa257b46f5798b46.jpg">
+<meta name="ext-resource-dependency" content="../img/818c03f64c2781b464c4a65fef9b7475.jpg" data-resource-id="../img/818c03f64c2781b464c4a65fef9b7475.jpg">
+<meta name="ext-resource-dependency" content="../img/82a9b4fbc42e5392c9f5e5a3f8c6331e.png" data-resource-id="../img/82a9b4fbc42e5392c9f5e5a3f8c6331e.png">
+<meta name="ext-resource-dependency" content="../img/82ccae95345230bc9123f79b1c49b1ea.jpg" data-resource-id="../img/82ccae95345230bc9123f79b1c49b1ea.jpg">
+<meta name="ext-resource-dependency" content="../img/832e748062cd954e01a93e820105bf01.svg" data-resource-id="../img/832e748062cd954e01a93e820105bf01.svg">
+<meta name="ext-resource-dependency" content="../img/8642b47f7e644fc21119534f74e3bc27.jpg" data-resource-id="../img/8642b47f7e644fc21119534f74e3bc27.jpg">
+<meta name="ext-resource-dependency" content="../img/8c9a2bf5e181d43f43f6488060dd68d0.jpg" data-resource-id="../img/8c9a2bf5e181d43f43f6488060dd68d0.jpg">
+<meta name="ext-resource-dependency" content="../img/8eaee317b3d61367537c5498bba51dcf.jpg" data-resource-id="../img/8eaee317b3d61367537c5498bba51dcf.jpg">
+<meta name="ext-resource-dependency" content="../img/8f77d0e5256ca524f941d101b893f6ed.jpg" data-resource-id="../img/8f77d0e5256ca524f941d101b893f6ed.jpg">
+<meta name="ext-resource-dependency" content="../img/90fcd341b8516910ab4c81fc00c87c41.jpg" data-resource-id="../img/90fcd341b8516910ab4c81fc00c87c41.jpg">
+<meta name="ext-resource-dependency" content="../img/932e459f264ce436ac97d8b163c3458c.pdf" data-resource-id="../img/932e459f264ce436ac97d8b163c3458c.pdf">
+<meta name="ext-resource-dependency" content="../img/9423a8012ac45e63c72a7b0583d37658.pdf" data-resource-id="../img/9423a8012ac45e63c72a7b0583d37658.pdf">
+<meta name="ext-resource-dependency" content="../img/968a3d01b12b51cd8faaafee5f3abdec.jpg" data-resource-id="../img/968a3d01b12b51cd8faaafee5f3abdec.jpg">
+<meta name="ext-resource-dependency" content="../img/982e37f658fd95565e94b72b0555459f.svg" data-resource-id="../img/982e37f658fd95565e94b72b0555459f.svg">
+<meta name="ext-resource-dependency" content="../img/98b8114c0ad99c41e28687388a8882c1.jpg" data-resource-id="../img/98b8114c0ad99c41e28687388a8882c1.jpg">
+<meta name="ext-resource-dependency" content="../img/99923083c4fa77eb02de5b8c4a3134ca.pdf" data-resource-id="../img/99923083c4fa77eb02de5b8c4a3134ca.pdf">
+<meta name="ext-resource-dependency" content="../img/9a0e6c56794eccb79da2126264721a8e.pdf" data-resource-id="../img/9a0e6c56794eccb79da2126264721a8e.pdf">
+<meta name="ext-resource-dependency" content="../img/9af17c3ee5fb628e3be58a4d8626174d.jpg" data-resource-id="../img/9af17c3ee5fb628e3be58a4d8626174d.jpg">
+<meta name="ext-resource-dependency" content="../img/9b645627868aa667a4933e6393e04a62.pdf" data-resource-id="../img/9b645627868aa667a4933e6393e04a62.pdf">
+<meta name="ext-resource-dependency" content="../img/9bed3f319f1f583b5f64be8c81a43412.jpg" data-resource-id="../img/9bed3f319f1f583b5f64be8c81a43412.jpg">
+<meta name="ext-resource-dependency" content="../img/9bef806cbb5cdbb03afb4adce33c15b5.jpg" data-resource-id="../img/9bef806cbb5cdbb03afb4adce33c15b5.jpg">
+<meta name="ext-resource-dependency" content="../img/9c017721e9e6ad07cfedbe347a615d86.jpg" data-resource-id="../img/9c017721e9e6ad07cfedbe347a615d86.jpg">
+<meta name="ext-resource-dependency" content="../img/9ddd4458d7c293413e7b81cd4a861a12.jpg" data-resource-id="../img/9ddd4458d7c293413e7b81cd4a861a12.jpg">
+<meta name="ext-resource-dependency" content="../img/9e52996ad4f96e8afed37b893e7c8318.svg" data-resource-id="../img/9e52996ad4f96e8afed37b893e7c8318.svg">
+<meta name="ext-resource-dependency" content="../img/9e7e16f0bb258000ab84de75911638fa.jpg" data-resource-id="../img/9e7e16f0bb258000ab84de75911638fa.jpg">
+<meta name="ext-resource-dependency" content="../img/9ee68782eebdc72e9dc4fae7c9d51ab6.pdf" data-resource-id="../img/9ee68782eebdc72e9dc4fae7c9d51ab6.pdf">
+<meta name="ext-resource-dependency" content="../img/9f0950719f35e421d1125ee54a14820b.jpg" data-resource-id="../img/9f0950719f35e421d1125ee54a14820b.jpg">
+<meta name="ext-resource-dependency" content="../img/a19d62e8ea3498adda3edff647ef7f8e.jpg" data-resource-id="../img/a19d62e8ea3498adda3edff647ef7f8e.jpg">
+<meta name="ext-resource-dependency" content="../img/a2bb3a8785ac4e59e02106f6ef190930.pdf" data-resource-id="../img/a2bb3a8785ac4e59e02106f6ef190930.pdf">
+<meta name="ext-resource-dependency" content="../img/a3f073e21b45ea11571b7d46439cd9f3.pdf" data-resource-id="../img/a3f073e21b45ea11571b7d46439cd9f3.pdf">
+<meta name="ext-resource-dependency" content="../img/a55ad36dab4a1576a5e614ba7ed4b160.png" data-resource-id="../img/a55ad36dab4a1576a5e614ba7ed4b160.png">
+<meta name="ext-resource-dependency" content="../img/a61946fa50528b951aeb7984f70b6443.jpg" data-resource-id="../img/a61946fa50528b951aeb7984f70b6443.jpg">
+<meta name="ext-resource-dependency" content="../img/a67807a23da5aa21405ef7438a8948de.jpg" data-resource-id="../img/a67807a23da5aa21405ef7438a8948de.jpg">
+<meta name="ext-resource-dependency" content="../img/a71266109d3784aed8865c73fe1b45b4.jpg" data-resource-id="../img/a71266109d3784aed8865c73fe1b45b4.jpg">
+<meta name="ext-resource-dependency" content="../img/a90bd2d627a2ec4be569265774c03e98.svg" data-resource-id="../img/a90bd2d627a2ec4be569265774c03e98.svg">
+<meta name="ext-resource-dependency" content="../img/ac165c596c11f4a4fd2bae6f8a6fdf0f.jpg" data-resource-id="../img/ac165c596c11f4a4fd2bae6f8a6fdf0f.jpg">
+<meta name="ext-resource-dependency" content="../img/ad58a00fdf8f616537258b20f611f2b8.jpg" data-resource-id="../img/ad58a00fdf8f616537258b20f611f2b8.jpg">
+<meta name="ext-resource-dependency" content="../img/ad81faef215d4aba17e21f36169fafca.jpg" data-resource-id="../img/ad81faef215d4aba17e21f36169fafca.jpg">
+<meta name="ext-resource-dependency" content="../img/adfbc3e3cda2662c2e40602d30be5cc8.jpg" data-resource-id="../img/adfbc3e3cda2662c2e40602d30be5cc8.jpg">
+<meta name="ext-resource-dependency" content="../img/ae355b8e9da819b256882f82dc63eb3a.jpg" data-resource-id="../img/ae355b8e9da819b256882f82dc63eb3a.jpg">
+<meta name="ext-resource-dependency" content="../img/af1e5edf1b9357a898b6ab1b04e2f423.mp4" data-resource-id="../img/af1e5edf1b9357a898b6ab1b04e2f423.mp4">
+<meta name="ext-resource-dependency" content="../img/b0a5717732b8219e5f76a546d946d1df.jpg" data-resource-id="../img/b0a5717732b8219e5f76a546d946d1df.jpg">
+<meta name="ext-resource-dependency" content="../img/b0a7a00751cf1f67f34e69cf8ed4d2e0.jpg" data-resource-id="../img/b0a7a00751cf1f67f34e69cf8ed4d2e0.jpg">
+<meta name="ext-resource-dependency" content="../img/b0ea2bdecf34d3c7292fb7c01952f044.jpg" data-resource-id="../img/b0ea2bdecf34d3c7292fb7c01952f044.jpg">
+<meta name="ext-resource-dependency" content="../img/b1b1b4db19cbd24c8f9cc5c231c83dac.jpg" data-resource-id="../img/b1b1b4db19cbd24c8f9cc5c231c83dac.jpg">
+<meta name="ext-resource-dependency" content="../img/b2bfc08f99031d7d98b43bda077c0055.jpg" data-resource-id="../img/b2bfc08f99031d7d98b43bda077c0055.jpg">
+<meta name="ext-resource-dependency" content="../img/b3c08938d575139e68509f3485aaae3e.pdf" data-resource-id="../img/b3c08938d575139e68509f3485aaae3e.pdf">
+<meta name="ext-resource-dependency" content="../img/b606ec2de61f2b4b11ee8de69c83049d.pdf" data-resource-id="../img/b606ec2de61f2b4b11ee8de69c83049d.pdf">
+<meta name="ext-resource-dependency" content="../img/b827520ee2fa7cfe920e1bb01e8e94e9.png" data-resource-id="../img/b827520ee2fa7cfe920e1bb01e8e94e9.png">
+<meta name="ext-resource-dependency" content="../img/b99dc9d040324e28003b28c6017ac492.jpg" data-resource-id="../img/b99dc9d040324e28003b28c6017ac492.jpg">
+<meta name="ext-resource-dependency" content="../img/bb1fbb5539dd8dd990785a639cd180f7.pdf" data-resource-id="../img/bb1fbb5539dd8dd990785a639cd180f7.pdf">
+<meta name="ext-resource-dependency" content="../img/bc5ceda51b2c9c68d5a2e1e4fbb27196.jpg" data-resource-id="../img/bc5ceda51b2c9c68d5a2e1e4fbb27196.jpg">
+<meta name="ext-resource-dependency" content="../img/bf68187b0ce0eebc3cda000022bc9d20.jpg" data-resource-id="../img/bf68187b0ce0eebc3cda000022bc9d20.jpg">
+<meta name="ext-resource-dependency" content="../img/c0e72b67db88ff29be50895c096a5640.pdf" data-resource-id="../img/c0e72b67db88ff29be50895c096a5640.pdf">
+<meta name="ext-resource-dependency" content="../img/c12ef90c7c056ba871387e9e973e503f.pdf" data-resource-id="../img/c12ef90c7c056ba871387e9e973e503f.pdf">
+<meta name="ext-resource-dependency" content="../img/c1bafb528c93280f081941ab88da9cd6.jpg" data-resource-id="../img/c1bafb528c93280f081941ab88da9cd6.jpg">
+<meta name="ext-resource-dependency" content="../img/c4bd1e21b8c7085b5f0a016b0a52e9d2.jpg" data-resource-id="../img/c4bd1e21b8c7085b5f0a016b0a52e9d2.jpg">
+<meta name="ext-resource-dependency" content="../img/c5c32227e8be96e220a7a09a86d3834a.jpg" data-resource-id="../img/c5c32227e8be96e220a7a09a86d3834a.jpg">
+<meta name="ext-resource-dependency" content="../img/c5f3a915e57ec862046f8fa3b14507f4.jpg" data-resource-id="../img/c5f3a915e57ec862046f8fa3b14507f4.jpg">
+<meta name="ext-resource-dependency" content="../img/c67180f627df70ee9606b1980d1579fb.pdf" data-resource-id="../img/c67180f627df70ee9606b1980d1579fb.pdf">
+<meta name="ext-resource-dependency" content="../img/c7c7f2ee893a7d46fca2deeede07be72.jpg" data-resource-id="../img/c7c7f2ee893a7d46fca2deeede07be72.jpg">
+<meta name="ext-resource-dependency" content="../img/c7e90282d0555be8685674bd3557254d.jpg" data-resource-id="../img/c7e90282d0555be8685674bd3557254d.jpg">
+<meta name="ext-resource-dependency" content="../img/ca6fb9b9aa325aed55129e2767539bb1.jpg" data-resource-id="../img/ca6fb9b9aa325aed55129e2767539bb1.jpg">
+<meta name="ext-resource-dependency" content="../img/cbf332c7a6cf10a63197f022635e96a5.pdf" data-resource-id="../img/cbf332c7a6cf10a63197f022635e96a5.pdf">
+<meta name="ext-resource-dependency" content="../img/cda9a63aab019c70b5ffdec2fb7f17a4.jpg" data-resource-id="../img/cda9a63aab019c70b5ffdec2fb7f17a4.jpg">
+<meta name="ext-resource-dependency" content="../img/cf2ac45f0174c50603b9140147b79f5e.pdf" data-resource-id="../img/cf2ac45f0174c50603b9140147b79f5e.pdf">
+<meta name="ext-resource-dependency" content="../img/cfed801306c0b194c612fab58989976d.pdf" data-resource-id="../img/cfed801306c0b194c612fab58989976d.pdf">
+<meta name="ext-resource-dependency" content="../img/d13371259887d345c42837152e300047.jpg" data-resource-id="../img/d13371259887d345c42837152e300047.jpg">
+<meta name="ext-resource-dependency" content="../img/d1d238143479254b4a0e2d25d375b2c6.jpg" data-resource-id="../img/d1d238143479254b4a0e2d25d375b2c6.jpg">
+<meta name="ext-resource-dependency" content="../img/d53dfe1a422b4286ceadbadb104bd7d6.jpg" data-resource-id="../img/d53dfe1a422b4286ceadbadb104bd7d6.jpg">
+<meta name="ext-resource-dependency" content="../img/d6ef05669f2e461d471abc6b38dfafc1.jpg" data-resource-id="../img/d6ef05669f2e461d471abc6b38dfafc1.jpg">
+<meta name="ext-resource-dependency" content="../img/d8239ab11495a69ea0e88e80f5aa420e.jpg" data-resource-id="../img/d8239ab11495a69ea0e88e80f5aa420e.jpg">
+<meta name="ext-resource-dependency" content="../img/d959c0cafd64a68ee28803230a365869.jpg" data-resource-id="../img/d959c0cafd64a68ee28803230a365869.jpg">
+<meta name="ext-resource-dependency" content="../img/d969f00269b8ea24c360fd59fba7d938.jpg" data-resource-id="../img/d969f00269b8ea24c360fd59fba7d938.jpg">
+<meta name="ext-resource-dependency" content="../img/d9a4083f172e4021e4b53253241fe58e.jpg" data-resource-id="../img/d9a4083f172e4021e4b53253241fe58e.jpg">
+<meta name="ext-resource-dependency" content="../img/dc905d591ec6cdb116fcd0a0cc95002c.jpg" data-resource-id="../img/dc905d591ec6cdb116fcd0a0cc95002c.jpg">
+<meta name="ext-resource-dependency" content="../img/e046b55b6e80f80d5e8f678460986aff.jpg" data-resource-id="../img/e046b55b6e80f80d5e8f678460986aff.jpg">
+<meta name="ext-resource-dependency" content="../img/e095330b58f419807649acc317a4124c.jpg" data-resource-id="../img/e095330b58f419807649acc317a4124c.jpg">
+<meta name="ext-resource-dependency" content="../img/e13442c2e95636d6170d5ffbdcf49010.jpg" data-resource-id="../img/e13442c2e95636d6170d5ffbdcf49010.jpg">
+<meta name="ext-resource-dependency" content="../img/e1cc90eaa033b57aea670890df8ab5cf.jpg" data-resource-id="../img/e1cc90eaa033b57aea670890df8ab5cf.jpg">
+<meta name="ext-resource-dependency" content="../img/e26f33514c15537323de9b31999daa68.png" data-resource-id="../img/e26f33514c15537323de9b31999daa68.png">
+<meta name="ext-resource-dependency" content="../img/e69b2b243334a5831802b7fc40bb3422.jpg" data-resource-id="../img/e69b2b243334a5831802b7fc40bb3422.jpg">
+<meta name="ext-resource-dependency" content="../img/e6fdd4d59882dd77ac201bd0ac465b16.pdf" data-resource-id="../img/e6fdd4d59882dd77ac201bd0ac465b16.pdf">
+<meta name="ext-resource-dependency" content="../img/e79b8ad17f064edcb4aaa73b6f02690a.jpg" data-resource-id="../img/e79b8ad17f064edcb4aaa73b6f02690a.jpg">
+<meta name="ext-resource-dependency" content="../img/eb32719438bda7597ae55798e82ec663.jpg" data-resource-id="../img/eb32719438bda7597ae55798e82ec663.jpg">
+<meta name="ext-resource-dependency" content="../img/ebb157c4f73dde053df85c10927ce26c.pdf" data-resource-id="../img/ebb157c4f73dde053df85c10927ce26c.pdf">
+<meta name="ext-resource-dependency" content="../img/ef0801537567a246d9fe49e9a6e3b306.png" data-resource-id="../img/ef0801537567a246d9fe49e9a6e3b306.png">
+<meta name="ext-resource-dependency" content="../img/f294146f3d12a729f6fdde018ee52013.jpg" data-resource-id="../img/f294146f3d12a729f6fdde018ee52013.jpg">
+<meta name="ext-resource-dependency" content="../img/f36041e40d79da6551fd0c920542745b.pdf" data-resource-id="../img/f36041e40d79da6551fd0c920542745b.pdf">
+<meta name="ext-resource-dependency" content="../img/f4ba0bee38160ecfe3a739bb3dad38f9.svg" data-resource-id="../img/f4ba0bee38160ecfe3a739bb3dad38f9.svg">
+<meta name="ext-resource-dependency" content="../img/f5fdc233891a6cdfd80a8007f4803f21.jpg" data-resource-id="../img/f5fdc233891a6cdfd80a8007f4803f21.jpg">
+<meta name="ext-resource-dependency" content="../img/f6ba84b9ddc45d05e6268c7dfe1efbf7.jpg" data-resource-id="../img/f6ba84b9ddc45d05e6268c7dfe1efbf7.jpg">
+<meta name="ext-resource-dependency" content="../img/f8ac83eda2768f74bc5595bcde955f95.pdf" data-resource-id="../img/f8ac83eda2768f74bc5595bcde955f95.pdf">
+<meta name="ext-resource-dependency" content="../img/f9694a615ea98576988670f343ed2c03.jpg" data-resource-id="../img/f9694a615ea98576988670f343ed2c03.jpg">
+<meta name="ext-resource-dependency" content="../img/f996e33492b2641a329f0effb846b0d9.pdf" data-resource-id="../img/f996e33492b2641a329f0effb846b0d9.pdf">
+<meta name="ext-resource-dependency" content="../img/fb128bf13ca2f3d920145e28847dc7b1.jpg" data-resource-id="../img/fb128bf13ca2f3d920145e28847dc7b1.jpg">
+<meta name="ext-resource-dependency" content="../img/fdd0510df20229b9be087be8451689bd.jpg" data-resource-id="../img/fdd0510df20229b9be087be8451689bd.jpg">
+<meta name="ext-resource-dependency" content="../img/fe386380689e49fbe0898bb2ab4d28d8.jpg" data-resource-id="../img/fe386380689e49fbe0898bb2ab4d28d8.jpg">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--acento)}
+.celda:hover{background:var(--fondo-alt)}
+.foto a:hover,a.foto:hover{color:var(--crema)}
+.foto:hover .subraya{border-bottom-width:2px}
+.menu a:hover{color:var(--acento)}
+.nav a:hover{color:inherit}
+.nav a:hover > span{border-bottom-color:currentColor !important}
+.nav .menu a:hover{color:var(--acento)}
+button{cursor:pointer}
+button:disabled{cursor:default;opacity:.3}
+input::placeholder{color:var(--texto-suave);opacity:1}
+@keyframes avance{from{width:0}to{width:100%}}
+/* CSS_FICHA_V2 */
+.galeria:focus-visible,.dibujos:focus-visible{outline:2px solid var(--texto);outline-offset:4px}
+.comprar{transition:background-color .2s ease}
+.comprar:hover{background:var(--acento) !important;color:var(--sobre-acento) !important}
+.comprar[disabled]:hover{background:transparent !important;color:var(--texto-suave) !important}
+.rel:hover{background:var(--fondo-alt)}
+.celda:hover{background:var(--fondo-alt)}
+.boton:hover{background:var(--acento) !important}
+.boton-2:hover{color:var(--acento)}
+@keyframes avance{from{width:0}to{width:100%}}
+.faq{transition:background-color .2s ease}
+.faq:hover{background:var(--fondo-alt) !important}
+.faq:focus-visible{outline:2px solid var(--texto);outline-offset:-4px}
+.faq-item:last-child{border-bottom:0 !important}
+.wa-flotante:hover{background:var(--acento) !important;color:var(--sobre-acento) !important}
+.wa-flotante:focus-visible{outline:2px solid var(--foco);outline-offset:3px}
+.portada-foto{will-change:opacity}
+.portada-cta:hover{border-bottom-width:2px}
+.seg{cursor:pointer}
+.seg:focus-visible{outline:2px solid var(--crema);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.portada-foto{transition:none !important}}
+</style>
+</helmet>
+<div data-theme="crema" style="background: var(--fondo); color: var(--texto); font-family: var(--font-sans); font-size: 17px; line-height: 26px">
+<sc-if value="{{sinFicha}}" hint-placeholder-val="{{true}}">
+
+<!-- ENCABEZADO: transparente sobre la portada; crema con el monograma al pasarla; se oculta al bajar y vuelve al subir -->
+<header style="position: sticky; top: 0; z-index: 50; box-sizing: border-box; height: 71px; padding: 0 31px 0 32px; display: flex; align-items: center; justify-content: space-between; background: {{hdrFondo}}; color: {{hdrTexto}}; border-bottom: 1px solid {{hdrLinea}}; transform: {{hdrMover}}; transition: transform 350ms ease, background-color 250ms ease, color 250ms ease, border-color 250ms ease">
+  <a href="Main.dc.html" aria-label="Ache, inicio" style="display: flex; align-items: center; height: 44px; opacity: {{logoOp}}; transition: opacity 250ms ease">
+    <img src="../img/9e52996ad4f96e8afed37b893e7c8318.svg" alt="" style="display: block; height: 32px">
+  </a>
+  <nav class="nav" aria-label="Principal" style="display: flex; align-items: center; gap: 20px; font-family: var(--font-mono); font-size: 14px; line-height: 16px; letter-spacing: 0.04em">
+    <div>
+      <a href="Catalogo.dc.html" style="display: block; padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid {{lineaCatalogo}}">PRODUCTOS</span></a>
+    </div>
+    <div style="position: relative">
+      <a href="Nosotros.dc.html" style="display: block; padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid {{lineaNosotros}}">NOSOTROS</span></a>
+    </div>
+    <a href="Vende.dc.html" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">VENDE TU MUEBLE</span></a>
+    <a href="{{carritoHref}}" style="padding: 27px 0 26px"><span style="padding-bottom: 3px; border-bottom: 1px solid transparent">CARRITO ({{carritoN}})</span></a>
+  </nav>
+</header>
+
+<!-- PORTADA: carrusel a sangre en 16:9 con el logotipo grande; las fotos cambian solas cada 6 s (pausa con movimiento reducido) -->
+<section aria-label="Portada" aria-roledescription="carrusel" style="position: relative; margin-top: -71px; aspect-ratio: 1903 / 1070; overflow: hidden; border-bottom: 1px solid var(--linea); background: #74746f">
+  <sc-for list="{{portadas}}" as="s" hint-placeholder-count="4">
+    <img class="portada-foto" src="{{s.foto}}" alt="{{s.alt}}" aria-hidden="{{s.oculta}}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: {{s.op}}; transform: {{s.escala}}; transition: opacity 1.2s ease, {{s.trans}}">
+  </sc-for>
+  <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 190px; background: linear-gradient(to bottom, rgba(25, 1, 0, 0.46), rgba(25, 1, 0, 0)); pointer-events: none"></div>
+  <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 200px; background: linear-gradient(to top, rgba(25, 1, 0, 0.42), rgba(25, 1, 0, 0)); pointer-events: none"></div>
+  <h1 style="position: absolute; left: 32px; top: 30px; margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 34px">
+    <img ref="{{introDestino}}" src="../img/f4ba0bee38160ecfe3a739bb3dad38f9.svg" alt="Ache" style="display: block; width: 326px; opacity: {{logoIntroOp}}">
+  </h1>
+  <div style="position: absolute; left: 32px; right: 32px; bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; color: var(--crema); font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.06em">
+    <div style="display: flex; align-items: center; gap: 20px">
+      <span style="font-variant-numeric: tabular-nums">{{portadaN}}</span>
+      <div style="display: flex; gap: 8px">
+        <sc-for list="{{segmentos}}" as="g" hint-placeholder-count="4">
+          <button type="button" class="seg" onClick="{{g.ir}}" aria-label="{{g.aria}}" aria-current="{{g.actual}}" style="box-sizing: content-box; display: block; width: 56px; height: 2px; padding: 12px 0; border: 0; background: transparent">
+            <span style="position: relative; display: block; height: 2px; overflow: hidden; background: rgba(243, 242, 232, 0.4)">
+              <span style="position: absolute; left: 0; top: 0; bottom: 0; width: {{g.ancho}}; background: var(--crema); animation: {{g.anim}}"></span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    <a href="Catalogo.dc.html" class="portada-cta" style="color: var(--crema); padding-bottom: 6px; border-bottom: 1px solid currentColor">VER LOS PRODUCTOS →</a>
+  </div>
+</section>
+
+<!-- RECIÉN LLEGADOS: cuadrícula con bordes que avanza de una en una -->
+<section aria-label="Recién llegados">
+  <div style="box-sizing: border-box; height: 78px; padding: 0 30px 0 33px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--linea)">
+    <h2 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 400">Recién llegados, elegidos por Ache esta semana</h2>
+    <div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.06em">
+      <button type="button" onClick="{{anterior}}" disabled="{{sinAnterior}}" aria-label="Piezas anteriores" style="box-sizing: border-box; width: 44px; height: 44px; padding: 0; border: 1px solid var(--linea); background: transparent; color: var(--texto); font-family: var(--font-mono); font-size: 16px">←</button>
+      <button type="button" onClick="{{siguiente}}" disabled="{{sinSiguiente}}" aria-label="Piezas siguientes" style="box-sizing: border-box; width: 44px; height: 44px; padding: 0; border: 1px solid var(--linea); background: transparent; color: var(--texto); font-family: var(--font-mono); font-size: 16px">→</button>
+      <a href="Catalogo.dc.html" style="margin-left: 26px; padding-bottom: 6px; border-bottom: 1px solid currentColor">VER TODO →</a>
+    </div>
+  </div>
+  <div style="overflow: hidden; border-bottom: 1px solid var(--linea)">
+    <div style="display: flex; transform: {{pista}}; transition: transform 500ms ease">
+      <sc-for list="{{piezas}}" as="p" hint-placeholder-count="4">
+        <a href="#ficha" onClick="{{p.abrir}}" class="celda" style="flex: 0 0 25%; box-sizing: border-box; padding: 64px 64px 42px; border-right: 1px solid var(--linea); display: flex; flex-direction: column; color: var(--texto)">
+          <div style="position: relative">
+            <img src="{{p.foto}}" alt="{{p.alt}}" style="display: block; width: 100%; aspect-ratio: 347 / 463; object-fit: cover">
+            <sc-if value="{{p.vendido}}" hint-placeholder-val="{{false}}">
+              <span style="position: absolute; left: 12px; top: 12px; padding: 4px 8px; background: var(--acento); color: var(--sobre-acento); font-family: var(--font-mono); font-size: 11px; line-height: 14px; letter-spacing: 0.08em">VENDIDO</span>
+            </sc-if>
+            <sc-if value="{{p.kit}}" hint-placeholder-val="{{false}}">
+              <span style="position: absolute; left: 12px; top: 12px; padding: 3px 7px; border: 1px solid var(--linea); background: var(--fondo); color: var(--texto); font-family: var(--font-mono); font-size: 11px; line-height: 14px; letter-spacing: 0.08em">SET</span>
+            </sc-if>
+          </div>
+          <div style="margin-top: 28px; font-size: 14px; line-height: 20px">{{p.nombre}}</div>
+          <div style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.04em; color: {{p.colorDato}}">{{p.dato}}</div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- CONOCE ACHE: ilustración del brandbook (sillón) sobre ocre, como el panel azul de «Piezas vendidas», y quiénes somos, en corto (mismas mitades que «Comprar» y «Piezas vendidas») -->
+<section aria-label="Conoce Ache" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); aspect-ratio: 8 / 3; border-bottom: 1px solid var(--linea)">
+  <div data-theme="ocre" style="position: relative; box-sizing: border-box; overflow: hidden; border-right: 1px solid var(--linea); background: var(--fondo); color: var(--texto); display: flex; align-items: center; justify-content: center">
+    <img src="../img/137ce14e2ff7dd2f8a24497b8f47ab9a.svg" alt="Ilustración de línea de un sillón con brazos" style="display: block; width: 36%; height: auto">
+    <span style="position: absolute; left: 32px; bottom: 30px; font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.08em">TALLER EN GUADALAJARA · DESDE 2023</span>
+  </div>
+  <div style="box-sizing: border-box; padding: 60px 64px 56px; display: flex; flex-direction: column; align-items: flex-start">
+    <h2 style="margin: 0; max-width: 600px; font-size: 50px; line-height: 75px; font-weight: 400; font-style: italic">Muebles con historia, restaurados a mano</h2>
+    <p style="margin: 4px 0 0; max-width: 540px; font-size: 21px; line-height: 28px">Ache restaura muebles en Guadalajara. Buscamos piezas con buena estructura y una historia que contar, las restauramos a mano y las entregamos listas para una segunda vida.</p>
+    <a href="Nosotros.dc.html" style="margin-top: 14px; font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.06em; padding-bottom: 6px; border-bottom: 1px solid currentColor">CONOCE ACHE →</a>
+  </div>
+</section>
+
+<!-- SETS: carrusel como Recién llegados, con los sets armados del más chico al más grande -->
+<section aria-label="Sets">
+  <div style="box-sizing: border-box; height: 78px; padding: 0 30px 0 33px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--linea)">
+    <h2 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 400">Sets armados, de un par de piezas a un comedor completo</h2>
+    <div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.06em">
+      <button type="button" onClick="{{anteriorSets}}" disabled="{{sinAnteriorSets}}" aria-label="Sets anteriores" style="box-sizing: border-box; width: 44px; height: 44px; padding: 0; border: 1px solid var(--linea); background: transparent; color: var(--texto); font-family: var(--font-mono); font-size: 16px">←</button>
+      <button type="button" onClick="{{siguienteSets}}" disabled="{{sinSiguienteSets}}" aria-label="Sets siguientes" style="box-sizing: border-box; width: 44px; height: 44px; padding: 0; border: 1px solid var(--linea); background: transparent; color: var(--texto); font-family: var(--font-mono); font-size: 16px">→</button>
+      <a href="Kits.dc.html" style="margin-left: 26px; padding-bottom: 6px; border-bottom: 1px solid currentColor">VER TODOS LOS SETS →</a>
+    </div>
+  </div>
+  <div style="overflow: hidden; border-bottom: 1px solid var(--linea)">
+    <div style="display: flex; transform: {{pistaSets}}; transition: transform 500ms ease">
+      <sc-for list="{{sets}}" as="k" hint-placeholder-count="4">
+        <a href="#ficha" onClick="{{k.abrir}}" class="celda" style="flex: 0 0 25%; box-sizing: border-box; padding: 64px 64px 42px; border-right: 1px solid var(--linea); display: flex; flex-direction: column; color: var(--texto)">
+          <div style="position: relative">
+            <img src="{{k.foto}}" alt="{{k.alt}}" style="display: block; width: 100%; aspect-ratio: 347 / 463; object-fit: cover">
+            <span style="position: absolute; left: 12px; top: 12px; padding: 3px 7px; border: 1px solid var(--linea); background: var(--fondo); color: var(--texto); font-family: var(--font-mono); font-size: 11px; line-height: 14px; letter-spacing: 0.08em">{{k.piezas}}</span>
+          </div>
+          <div style="margin-top: 28px; font-size: 14px; line-height: 20px">{{k.nombre}}</div>
+          <div style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.04em; color: var(--texto-suave)">{{k.dato}}</div>
+          <div style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.04em; color: var(--texto-suave)">{{k.precio}}</div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO DEL TALLER: video de muestra (fotos del taller de Ache) a todo lo ancho, en bucle y sin sonido; botón para pausarlo -->
+<section aria-label="Video del taller">
+  <div style="box-sizing: border-box; height: 78px; padding: 0 30px 0 33px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--linea)">
+    <h2 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 400">Detrás de cada mueble, un taller en Guadalajara</h2>
+    <a href="Nosotros.dc.html" style="font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.06em; padding-bottom: 6px; border-bottom: 1px solid currentColor">CONOCE EL TALLER →</a>
+  </div>
+  <div style="position: relative; aspect-ratio: 2 / 1; overflow: hidden; border-bottom: 1px solid var(--linea); background: var(--negro)">
+    <video ref="{{vidRef}}" src="../img/af1e5edf1b9357a898b6ab1b04e2f423.mp4" poster="../img/b0a5717732b8219e5f76a546d946d1df.jpg" muted="{{siempre}}" loop="{{siempre}}" playsInline="{{siempre}}" preload="auto" aria-label="Video del taller de Ache: los restauradores trabajan una cómoda, un escritorio y una cubierta de parquet" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover"></video>
+    <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 160px; background: linear-gradient(to top, rgba(25, 1, 0, 0.5), rgba(25, 1, 0, 0))"></div>
+    <button type="button" onClick="{{alternarVideo}}" aria-label="{{videoAria}}" style="position: absolute; left: 32px; bottom: 28px; box-sizing: border-box; height: 44px; padding: 0 18px; display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--crema); background: rgba(25, 1, 0, 0.3); color: var(--crema); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.08em">{{videoBoton}}</button>
+    <span style="position: absolute; right: 32px; bottom: 42px; color: var(--crema); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.08em">EN EL TALLER · GUADALAJARA</span>
+  </div>
+</section>
+
+<!-- PIEZAS ÚNICAS Y SETS: las dos entradas al catálogo (mismas mitades que «Conoce Ache» y «Piezas vendidas») -->
+<section aria-label="Comprar" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); aspect-ratio: 8 / 3; border-bottom: 1px solid var(--linea)">
+  <a href="Catalogo.dc.html" class="foto" style="position: relative; display: block; box-sizing: border-box; overflow: hidden; color: var(--crema); border-right: 1px solid var(--linea)">
+    <img src="../img/758eb9c150b7063954516dbe6c9ffa03.jpg" alt="Silla de rejilla sola en un patio de concreto con luz de tarde" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover">
+    <h2 style="position: absolute; left: 32px; top: 42px; margin: 0; font-size: 48px; line-height: 56px; font-weight: 400; text-shadow: 0 0 18px rgba(25, 1, 0, 0.18)">Piezas únicas</h2>
+    <span class="subraya" style="position: absolute; left: 32px; bottom: 29px; font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.06em; padding-bottom: 6px; border-bottom: 1px solid currentColor">VER EL CATÁLOGO →</span>
+  </a>
+  <a href="Kits.dc.html" class="foto" style="position: relative; display: block; box-sizing: border-box; overflow: hidden; color: var(--crema)">
+    <img src="../img/9bef806cbb5cdbb03afb4adce33c15b5.jpg" alt="Mesa baja y biombo de madera en una nave de concreto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover">
+    <h2 style="position: absolute; left: 32px; top: 42px; margin: 0; font-size: 48px; line-height: 56px; font-weight: 400; text-shadow: 0 0 18px rgba(25, 1, 0, 0.18)">Sets restaurados</h2>
+    <span class="subraya" style="position: absolute; left: 32px; bottom: 29px; font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.06em; padding-bottom: 6px; border-bottom: 1px solid currentColor">VER LOS SETS →</span>
+  </a>
+</section>
+
+<!-- CONTEO DE VENDIDOS con la ilustración del comedor (mismas mitades que «Conoce Ache» y «Comprar») -->
+<section ref="{{vendRef}}" aria-label="Piezas vendidas" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); aspect-ratio: 8 / 3; border-bottom: 1px solid var(--linea)">
+  <div style="box-sizing: border-box; padding: 60px 64px 56px; border-right: 1px solid var(--linea); display: flex; flex-direction: column; align-items: flex-start">
+    <h2 style="margin: 0; max-width: 620px; font-size: 50px; line-height: 75px; font-weight: 400; font-style: italic"><span style="display: inline-grid; font-variant-numeric: tabular-nums"><span aria-hidden="true" style="grid-area: 1 / 1; visibility: hidden">{{vendidosTotal}}</span><span style="grid-area: 1 / 1; text-align: right">{{vendidos}}</span></span> muebles ya encontraron una segunda casa</h2>
+    <p style="margin: 4px 0 0; max-width: 510px; font-size: 21px; line-height: 28px">Cada pieza que vendemos se queda en el catálogo con su leyenda de «vendido». Es nuestra forma de llevar la cuenta: muebles restaurados que siguen en uso, en lugar de terminar en la basura.</p>
+    <a href="Catalogo.dc.html" style="margin-top: 14px; font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.06em; padding-bottom: 6px; border-bottom: 1px solid currentColor">VER LAS PIEZAS VENDIDAS →</a>
+  </div>
+  <div data-theme="azul" style="position: relative; box-sizing: border-box; background: var(--fondo); color: var(--texto); display: flex; align-items: center; justify-content: center">
+    <img src="../img/982e37f658fd95565e94b72b0555459f.svg" alt="Ilustración de línea de un comedor redondo con dos sillas y un florero" style="display: block; width: 48%; height: auto">
+    <span style="position: absolute; left: 32px; bottom: 30px; font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.08em"><span style="display: inline-grid; font-variant-numeric: tabular-nums"><span aria-hidden="true" style="grid-area: 1 / 1; visibility: hidden">{{vendidosTotal}}</span><span style="grid-area: 1 / 1; text-align: right">{{vendidos}}</span></span> PIEZAS VENDIDAS DESDE 2023</span>
+  </div>
+</section>
+
+<!-- LOS ÚLTIMOS QUE ENCONTRARON CASA: carrusel como Recién llegados y Sets, con las últimas piezas y sets vendidos -->
+<section aria-label="Los últimos que encontraron casa">
+  <div style="box-sizing: border-box; height: 78px; padding: 0 30px 0 33px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--linea)">
+    <h2 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 400">Los últimos que encontraron casa</h2>
+    <div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.06em">
+      <button type="button" onClick="{{anteriorUlt}}" disabled="{{sinAnteriorUlt}}" aria-label="Vendidos anteriores" style="box-sizing: border-box; width: 44px; height: 44px; padding: 0; border: 1px solid var(--linea); background: transparent; color: var(--texto); font-family: var(--font-mono); font-size: 16px">←</button>
+      <button type="button" onClick="{{siguienteUlt}}" disabled="{{sinSiguienteUlt}}" aria-label="Vendidos siguientes" style="box-sizing: border-box; width: 44px; height: 44px; padding: 0; border: 1px solid var(--linea); background: transparent; color: var(--texto); font-family: var(--font-mono); font-size: 16px">→</button>
+    </div>
+  </div>
+  <div style="overflow: hidden; border-bottom: 1px solid var(--linea)">
+    <div style="display: flex; transform: {{pistaUlt}}; transition: transform 500ms ease">
+      <sc-for list="{{ultimos}}" as="u" hint-placeholder-count="4">
+        <sc-if value="{{u.conFicha}}" hint-placeholder-val="{{true}}">
+          <a href="#ficha" onClick="{{u.abrir}}" class="celda" style="flex: 0 0 25%; box-sizing: border-box; padding: 64px 64px 42px; border-right: 1px solid var(--linea); display: flex; flex-direction: column; color: var(--texto)">
+            <div style="position: relative">
+              <img src="{{u.foto}}" alt="{{u.alt}}" style="display: block; width: 100%; aspect-ratio: 347 / 463; object-fit: cover">
+              <span style="position: absolute; left: 12px; top: 12px; padding: 4px 8px; background: var(--acento); color: var(--sobre-acento); font-family: var(--font-mono); font-size: 11px; line-height: 14px; letter-spacing: 0.08em">VENDIDO</span>
+            </div>
+            <div style="margin-top: 28px; font-size: 14px; line-height: 20px">{{u.nombre}}</div>
+            <div style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.04em; color: var(--texto-suave)">{{u.dato}}</div>
+            <div style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.04em; color: var(--acento)">{{u.lugar}}</div>
+          </a>
+        </sc-if>
+        <sc-if value="{{u.sinFicha}}" hint-placeholder-val="{{false}}">
+          <div style="flex: 0 0 25%; box-sizing: border-box; padding: 64px 64px 42px; border-right: 1px solid var(--linea); display: flex; flex-direction: column; color: var(--texto)">
+            <div style="position: relative">
+              <img src="{{u.foto}}" alt="{{u.alt}}" style="display: block; width: 100%; aspect-ratio: 347 / 463; object-fit: cover">
+              <span style="position: absolute; left: 12px; top: 12px; padding: 4px 8px; background: var(--acento); color: var(--sobre-acento); font-family: var(--font-mono); font-size: 11px; line-height: 14px; letter-spacing: 0.08em">VENDIDO</span>
+            </div>
+            <div style="margin-top: 28px; font-size: 14px; line-height: 20px">{{u.nombre}}</div>
+            <div style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.04em; color: var(--texto-suave)">{{u.dato}}</div>
+            <div style="font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.04em; color: var(--acento)">{{u.lugar}}</div>
+          </div>
+        </sc-if>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- COMPRAMOS MUEBLES: la misma banda de Quiénes somos, en ocre -->
+<section aria-label="Compramos muebles" data-theme="ocre" style="box-sizing: border-box; padding: 56px 32px 64px; border-bottom: 1px solid var(--linea); background: var(--fondo); color: var(--texto); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 64px; align-items: end">
+  <div>
+    <p style="margin: 0; font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.08em; color: var(--texto-suave)">VENDE TU MUEBLE</p>
+    <h2 style="margin: 10px 0 0; font-size: 50px; line-height: 75px; font-weight: 400; font-style: italic; text-wrap: balance">¿Tienes un mueble que ya no usas?</h2>
+  </div>
+  <div style="display: flex; flex-direction: column; align-items: flex-start">
+    <p style="margin: 0; max-width: 520px; font-size: 21px; line-height: 32px">También compramos muebles usados para darles una segunda vida. Mándanos unas fotos por WhatsApp y te respondemos.</p>
+    <a href="#" style="margin-top: 28px; box-sizing: border-box; height: 56px; padding: 0 28px; display: inline-flex; align-items: center; background: var(--texto); color: var(--fondo); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.08em">ESCRÍBENOS POR WHATSAPP →</a>
+  </div>
+</section>
+
+<!-- PIE: en vino (el color de pie del sistema de diseño), con la suscripción como primera parte y sin retícula:
+     un solo filete suave antes de la última fila -->
+<footer data-theme="vino" style="background: var(--fondo); color: var(--texto)">
+  <section aria-label="Suscripción" style="box-sizing: border-box; padding: 64px 30px 72px 32px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center">
+    <h2 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 400">Recibe primero las piezas nuevas</h2>
+    <sc-if value="{{sinSuscribir}}" hint-placeholder-val="{{true}}">
+      <form onSubmit="{{suscribir}}" style="display: flex; align-items: center; gap: 92px">
+        <label style="flex: 1 1 auto; min-width: 0">
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Correo electrónico</span>
+          <input type="email" required="" placeholder="Tu correo electrónico" style="box-sizing: border-box; width: 100%; height: 52px; padding: 0; border: 0; border-bottom: 1px solid var(--linea); border-radius: 0; background: transparent; color: var(--texto); font-family: var(--font-sans); font-size: 15px; outline-offset: 4px">
+        </label>
+        <button type="submit" style="flex: 0 0 276px; height: 60px; border: 0; background: var(--texto); color: var(--fondo); font-family: var(--font-mono); font-size: 14px; line-height: 18px; letter-spacing: 0.08em">SUSCRIBIRME →</button>
+      </form>
+    </sc-if>
+    <sc-if value="{{suscrito}}" hint-placeholder-val="{{false}}">
+      <p style="margin: 0; font-size: 17px; line-height: 26px">Listo. Te escribiremos en cuanto lleguen piezas nuevas.</p>
+    </sc-if>
+  </section>
+  <div style="box-sizing: border-box; padding: 0 32px 72px; display: grid; grid-template-columns: 2fr 1fr 1fr; column-gap: 32px; align-items: start">
+    <div style="display: flex; align-items: flex-start; gap: 64px">
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 32px">
+        <img src="../img/f4ba0bee38160ecfe3a739bb3dad38f9.svg" alt="Ache" style="display: block; height: 48px; width: auto">
+        <a href="Contacto.dc.html" style="box-sizing: border-box; height: 52px; padding: 0 26px; display: inline-flex; align-items: center; border: 1px solid var(--texto); color: var(--texto); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.08em">CONTACTO →</a>
+      </div>
+      <img src="../img/832e748062cd954e01a93e820105bf01.svg" alt="Ilustración de línea de Origen: una lámpara de pie junto a un sillón" style="display: block; height: 170px; width: auto">
+    </div>
+    <nav aria-label="Ayuda" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px">
+      <a href="Vende.dc.html">Vende tu mueble</a>
+      <a href="Ayuda.dc.html#preguntas">Preguntas frecuentes</a>
+      <a href="Ayuda.dc.html#devoluciones">Devoluciones</a>
+      <a href="Contacto.dc.html">Envíos y entregas</a>
+      <a href="Contacto.dc.html">Cuidado de tu mueble</a>
+    </nav>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <span>Entregamos en la Zona Metropolitana de Guadalajara.</span>
+      <span style="color: var(--texto-suave)">Tarjeta, Apple Pay, Google Pay, PayPal, transferencia y OXXO.</span>
+    </div>
+  </div>
+  <div style="box-sizing: border-box; margin: 0 32px; height: 72px; border-top: 1px solid var(--linea-suave); display: flex; align-items: center; justify-content: space-between; color: var(--texto-suave)">
+    <nav aria-label="Redes" style="display: flex; gap: 22px">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">WhatsApp</a>
+    </nav>
+    <span>© 2026 Ache · Sitio por Crafteo</span>
+  </div>
+</footer>
+
+</sc-if>
+<sc-if value="{{conFicha}}" hint-placeholder-val="{{false}}">
+<dc-import name="Pieza" codigo="{{fichaCodigo}}" origen="Main" al-volver="{{volverDeFicha}}" carrito="{{carritoLista}}" al-agregar="{{agregarAlCarrito}}" hint-size="100%,4940px"></dc-import>
+</sc-if>
+
+<!-- INTRO: el logotipo se parte, pasan imágenes del brandbook (sellos e ilustraciones sobre sus colores) y el logotipo vuelve a su lugar -->
+<sc-if value="{{intro}}" hint-placeholder-val="{{false}}">
+  <div role="status" aria-label="Cargando" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 95; background: {{introFondo}}; transition: background-color .5s ease; color: var(--texto)">
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: {{introAlto}}px">
+      <div ref="{{introGrupo}}" style="position: absolute; left: 50%; top: 50%; display: flex; align-items: center; transform: {{grupoT}}; transform-origin: 50% 50%; transition: {{grupoTrans}}">
+        <span style="position: relative; display: block; flex: 0 0 auto">
+          <img src="../img/34fe89535bf6301dc07aa23e1abc89d7.svg" alt="" style="display: block; height: 135.75px; width: auto; opacity: {{letrasOp}}; transition: opacity .5s ease">
+          <img src="../img/2a0ea62edae025c4c503191f7710cc99.svg" alt="" style="position: absolute; top: 0; left: 0; display: block; height: 135.75px; width: auto; opacity: {{letrasCremaOp}}; transition: opacity .5s ease">
+        </span>
+        <div style="position: relative; flex: 0 0 auto; overflow: hidden; width: {{ventanaAncho}}; height: 271.5px; margin: 0 {{ventanaMargen}}; transition: width .45s cubic-bezier(.7,0,.2,1), margin .45s cubic-bezier(.7,0,.2,1)">
+          <sc-for list="{{cuadrosIntro}}" as="c" hint-placeholder-count="9">
+            <img src="{{c.foto}}" alt="" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 205.5px; height: 100%; object-fit: cover; opacity: {{c.op}}">
+          </sc-for>
+        </div>
+        <span style="position: relative; display: block; flex: 0 0 auto">
+          <img src="../img/a90bd2d627a2ec4be569265774c03e98.svg" alt="" style="display: block; height: 135.75px; width: auto; opacity: {{letrasOp}}; transition: opacity .5s ease">
+          <img src="../img/74c6a029ec6ae34ee83f36c6ba98176b.svg" alt="" style="position: absolute; top: 0; left: 0; display: block; height: 135.75px; width: auto; opacity: {{letrasCremaOp}}; transition: opacity .5s ease">
+        </span>
+      </div>
+      <p style="position: absolute; left: 21px; bottom: 19.5px; margin: 0; font-family: var(--font-mono); font-size: 15px; line-height: 1; letter-spacing: 0.04em; opacity: {{rotuloOp}}; transition: opacity .3s ease">(CARGANDO)</p>
+      <p style="position: absolute; right: 18.75px; bottom: 19.5px; margin: 0; font-family: var(--font-mono); font-size: 15px; line-height: 1; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; opacity: {{rotuloOp}}; transition: opacity .3s ease">{{cargaPct}}%</p>
+    </div>
+  </div>
+</sc-if>
+<!-- WHATSAPP: botón fijo, siempre a la vista (globo de diálogo genérico, no el logotipo de WhatsApp) -->
+<a href="#" class="wa-flotante" aria-label="Escríbenos por WhatsApp" style="position: fixed; right: 24px; bottom: 24px; z-index: 45; box-sizing: border-box; height: 52px; padding: 0 20px 0 17px; display: flex; align-items: center; gap: 10px; background: var(--texto); color: var(--fondo); border: 1px solid var(--fondo); font-family: var(--font-mono); font-size: 13px; line-height: 16px; letter-spacing: 0.08em; text-decoration: none; transition: background-color .2s ease, color .2s ease">
+  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" style="display: block"><path d="M1.5 2.5h15v10h-9l-4 3.5v-3.5h-2z" stroke="currentColor" stroke-width="1.3"></path></svg>
+  <span>WHATSAPP</span>
+</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"pantallaDeCarga": {"editor": "boolean", "default": true}, "$preview": {"width": 1440, "height": 5773}}'>
+/* exportable: imágenes */
+// Cuando la página corre desde el HTML descargado, window.__resources trae una copia de cada imagen subida.
+var __acheRecursos = (typeof window !== 'undefined' && window.__resources) || null;
+function __acheMapa(v, d) {
+  if (typeof v === 'string') {
+    if (v.lastIndexOf('/_blob/', 0) !== 0) return v;
+    var r = __acheRecursos[v];
+    return typeof r === 'string' && r ? r : v;
+  }
+  if (!v || typeof v !== 'object' || d > 8) return v;
+  var lista = Array.isArray(v);
+  if (!lista && Object.getPrototypeOf(v) !== Object.prototype) return v;
+  var claves = lista ? null : Object.keys(v), n = lista ? v.length : claves.length, fuera = null;
+  for (var i = 0; i < n; i++) {
+    var k = lista ? i : claves[i], x = v[k], y = __acheMapa(x, d + 1);
+    if (y !== x) { if (!fuera) fuera = lista ? v.slice() : Object.assign({}, v); fuera[k] = y; }
+  }
+  return fuera || v;
+}
+
+var CODIGOS = ["NO. 0157", "NO. 0154", "NO. 0150", "NO. 0138", "NO. 0147", "NO. 0141", "NO. 0163", "NO. 0164", "NO. 0165", "NO. 0167", "NO. 0171", "NO. 0173", "NO. 0158", "NO. 0153", "NO. 0144", "NO. 0176", "NO. 0179", "NO. 0156", "NO. 0152", "NO. 0148", "NO. 0145", "NO. 0140", "NO. 0135", "NO. 0166", "NO. 0168", "NO. 0169", "NO. 0174", "NO. 0175", "NO. 0177", "NO. 0178", "NO. 0155", "NO. 0136", "NO. 0134", "NO. 0139", "NO. 0170", "NO. 0137", "NO. 0162", "NO. 0172", "SET NO. 0151", "SET NO. 0180", "SET NO. 0181", "SET NO. 0182", "SET NO. 0183", "NO. 0149"];
+var CUADROS_INTRO = ["../img/a55ad36dab4a1576a5e614ba7ed4b160.png", "../img/3aee69cb62027b03021d815a50fd0603.png", "../img/2c5118372fecf0c1922aa7ba221a93de.png", "../img/82a9b4fbc42e5392c9f5e5a3f8c6331e.png", "../img/e26f33514c15537323de9b31999daa68.png", "../img/4632b0beefe8d5b1905c0b902178bb69.png", "../img/b827520ee2fa7cfe920e1bb01e8e94e9.png", "../img/58a681e4e59144a4ab13069cfde26564.png", "../img/ef0801537567a246d9fe49e9a6e3b306.png"];
+var VENDIDOS_TOTAL = 312;
+var PORTADAS = [["../img/ad58a00fdf8f616537258b20f611f2b8.jpg", "Biombo de celosía, sillón bajo de rejilla y mesa baja de madera en un patio de concreto"], ["../img/37dc73282da17baa70cdd87ee2d769fe.jpg", "Sala Copenhague: sillón y otomana verdes y sillón gris de nogal en una nave de muros blancos"], ["../img/a67807a23da5aa21405ef7438a8948de.jpg", "Dos sillas de madera oscura con asiento de piel, de frente, con su sombra sobre el muro"], ["../img/383646a8c09a80050a83b1fda11a3446.jpg", "Sillón de nogal con tapiz de terciopelo rosa sobre un fondo rosado"]];
+var PORTADA_MS = 6000;
+var PREGUNTAS = [["¿Cada pieza es única? ¿Qué pasa cuando se vende?", "Sí. Cada mueble es una pieza única: no fabricamos ni repetimos modelos. Cuando se vende, se queda en el catálogo con la leyenda «vendido» y ya no vuelve a estar disponible. Si buscas algo parecido, suscríbete y te avisamos cuando llegue una pieza similar."], ["¿De dónde vienen los muebles y cómo los restauran?", "Los encontramos en casas, mudanzas y bodegas de Guadalajara y sus alrededores, y también se los compramos a personas que ya no los usan. En el taller revisamos la estructura, reforzamos las uniones, lijamos a mano y terminamos con aceites y ceras naturales. Si la pieza lleva tapiz, lo cambiamos por uno nuevo."], ["¿Las piezas pueden tener marcas del tiempo?", "Sí. Restauramos la estructura y el acabado, pero respetamos la pátina y algunas marcas de uso que forman parte de la historia del mueble. Fotografiamos cada pieza tal como llegará a tu casa: lo que ves en la ficha es lo que recibes."], ["¿Puedo pedir más fotos o medidas de una pieza?", "Claro. Escríbenos por WhatsApp al 33 1234 5678 o a hola@estudioache.mx con el número de la pieza (por ejemplo, NO. 0143) y te mandamos fotos de los detalles que quieras ver y sus medidas exactas."], ["¿Qué es un set y por qué se vende completo?", "Un set son piezas que llegaron juntas, como una sala o un comedor con sus sillas. Las restauramos al mismo tiempo y con el mismo acabado para que el conjunto se vea parejo; por eso se vende completo y no separamos sus piezas."], ["¿Hacen envíos fuera de Guadalajara? ¿Cuánto cuesta el flete?", "Por ahora solo entregamos en la Zona Metropolitana de Guadalajara, con flete propio. El flete se cobra aparte del precio de la pieza y se calcula según su tamaño, la distancia y el piso de entrega."], ["¿Cuánto tarda la entrega?", "Entre 3 y 5 días hábiles después de tu compra. Te escribimos para acordar el día y la hora, y te mantenemos al tanto hasta que la pieza llega a tu casa."], ["¿Qué formas de pago aceptan? ¿Hay meses sin intereses?", "Aceptamos tarjeta de débito y crédito, Apple Pay, Google Pay, PayPal, transferencia y OXXO. Por ahora no manejamos meses sin intereses. Si tienes un cupón o un código de referido, lo aplicas al pagar."], ["¿Aceptan devoluciones?", "Como cada pieza es única, te pedimos revisar las fotos y las medidas antes de comprar: no aceptamos devoluciones por cambio de opinión. Si tu mueble llega con un daño que no aparecía en la ficha, escríbenos dentro de las 48 horas siguientes a la entrega y lo resolvemos contigo."]];
+class Component extends DCLogic {
+// PORTADA: el carrusel avanza solo cuando ya terminó la intro; con movimiento reducido se queda quieto
+_portadaTic() {
+  var st = this.state || {};
+  if (st.iFase != null && st.iFase < 6) { this._pDesde = Date.now(); return; }
+  if (this._pQuieto) return;
+  if (Date.now() - (this._pDesde || 0) >= PORTADA_MS) {
+    this._pDesde = Date.now();
+    this.setState({ portada: ((st.portada || 0) + 1) % PORTADAS.length });
+  }
+}
+_valsPortada() {
+  var self = this, st = this.state || {};
+  var p = st.portada || 0, listo = !(st.iFase != null && st.iFase < 6), mueve = listo && !this._pQuieto;
+  var dos = function (n) { return (n < 10 ? '0' : '') + n; };
+  return {
+    portadas: PORTADAS.map(function (f, i) {
+      var on = i === p;
+      return { foto: f[0], alt: f[1], oculta: on ? 'false' : 'true', op: on ? 1 : 0,
+        escala: self._pQuieto ? 'none' : (on ? 'scale(1.06)' : 'scale(1)'),
+        trans: on ? 'transform 7s linear' : 'transform 0s linear 1.3s' };
+    }),
+    portadaN: dos(p + 1) + ' / ' + dos(PORTADAS.length),
+    segmentos: PORTADAS.map(function (f, i) {
+      var on = i === p;
+      return { aria: 'Ver la foto ' + (i + 1) + ' de ' + PORTADAS.length, actual: on ? 'true' : 'false',
+        ancho: i < p || (on && !mueve) ? '100%' : '0%',
+        anim: on && mueve ? 'avance ' + PORTADA_MS + 'ms linear forwards' : 'none',
+        ir: function () { if (i === p) return; self._pDesde = Date.now(); self.setState({ portada: i }); } };
+    })
+  };
+}
+// PREGUNTAS FRECUENTES: al llegar con #preguntas (desde el pie de otra pantalla) baja a la sección
+_irHash() {
+  if (this._hashListo) return;
+  var st = this.state || {};
+  if (st.iFase != null && st.iFase < 6) return;
+  var h = '';
+  try { h = (window.location.hash || '').slice(1); } catch (e) {}
+  if (!h) { this._hashListo = true; return; }
+  var el = document.getElementById(h);
+  if (el) { this._hashListo = true; el.scrollIntoView(); }
+}
+// CONTEO DE VENDIDOS: de 0 a la cifra cuando la sección entra en pantalla (una sola vez)
+_vendRefs() { if (!this._vendRef) this._vendRef = { current: null }; }
+_vidRefs() { if (!this._vidRef) this._vidRef = { current: null }; }
+_videoIniciar() {
+  // video del taller: sin sonido y en bucle; arranca solo, salvo con «movimiento reducido»
+  var v = this._vidRef && this._vidRef.current;
+  if (!v || this._vidListo) return;
+  this._vidListo = true;
+  v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', '');
+  var reducido = false;
+  try { reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  if (reducido) { this.setState({ vidPausa: true }); return; }
+  var self = this, p = v.play();
+  if (p && p.catch) p.catch(function () { self.setState({ vidPausa: true }); });
+}
+_vendidosVer() {
+  var st = this.state || {};
+  if (this._contado || (st.iFase != null && st.iFase < 6)) return;
+  var el = this._vendRef && this._vendRef.current;
+  if (!el) return;
+  var r = el.getBoundingClientRect(), vh = window.innerHeight || 900;
+  if (r.top < vh * 0.85 && r.bottom > 0) { this._contado = true; this._contar(); }
+}
+_contar() {
+  var self = this, fin = VENDIDOS_TOTAL, t0 = null;
+  var reducido = false;
+  try { reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  if (reducido) { this.setState({ cuenta: fin }); return; }
+  var paso = function (t) {
+    if (t0 == null) t0 = t;
+    var p = Math.min(1, (t - t0) / 1600), e = 1 - Math.pow(1 - p, 3);
+    self.setState({ cuenta: Math.round(e * fin) });
+    if (p < 1) self._cr = requestAnimationFrame(paso);
+  };
+  this.setState({ cuenta: 0 });
+  this._cr = requestAnimationFrame(paso);
+}
+// INTRO: el logotipo se parte, pasan imágenes del brandbook y el logotipo vuelve a su lugar
+_introRefs() {
+  if (this._iGrupo) return;
+  this._iGrupo = { current: null }; this._iDestino = { current: null };
+  var reducido = false;
+  try { reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  var interna = false;
+  try { interna = /\.dc\.html/.test(document.referrer || ''); } catch (e) {}
+  // sin intro: si se apaga en el lienzo, si se llega desde otra página del sitio o con movimiento reducido
+  var conHash = false;
+  try { conHash = !!window.location.hash; } catch (e) {}
+  this._iCon = this.props.pantallaDeCarga !== false && !reducido && !interna && !conHash;
+}
+_introIniciar() {
+  var self = this;
+  this._introRefs();
+  this._iTt = [];
+  var W = window.innerWidth || 1440;
+  var z = parseFloat(document.documentElement.style.zoom) || 1;
+  this._iAlto = Math.min(window.innerHeight || 900, Math.round(W * 0.62)) / z;
+  if (!this._iCon) { this.setState({ iFase: 6, iAlto: this._iAlto }); return; }
+  try { document.documentElement.style.overflow = 'hidden'; window.scrollTo(0, 0); } catch (e) {}
+  var t0 = Date.now();
+  this.setState({ iFase: 0, iFoto: 0, iPct: 0, iAlto: this._iAlto });
+  this._iTt.push(setTimeout(function () { self.setState({ iFase: 1 }); }, 80));
+  this._iTt.push(setTimeout(function () { self.setState({ iFase: 2 }); }, 450));
+  this._iInt = setInterval(function () {
+    var st = self.state || {};
+    var p = Math.min(1, Math.max(0, (Date.now() - t0 - 450) / 2550));
+    var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+    self.setState({ iFoto: ((st.iFoto || 0) + 1) % CUADROS_INTRO.length, iPct: Math.min(99, Math.round(e * 99)) });
+  }, 170);
+  this._iTt.push(setTimeout(function () { clearInterval(self._iInt); self.setState({ iFase: 3, iPct: 99 }); }, 3050));
+  this._iTt.push(setTimeout(function () {
+    // a dónde va: el logotipo de la página, medido ya con el nombre completo
+    var g = self._iGrupo.current, t = self._iDestino.current;
+    if (g && t) {
+      var rg = g.getBoundingClientRect(), rt = t.getBoundingClientRect();
+      var k = g.offsetWidth ? rg.width / g.offsetWidth : 1;
+      var dx = ((rt.left + rt.width / 2) - (rg.left + rg.width / 2)) / k;
+      var dy = ((rt.top + rt.height / 2) - (rg.top + rg.height / 2)) / k;
+      self._iFin = 'translate(-50%,-50%) translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) scale(' + (rt.width / rg.width).toFixed(4) + ')';
+    }
+    self.setState({ iFase: 4 });
+  }, 3520));
+  // ya en su lugar: se descubre la página alrededor del logotipo
+  this._iTt.push(setTimeout(function () { self.setState({ iFase: 5 }); }, 4270));
+  this._iTt.push(setTimeout(function () {
+    self.setState({ iFase: 6 });
+    try { document.documentElement.style.overflow = ''; } catch (e) {}
+  }, 4800));
+}
+_introParar() {
+  (this._iTt || []).forEach(function (t) { clearTimeout(t); });
+  clearInterval(this._iInt);
+  try { document.documentElement.style.overflow = ''; } catch (e) {}
+}
+_valsIntro() {
+  this._introRefs();
+  var st = this.state || {};
+  var f = st.iFase != null ? st.iFase : (this._iCon ? 0 : 6);
+  var foto = st.iFoto || 0, pct = st.iPct || 0;
+  var t = 'translate(-50%,-50%)';
+  if (f === 2) t = 'translate(-50%,-50%) translateX(20px)';
+  if (f >= 4 && this._iFin) t = this._iFin;
+  return {
+    intro: f < 6,
+    introAlto: (st.iAlto || this._iAlto || 893).toFixed(1),
+    introFondo: f >= 5 ? 'transparent' : 'var(--fondo)',
+    introGrupo: this._iGrupo, introDestino: this._iDestino,
+    letrasOp: f >= 1 && f < 5 ? 1 : 0,
+    letrasCremaOp: f >= 5 ? 1 : 0,
+    ventanaAncho: f === 2 ? '205.5px' : '0px',
+    ventanaMargen: f === 2 ? '16.125px' : '3.4875px',
+    grupoT: t,
+    grupoTrans: f >= 4 ? 'transform .75s cubic-bezier(.7,0,.2,1)' : (f >= 1 ? 'transform .45s cubic-bezier(.7,0,.2,1)' : 'none'),
+    rotuloOp: f >= 3 ? 0 : 1,
+    cargaPct: (pct < 10 ? '0' : '') + pct,
+    cuadrosIntro: CUADROS_INTRO.map(function (c, i) { return { foto: c, op: i === foto ? 1 : 0 }; }),
+    logoIntroOp: f >= 6 ? 1 : 0
+  };
+}
+componentDidMount() {
+  var self = this;
+  this._y = 0;
+  this._alBajar = function () {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    var dy = y - self._y;
+    self._y = y;
+    var st = self.state || {};
+    var oculto = !!st.oculto;
+    if (y < 300) oculto = false;
+    else if (dy > 4) oculto = true;
+    else if (dy < -4) oculto = false;
+    var ancho = document.documentElement.clientWidth || window.innerWidth || 1440;
+    var solido = y > ancho * 1070 / 1903 - 72;
+    if (st.oculto !== oculto || st.solido !== solido) {
+      self.setState({ oculto: oculto, solido: solido, menu: oculto ? '' : st.menu });
+    }
+  };
+  window.addEventListener('scroll', this._alBajar, { passive: true });
+  // en pantallas de menos de 1440 px el diseño se ve a escala, sin apretarse
+  this._escala = function () {
+    var w = window.innerWidth || 1440;
+    document.documentElement.style.zoom = w < 1440 ? String(Math.max(w / 1440, 0.5)) : '';
+  };
+  this._escala();
+  window.addEventListener('resize', this._escala);
+  this._introIniciar();
+  // portada: carrusel
+  try { this._pQuieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { this._pQuieto = false; }
+  this._pDesde = Date.now();
+  this._pInt = setInterval(function () { self._portadaTic(); }, 200);
+  // conteo de vendidos: al desplazarse y, si ya está a la vista, en cuanto termina la intro
+  this._vendRefs();
+  this._vidRefs();
+  this._vidTt = setTimeout(function () { self._videoIniciar(); }, 200);
+  this._alVerVendidos = function () { self._vendidosVer(); };
+  window.addEventListener('scroll', this._alVerVendidos, { passive: true });
+  this._vendTt = [setTimeout(this._alVerVendidos, 300), setTimeout(this._alVerVendidos, 4950),
+    setTimeout(function () { self._irHash(); }, 250), setTimeout(function () { self._irHash(); }, 4950)];
+}
+componentWillUnmount() {
+  this._introParar();
+  clearInterval(this._pInt);
+  window.removeEventListener('scroll', this._alVerVendidos);
+  clearTimeout(this._vidTt);
+  (this._vendTt || []).forEach(function (t) { clearTimeout(t); });
+  cancelAnimationFrame(this._cr);
+  window.removeEventListener('scroll', this._alBajar);
+  window.removeEventListener('resize', this._escala);
+}
+renderVals() {
+  var self = this;
+  var st = this.state || {};
+  var fichaAbierta = st.ficha || '';
+  var carritoLista = st.carrito || [];
+  var abrirFicha = function (c) {
+    return function (e) {
+      if (e && e.preventDefault) e.preventDefault();
+      self._yAntes = window.scrollY || 0;
+      self.setState({ ficha: c, menu: '' });
+      if (window.scrollTo) window.scrollTo(0, 0);
+    };
+  };
+  var abrir = {};
+  CODIGOS.forEach(function (c) { abrir[(c.indexOf('SET') === 0 ? 'k' : 'n') + c.slice(-4)] = abrirFicha(c); });
+  var solido = !!st.solido;
+  var menu = st.menu || '';
+  var datos = [
+    ["../img/b99dc9d040324e28003b28c6017ac492.jpg", "Mesa de roble con cubierta de parquet, del set Comedor Bergen", "Comedor Bergen", "5 PIEZAS · $52,800", 0, 1, "SET NO. 0180"],
+    ["../img/17f1754c8c9bc97bc5367a586882c175.jpg", "Silla de teca con respaldo de madera y asiento de rejilla", "Silla de rejilla", "NO. 0179 · $7,200", 0, 0, "NO. 0179"],
+    ["../img/9bed3f319f1f583b5f64be8c81a43412.jpg", "Sillón de teca con patas en tijera, asiento y respaldo de rejilla", "Sillón de rejilla en tijera", "NO. 0173 · $14,300", 0, 0, "NO. 0173"],
+    ["../img/3afc40de16230915ec983ab0a8842ad9.jpg", "Silla de nogal con brazos, respaldo de rejilla y asiento blanco, del set Sillas Lisboa", "Sillas Lisboa", "6 PIEZAS · $41,400", 0, 1, "SET NO. 0181"],
+    ["../img/90fcd341b8516910ab4c81fc00c87c41.jpg", "Lámpara de pie con base de teca calada y pantalla de fibra", "Lámpara de pie de teca", "NO. 0172 · $8,600", 0, 0, "NO. 0172"],
+    ["../img/9e7e16f0bb258000ab84de75911638fa.jpg", "Mesa de centro de roble con cubierta triangular", "Mesa de centro triangular", "NO. 0178 · $11,400", 0, 0, "NO. 0178"],
+    ["../img/d53dfe1a422b4286ceadbadb104bd7d6.jpg", "Silla escalonada de nogal con cojines grises, del set Escalón en nogal", "Escalón en nogal", "2 PIEZAS · $16,800", 0, 1, "SET NO. 0182"],
+    ["../img/d6ef05669f2e461d471abc6b38dfafc1.jpg", "Sillón bajo de teca con patas cruzadas y rejilla", "Sillón de patas cruzadas", "NO. 0171 · $15,400", 0, 0, "NO. 0171"],
+    ["../img/04766d07c89f4df2a83afda1d29fc5e2.jpg", "Silla de teca con patas cruzadas y asiento de rejilla", "Silla plegable de rejilla", "NO. 0176 · $6,800", 0, 0, "NO. 0176"],
+    ["../img/f9694a615ea98576988670f343ed2c03.jpg", "Mesa de centro redonda de fresno ebonizado", "Mesa de centro negra", "NO. 0175 · $13,900", 0, 0, "NO. 0175"],
+    ["../img/968a3d01b12b51cd8faaafee5f3abdec.jpg", "Banco alto de teca con aro reposapiés de latón", "Banco alto con aro de latón", "NO. 0170 · $6,900", 0, 0, "NO. 0170"],
+    ["../img/54975d925e0419855e8dc532d1fc95fe.jpg", "Consola de teca con dos cajones y patas en V", "Consola de dos cajones", "NO. 0169 · $11,800", 0, 0, "NO. 0169"]
+  ];
+  var piezas = datos.map(function (d) {
+    return {
+      foto: d[0], alt: d[1], nombre: d[2], dato: d[3],
+      vendido: !!d[4], kit: !!d[5],
+      colorDato: d[4] ? 'var(--acento)' : 'var(--texto-suave)',
+      abrir: abrirFicha(d[6])
+    };
+  });
+  var max = piezas.length - 4;
+  var off = Math.max(0, Math.min(st.off || 0, max));
+  var setsDatos = [
+    ["../img/d53dfe1a422b4286ceadbadb104bd7d6.jpg", "Silla escalonada de nogal con cojines grises, del set Escalón en nogal", "Escalón en nogal", "2 PIEZAS", "SILLA Y BANCO", "$16,800", "SET NO. 0182"],
+    ["../img/ca6fb9b9aa325aed55129e2767539bb1.jpg", "Silla escalonada de fresno ebonizado con respaldo verde, del set Escalón en negro", "Escalón en negro", "2 PIEZAS", "SILLA Y BANCO", "$16,800", "SET NO. 0183"],
+    ["../img/162ea8f690bcc55e91d058923bf969d9.jpg", "Sillón de nogal tapizado en lana verde, del set Sala Copenhague", "Sala Copenhague", "4 PIEZAS", "SOFÁ, DOS SILLONES Y OTOMANA", "$46,800", "SET NO. 0151"],
+    ["../img/b99dc9d040324e28003b28c6017ac492.jpg", "Mesa de roble con cubierta de parquet, del set Comedor Bergen", "Comedor Bergen", "5 PIEZAS", "MESA Y CUATRO SILLAS", "$52,800", "SET NO. 0180"],
+    ["../img/3afc40de16230915ec983ab0a8842ad9.jpg", "Silla de nogal con brazos, respaldo de rejilla y asiento blanco, del set Sillas Lisboa", "Sillas Lisboa", "6 PIEZAS", "SEIS SILLAS", "$41,400", "SET NO. 0181"]
+  ];
+  var sets = setsDatos.map(function (d) {
+    return { foto: d[0], alt: d[1], nombre: d[2], piezas: d[3], dato: d[4], precio: d[5], abrir: abrirFicha(d[6]) };
+  });
+  var maxS = sets.length - 4;
+  var offS = Math.max(0, Math.min(st.offS || 0, maxS));
+  // LOS ÚLTIMOS QUE ENCONTRARON CASA: los tres vendidos de la v2 abren su ficha; los de la v4 no tienen ficha aquí
+  var ultimosDatos = [
+    ["../img/bf68187b0ce0eebc3cda000022bc9d20.jpg", "Banca de parota de una sola pieza con patas talladas", "Banca de tronco", "NO. 0193 · $15,600", "SE FUE A ZAPOPAN", ""],
+    ["../img/c5c32227e8be96e220a7a09a86d3834a.jpg", "Silla de estudio de teca con paleta, asiento y respaldo de rejilla", "Silla de estudio", "NO. 0153 · $9,400", "SE FUE A GUADALAJARA", "NO. 0153"],
+    ["../img/d959c0cafd64a68ee28803230a365869.jpg", "Dos sillas de nogal de respaldo alto, del set Sillas Milán", "Sillas Milán", "2 PIEZAS · $13,600", "SE FUE A TLAQUEPAQUE", ""],
+    ["../img/adfbc3e3cda2662c2e40602d30be5cc8.jpg", "Sofá de dos plazas con cojines blancos y patas de teca", "Sofá de dos plazas", "NO. 0141 · $24,800", "SE FUE A TLAJOMULCO", "NO. 0141"],
+    ["../img/191c7289477f780c0a0b0255deab80c4.jpg", "Dos sillones de respaldo envolvente con tapiz de lana gris y patas de nogal, del set Par de sillones grises", "Par de sillones grises", "2 PIEZAS · $34,600", "SE FUE A ZAPOPAN", ""],
+    ["../img/1423aeebc2669788a317635e3def27d5.jpg", "Banco redondo de cedro de cuatro patas", "Banco redondo", "NO. 0134 · $4,600", "SE FUE A TONALÁ", "NO. 0134"]
+  ];
+  var ultimos = ultimosDatos.map(function (d) {
+    return { foto: d[0], alt: d[1], nombre: d[2], dato: d[3], lugar: d[4],
+      conFicha: !!d[5], sinFicha: !d[5], abrir: d[5] ? abrirFicha(d[5]) : function () {} };
+  });
+  var maxU = ultimos.length - 4;
+  var offU = Math.max(0, Math.min(st.offU || 0, maxU));
+  var claro = solido || menu !== '';
+  return Object.assign(this._valsIntro(), this._valsPortada(), {
+    abrir: abrir,
+    sinFicha: !fichaAbierta,
+    conFicha: !!fichaAbierta,
+    fichaCodigo: fichaAbierta,
+    volverDeFicha: function (h) {
+      var y = self._yAntes || 0;
+      self.setState({ ficha: '' });
+      setTimeout(function () { var el = h ? document.getElementById(h) : null; if (el) el.scrollIntoView(); else window.scrollTo(0, y); }, 40);
+    },
+    carritoLista: carritoLista,
+    carritoN: carritoLista.length,
+    carritoHref: 'Carrito.dc.html#c=' + carritoLista.map(function (c) { return (c.indexOf('SET') === 0 ? 'k' : 'n') + c.slice(-4); }).join(','),
+    agregarAlCarrito: function (c) { if (carritoLista.indexOf(c) < 0) self.setState({ carrito: carritoLista.concat([c]) }); },
+    hdrFondo: solido ? 'var(--fondo)' : 'transparent',
+    hdrTexto: solido ? 'var(--texto)' : 'var(--crema)',
+    hdrLinea: solido ? 'var(--linea)' : 'transparent',
+    hdrMover: st.oculto ? 'translateY(-100%)' : 'translateY(0)',
+    logoOp: solido ? 1 : 0,
+    menuNosotros: menu === 'nosotros',
+    menuCatalogo: menu === 'catalogo',
+    lineaNosotros: menu === 'nosotros' ? 'currentColor' : 'transparent',
+    lineaCatalogo: menu === 'catalogo' ? 'currentColor' : 'transparent',
+    abrirNosotros: function () { self.setState({ menu: 'nosotros' }); },
+    abrirCatalogo: function () { self.setState({ menu: 'catalogo' }); },
+    cerrarMenu: function () { self.setState({ menu: '' }); },
+    piezas: piezas,
+    pista: 'translateX(' + (-25 * off) + '%)',
+    sinAnterior: off <= 0,
+    sinSiguiente: off >= max,
+    anterior: function () { self.setState({ off: Math.max(0, off - 1) }); },
+    siguiente: function () { self.setState({ off: Math.min(max, off + 1) }); },
+    reproduciendo: !!st.video,
+    videoTexto: st.video ? 'PAUSAR VIDEO' : 'REPRODUCIR VIDEO · 2:40',
+    video: function () { self.setState({ video: !st.video }); },
+    sinSuscribir: !st.suscrito,
+    suscrito: !!st.suscrito,
+    suscribir: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ suscrito: true }); },
+    preguntas: PREGUNTAS.map(function (p, i) {
+      var abierta = st.faq === i;
+      return { pregunta: p[0], respuesta: p[1], id: 'pregunta-' + (i + 1), expandida: abierta ? 'true' : 'false', oculta: abierta ? 'false' : 'true',
+        signo: abierta ? '–' : '+', filas: abierta ? '1fr' : '0fr',
+        alternar: function () { self.setState({ faq: abierta ? null : i }); } };
+    }),
+    irPreguntas: function (e) {
+      if (e && e.preventDefault) e.preventDefault();
+      var el = document.getElementById('preguntas');
+      if (el) { try { el.scrollIntoView({ behavior: 'smooth' }); } catch (err) { el.scrollIntoView(); } }
+    },
+    vendidos: String((this.state || {}).cuenta == null ? VENDIDOS_TOTAL : this.state.cuenta),
+    vendidosTotal: String(VENDIDOS_TOTAL),
+    vendRef: (this._vendRefs(), this._vendRef),
+    claro: claro,
+    sets: sets,
+    pistaSets: 'translateX(' + (-25 * offS) + '%)',
+    sinAnteriorSets: offS <= 0,
+    sinSiguienteSets: offS >= maxS,
+    anteriorSets: function () { self.setState({ offS: Math.max(0, offS - 1) }); },
+    siguienteSets: function () { self.setState({ offS: Math.min(maxS, offS + 1) }); },
+    ultimos: ultimos,
+    pistaUlt: 'translateX(' + (-25 * offU) + '%)',
+    sinAnteriorUlt: offU <= 0,
+    sinSiguienteUlt: offU >= maxU,
+    anteriorUlt: function () { self.setState({ offU: Math.max(0, offU - 1) }); },
+    siguienteUlt: function () { self.setState({ offU: Math.min(maxU, offU + 1) }); },
+    siempre: true,
+    vidRef: (this._vidRefs(), this._vidRef),
+    videoBoton: st.vidPausa ? '▶  REPRODUCIR' : '❚❚  PAUSAR',
+    videoAria: st.vidPausa ? 'Reproducir el video del taller' : 'Pausar el video del taller',
+    alternarVideo: function () {
+      var v = self._vidRef && self._vidRef.current;
+      if (!v) return;
+      if (v.paused) { v.muted = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); self.setState({ vidPausa: false }); }
+      else { v.pause(); self.setState({ vidPausa: true }); }
+    }
+  });
+}
+}
+
+if (__acheRecursos && typeof Component === 'function' && typeof Component.prototype.renderVals === 'function' && !Component.prototype.renderVals.__ache) {
+  (function () {
+    var rv = Component.prototype.renderVals;
+    var cambiado = function () { return __acheMapa(rv.apply(this, arguments), 0); };
+    cambiado.__ache = true;
+    Component.prototype.renderVals = cambiado;
+  })();
+}
+</script>
+</body>
+</html>

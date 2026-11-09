@@ -1,88 +1,243 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ache · Versiones</title>
-<link rel="stylesheet" href="ache-version-1/ds/ache/tokens.css">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ache · Propuesta de diseño</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="ds/ache/tokens.css">
 <style>
-  body { margin: 0; background: var(--crema); color: var(--negro); font-family: var(--font-sans); }
-  main { max-width: 960px; margin: 0 auto; padding: 80px 24px; }
-  .rotulo { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--texto-suave); margin: 0 0 16px; }
-  h1 { font-size: 56px; line-height: 60px; font-weight: 400; margin: 0 0 56px; }
-  ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--negro); }
-  li { display: grid; grid-template-columns: 80px 1fr; gap: 8px 24px; padding: 28px 0; border-bottom: 1px solid var(--negro); }
-  .num { font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.08em; padding-top: 8px; }
-  h2 { margin: 0 0 12px; font-size: 32px; line-height: 36px; font-weight: 400; }
-  h2 a { color: inherit; text-decoration: none; }
-  h2 a:hover { color: var(--oxido); }
-  .paginas { display: flex; flex-wrap: wrap; gap: 6px 20px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
-  .paginas a { color: var(--texto-suave); text-decoration: none; border-bottom: 1px solid transparent; }
-  .paginas a:hover { color: var(--negro); border-color: currentColor; }
-  @media (max-width: 600px) { h1 { font-size: 40px; line-height: 44px; } li { grid-template-columns: 1fr; } }
+/* Portada de sala de exhibición: dos ventanas verticales a cada inicio, que se recorren al pasar el cursor; al elegir
+   una, la versión ocupa toda la ventana con una barra negra mínima para volver o cambiar de versión.
+   Un solo esquema (Crema de la marca), sin tema oscuro: es el mismo fondo de las dos propuestas. */
+:root {
+  --p-fondo: #f3f2e8;      /* crema */
+  --p-texto: #190100;      /* negro de marca */
+  --p-suave: #655551;      /* texto secundario de la marca */
+  --p-linea: #190100;
+  --p-linea-suave: #ccc7be;
+  --p-acento: #7f332c;     /* óxido */
+  --p-resalte: #ca863a;    /* ocre */
+  --p-sans: "Neue Haas Unica Pro", "Helvetica Neue", Arial, sans-serif;
+  --p-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --p-barra: 44px;
+  color-scheme: light;
+}
+html, body { background: var(--p-fondo); color: var(--p-texto); }
+body { font-family: var(--p-sans); font-size: 16px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+.mono { font-family: var(--p-mono); font-size: 12px; line-height: 18px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ---------- portada ---------- */
+.portada {
+  max-width: 1600px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+  display: grid; gap: clamp(24px, 3.2vw, 44px);
+}
+.encabezado { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+.logo { display: block; width: clamp(150px, 16vw, 230px); height: auto; color: var(--p-texto); }
+.meta { display: grid; gap: 2px; text-align: right; color: var(--p-texto); }
+.meta span:last-child { color: var(--p-suave); }
+
+.intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 32px; align-items: end;
+  border-top: 1px solid var(--p-linea); padding-top: 16px; }
+.intro h1 { margin: 0; font-weight: 400; font-size: clamp(40px, 5vw, 84px); line-height: 0.98; letter-spacing: -0.02em; text-wrap: balance; }
+.intro p { margin: 0; max-width: 34em; font-size: clamp(16px, 1.35vw, 20px); line-height: 1.4; text-wrap: pretty; }
+
+.versiones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; column-gap: clamp(16px, 2.4vw, 32px); row-gap: 0; }
+.version { grid-row: span 2; display: grid; grid-template-rows: auto auto; grid-template-rows: subgrid; text-decoration: none; color: inherit; border: 1px solid var(--p-linea); min-width: 0; }
+.version:focus-visible { outline: 2px solid var(--p-acento); outline-offset: 3px; }
+.ventana { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #e6e4da; border-top: 1px solid var(--p-linea); }
+.ventana img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: 100%; object-fit: cover; object-position: 50% 0%;
+  transition: object-position 1.4s cubic-bezier(.4, 0, .2, 1); }
+.version:hover .ventana img, .version:focus-visible .ventana img { object-position: 50% 100%; transition-duration: 9s; transition-timing-function: cubic-bezier(.45, 0, .55, 1); }
+.recorrido { position: absolute; left: 12px; bottom: 12px; padding: 6px 10px; background: var(--p-fondo); color: var(--p-texto);
+  border: 1px solid var(--p-linea); transition: opacity .3s ease; }
+.version:hover .recorrido, .version:focus-visible .recorrido { opacity: 0; }
+
+.ficha { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 24px; padding: 18px 20px 20px; transition: background-color .25s ease, color .25s ease; }
+.ficha h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 3.4vw, 52px); line-height: 1; letter-spacing: -0.015em; }
+.ficha .ir { align-self: center; white-space: nowrap; }
+.ficha .ir span { display: inline-block; transition: transform .25s ease; }
+.ficha .pantallas { grid-column: 1 / -1; color: var(--p-suave); transition: color .25s ease; }
+.ficha .pantallas b { font-weight: 400; color: var(--p-texto); transition: color .25s ease; }
+.version:hover .ficha, .version:focus-visible .ficha { background: var(--p-texto); color: var(--p-fondo); }
+.version:hover .ficha .pantallas, .version:hover .ficha .pantallas b,
+.version:focus-visible .ficha .pantallas, .version:focus-visible .ficha .pantallas b { color: var(--p-fondo); }
+.version:hover .ficha .ir span, .version:focus-visible .ficha .ir span { transform: translateX(4px); }
+
+.pie { display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; border-top: 1px solid var(--p-linea-suave); padding-top: 14px; color: var(--p-suave); }
+
+@media (max-width: 760px) {
+  .intro { grid-template-columns: minmax(0, 1fr); }
+  .versiones { grid-template-columns: minmax(0, 1fr); row-gap: 16px; }
+  .version + .version { margin-top: 0; }
+  .meta { text-align: left; }
+}
+
+/* ---------- visor ---------- */
+.visor { position: fixed; inset: 0; z-index: 20; background: var(--p-fondo); display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.barra { display: flex; align-items: center; gap: 4px 20px; flex-wrap: wrap; min-height: var(--p-barra); box-sizing: border-box;
+  background: var(--p-texto); color: var(--p-fondo);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.barra button, .barra a { all: unset; cursor: pointer; display: inline-flex; align-items: center; min-height: var(--p-barra); font-family: var(--p-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--p-fondo); }
+.barra button:focus-visible, .barra a:focus-visible { outline: 2px solid var(--p-resalte); outline-offset: -6px; }
+.barra .volver:hover, .barra .completa:hover { color: var(--p-resalte); }
+.cambio { display: inline-flex; gap: 2px; margin-left: auto; }
+.cambio button { padding: 0 12px; border-bottom: 2px solid transparent; box-sizing: border-box; opacity: .62; }
+.cambio button:hover { opacity: 1; }
+.cambio button[aria-current="true"] { opacity: 1; border-bottom-color: var(--p-resalte); }
+.completa { margin-left: 8px; }
+.escenario { position: relative; min-height: 0; }
+.escenario iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: var(--p-fondo); opacity: 0; transition: opacity .4s ease; }
+.escenario iframe.lista { opacity: 1; }
+.cargando, .aviso { position: absolute; inset: 0; display: grid; place-content: center; gap: 14px; text-align: center; padding: 24px; color: var(--p-suave); }
+.aviso a { color: var(--p-texto); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 4px; justify-self: center; }
+@media (hover: none) { .recorrido { display: none; } }
+@media (max-width: 560px) { .barra .titulo { display: none; } .completa { display: none !important; } }
+@media (prefers-reduced-motion: reduce) {
+  .ventana img, .version:hover .ventana img, .version:focus-visible .ventana img { transition: none; object-position: 50% 0%; }
+  .escenario iframe { transition: none; }
+}
 </style>
-</head>
-<body>
-<main>
-  <p class="rotulo">Maqueta · Sitio de prueba</p>
-  <h1>Ache — versiones</h1>
-  <ol>
-    <li>
-      <span class="num">01</span>
-      <div>
-        <h2><a href="ache-version-1/Main.dc.html">Versión 1</a></h2>
-        <nav class="paginas">
-          <a href="ache-version-1/Main.dc.html">Inicio</a>
-          <a href="ache-version-1/Catalogo.dc.html">Catálogo</a>
-          <a href="ache-version-1/Pieza.dc.html">Ficha de pieza</a>
-          <a href="ache-version-1/Kits.dc.html">Kits</a>
-          <a href="ache-version-1/Kit.dc.html">Ficha de kit</a>
-          <a href="ache-version-1/Nosotros.dc.html">Quiénes somos</a>
-        </nav>
+
+<main class="portada" id="portada">
+  <header class="encabezado">
+    <svg class="logo" role="img" aria-label="Ache" viewBox="0 0 575.99 110.28" fill="currentColor"><path d="M74.43 66.07L84.06 26.46C85.12 22.07 91.38 22.07 92.45 26.46L102.07 66.07C102.53 67.98 101.09 69.82 99.12 69.82L77.38 69.82C75.42 69.82 73.97 67.98 74.43 66.07M30.52 1.16C27.84 1.16 25.51 2.99 24.88 5.59L0.58 105.61C0 107.99 1.8 110.28 4.25 110.28L60.72 110.28C62.46 110.28 63.98 109.08 64.39 107.39L70.37 82.81C71.05 80.01 73.55 78.04 76.42 78.04L100.08 78.04C102.95 78.04 105.46 80.01 106.14 82.81L112.11 107.39C112.52 109.08 114.04 110.28 115.78 110.28L148.88 110.28C151.33 110.28 153.13 107.99 152.55 105.61L128.25 5.59C127.62 2.99 125.29 1.16 122.62 1.16L30.52 1.16"></path><path d="M345.26 69.82L341.62 69.82C340.08 69.82 338.83 68.58 338.83 67.04L338.83 3.95C338.83 2.41 337.58 1.16 336.04 1.16L277.37 1.16C275.83 1.16 274.58 2.41 274.58 3.95L274.58 107.49C274.58 109.03 275.83 110.28 277.37 110.28L336.04 110.28C337.58 110.28 338.83 109.03 338.83 107.49L338.83 80.83C338.83 79.29 340.08 78.04 341.62 78.04L345.26 78.04C346.8 78.04 348.05 79.29 348.05 80.83L348.05 107.49C348.05 109.03 349.3 110.28 350.84 110.28L386.14 110.28C387.68 110.28 388.93 109.03 388.93 107.49L388.93 3.95C388.93 2.41 387.68 1.16 386.14 1.16L350.84 1.16C349.3 1.16 348.05 2.41 348.05 3.95L348.05 67.04C348.05 68.58 346.8 69.82 345.26 69.82"></path><path d="M520.58 37.46L520.58 3.95C520.58 2.41 519.34 1.16 517.8 1.16L460.16 1.16L460.16 1.16L398.7 1.16C397.16 1.16 395.91 2.41 395.91 3.95L395.91 107.49C395.91 109.03 397.16 110.28 398.7 110.28L447.92 110.28L517.8 110.28C519.34 110.28 520.58 109.03 520.58 107.49L520.58 73.97C520.58 72.43 519.34 71.18 517.8 71.18L462.95 71.18C461.41 71.18 460.16 69.94 460.16 68.4L460.16 62.61C460.16 61.07 461.41 59.83 462.95 59.83L494.85 59.83C496.39 59.83 497.64 58.58 497.64 57.04L497.64 54.39C497.64 52.86 496.39 51.61 494.85 51.61L462.95 51.61C461.41 51.61 460.16 50.36 460.16 48.82L460.16 43.04C460.16 41.5 461.41 40.25 462.95 40.25L517.8 40.25C519.34 40.25 520.58 39 520.58 37.46"></path><path d="M268.88 85.11L268.88 63.2C268.88 61.51 267.51 60.14 265.82 60.14L230.79 60.14C229.25 60.14 228.01 61.38 228.01 62.92L228.01 99.27C228.01 100.81 226.76 102.06 225.22 102.06L221.57 102.06C220.03 102.06 218.79 100.81 218.79 99.27L218.79 12.17C218.79 10.63 220.03 9.38 221.57 9.38L225.22 9.38C226.76 9.38 228.01 10.63 228.01 12.17L228.01 48.51C228.01 50.05 229.25 51.3 230.79 51.3L265.82 51.3C267.51 51.3 268.88 49.93 268.88 48.23L268.88 26.33C268.88 12.43 257.61 1.16 243.71 1.16L179.71 1.16C165.81 1.16 154.54 12.43 154.54 26.33L154.54 85.11C154.54 99.01 165.81 110.28 179.71 110.28L243.71 110.28C257.61 110.28 268.88 99.01 268.88 85.11"></path><path d="M552.29 24.17L555.06 24.17L559.94 33.22L557.16 33.22L552.29 24.17M555.91 22.38C556.49 21.73 556.78 20.77 556.78 19.5C556.78 18.08 556.49 17.09 555.89 16.53C555.3 15.96 554.39 15.68 553.17 15.68L548.88 15.68L548.88 23.36L553.17 23.36C554.41 23.36 555.33 23.03 555.91 22.38M546.37 13.37L553.37 13.37C555.3 13.37 556.76 13.88 557.76 14.89C558.76 15.91 559.27 17.43 559.27 19.47C559.27 21.44 558.75 22.96 557.72 24.04C556.69 25.12 555.18 25.66 553.19 25.66L548.88 25.66L548.88 33.22L546.37 33.22L546.37 13.37"></path><path d="M552.69 2.32C541.12 2.32 531.71 11.73 531.71 23.3C531.71 34.87 541.12 44.28 552.69 44.28C564.26 44.28 573.68 34.87 573.68 23.3C573.68 11.73 564.26 2.32 552.69 2.32M552.69 46.6C539.85 46.6 529.4 36.14 529.4 23.3C529.4 10.45 539.85 0 552.69 0C565.54 0 575.99 10.45 575.99 23.3C575.99 36.14 565.54 46.6 552.69 46.6"></path></svg>
+    <div class="meta mono"><span>Propuesta de diseño · Tienda en línea</span><span>estudioache.mx · Noviembre 2026</span></div>
+  </header>
+
+  <section class="intro" aria-labelledby="titulo">
+    <h1 id="titulo">Dos versiones de la tienda de Ache</h1>
+    <p>Elige una versión para recorrerla como si fuera el sitio. Puedes abrir los menús, filtrar el catálogo, entrar a las fichas y agregar piezas al carrito. Para cambiar de versión, regresa a la portada desde la barra de arriba.</p>
+  </section>
+
+  <section class="versiones" aria-label="Versiones">
+    <a class="version" href="#v2" data-version="v2">
+      <div class="ficha">
+        <h2>Versión 2</h2>
+        <span class="ir mono">Ver la versión <span aria-hidden="true">→</span></span>
+        <p class="pantallas mono" style="margin: 0"><b>10 pantallas</b> · Inicio · Catálogo · Ficha de pieza · Sets · Ficha de set · Quiénes somos · Contacto · Ayuda · Vende tu mueble · Carrito</p>
       </div>
-    </li>
-    <li>
-      <span class="num">02</span>
-      <div>
-        <h2><a href="ache-version-2/Main.dc.html">Versión 2</a></h2>
-        <nav class="paginas">
-          <a href="ache-version-2/Main.dc.html">Inicio</a>
-          <a href="ache-version-2/Catalogo.dc.html">Catálogo</a>
-          <a href="ache-version-2/Pieza.dc.html">Ficha de pieza</a>
-          <a href="ache-version-2/Kits.dc.html">Kits</a>
-          <a href="ache-version-2/Kit.dc.html">Ficha de kit</a>
-          <a href="ache-version-2/Nosotros.dc.html">Quiénes somos</a>
-          <a href="ache-version-2/Contacto.dc.html">Contacto</a>
-        </nav>
+      <div class="ventana">
+        <img src="portada/v2.jpg" alt="Inicio de la versión 2: portada con carrusel y el logotipo en crema, recién llegados, conoce Ache, piezas únicas y sets, y piezas vendidas">
+        <span class="recorrido mono" aria-hidden="true">Pasa el cursor para recorrer el inicio</span>
       </div>
-    </li>
-    <li>
-      <span class="num">03</span>
-      <div>
-        <h2><a href="ache-version-3/Main.dc.html">Versión 3</a></h2>
-        <nav class="paginas">
-          <a href="ache-version-3/Main.dc.html">Inicio</a>
-          <a href="ache-version-3/Catalogo.dc.html">Catálogo</a>
-          <a href="ache-version-3/Pieza.dc.html">Ficha de pieza</a>
-          <a href="ache-version-3/Kit.dc.html">Ficha de kit</a>
-          <a href="ache-version-3/Nosotros.dc.html">Quiénes somos</a>
-        </nav>
+    </a>
+    <a class="version" href="#v4" data-version="v4">
+      <div class="ficha">
+        <h2>Versión 4</h2>
+        <span class="ir mono">Ver la versión <span aria-hidden="true">→</span></span>
+        <p class="pantallas mono" style="margin: 0"><b>6 pantallas</b> · Inicio · Catálogo · Ficha de pieza · Ficha de set · Quiénes somos · Ayuda</p>
       </div>
-    </li>
-    <li>
-      <span class="num">04</span>
-      <div>
-        <h2><a href="ache-version-4/Main.dc.html">Versión 4</a></h2>
-        <nav class="paginas">
-          <a href="ache-version-4/Main.dc.html">Inicio</a>
-          <a href="ache-version-4/Catalogo.dc.html">Catálogo</a>
-          <a href="ache-version-4/Pieza.dc.html">Ficha de pieza</a>
-          <a href="ache-version-4/Kit.dc.html">Ficha de kit</a>
-          <a href="ache-version-4/Nosotros.dc.html">Quiénes somos</a>
-        </nav>
+      <div class="ventana">
+        <img src="portada/v4.jpg" alt="Inicio de la versión 4: encabezado fijo, portada con carrusel, recién llegados, conoce Ache, piezas únicas y sets, y muebles con casa nueva">
+        <span class="recorrido mono" aria-hidden="true">Pasa el cursor para recorrer el inicio</span>
       </div>
-    </li>
-  </ol>
+    </a>
+  </section>
+
+  <footer class="pie mono">
+    <span>Diseño para escritorio. Se ve mejor en una computadora.</span>
+    <span>Crafteo · Guadalajara</span>
+  </footer>
 </main>
-</body>
-</html>
+
+<div class="visor" id="visor" hidden>
+  <div class="barra" role="toolbar" aria-label="Presentación">
+    <button type="button" class="volver" id="volver"><span aria-hidden="true">←&nbsp;</span>Portada</button>
+    <span class="titulo mono" aria-hidden="true" style="opacity: .62">Ache · Tienda en línea</span>
+    <div class="cambio">
+      <button type="button" data-ir="v2" aria-current="false">Versión 2</button>
+    </div>
+    <button type="button" class="completa" id="completa" hidden>Pantalla completa</button>
+  </div>
+  <div class="escenario" id="escenario">
+    <div class="cargando mono" id="cargando">Cargando…</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var NOMBRE = { v2: 'Versión 2', v4: 'Versión 4' };
+  var portada = document.getElementById('portada');
+  var visor = document.getElementById('visor');
+  var escenario = document.getElementById('escenario');
+  var cargando = document.getElementById('cargando');
+  var marcos = {};
+  var actual = null;
+
+  function aviso(v) {
+    var d = document.createElement('div');
+    d.className = 'aviso mono';
+    d.innerHTML = '<span>No se pudo mostrar la ' + NOMBRE[v] + ' dentro de la presentación.</span>' +
+      '<a href="' + v + '/Main.dc.html">Abrir la ' + NOMBRE[v] + ' en esta ventana →</a>';
+    return d;
+  }
+
+  function marco(v) {
+    if (marcos[v]) return marcos[v];
+    var f = document.createElement('iframe');
+    f.title = 'Ache · ' + NOMBRE[v];
+    f.src = v + '/Main.dc.html';
+    var listo = false;
+    f.addEventListener('load', function () {
+      var ok = false;
+      try { ok = /\.dc\.html$/.test(f.contentWindow.location.pathname) && !!f.contentDocument.body; } catch (e) { ok = false; }
+      if (ok) { listo = true; f.classList.add('lista'); }
+      else if (!listo) { f.remove(); delete marcos[v]; if (actual === v) escenario.appendChild(aviso(v)); }
+      if (actual === v) cargando.hidden = true;
+    });
+    setTimeout(function () {
+      if (!listo && marcos[v] === f && actual === v) { cargando.hidden = true; escenario.appendChild(aviso(v)); }
+    }, 20000);
+    escenario.appendChild(f);
+    marcos[v] = f;
+    return f;
+  }
+
+  function mostrar() {
+    var h = (location.hash || '').slice(1);
+    var v = (h === 'v2' || h === 'v4') ? h : null;
+    [].forEach.call(escenario.querySelectorAll('.aviso'), function (n) { n.remove(); });
+    if (!v) {
+      actual = null;
+      visor.hidden = true; portada.hidden = false;
+      document.documentElement.style.overflow = '';
+      document.title = 'Ache · Propuestas de diseño';
+      return;
+    }
+    actual = v;
+    portada.hidden = true; visor.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    document.title = 'Ache · ' + NOMBRE[v];
+    var f = marco(v);
+    Object.keys(marcos).forEach(function (k) { marcos[k].style.visibility = k === v ? 'visible' : 'hidden'; });
+    cargando.hidden = f.classList.contains('lista');
+    cargando.textContent = 'Cargando la ' + NOMBRE[v] + '…';
+    [].forEach.call(document.querySelectorAll('.cambio button'), function (b) { b.setAttribute('aria-current', b.getAttribute('data-ir') === v ? 'true' : 'false'); });
+    try { f.focus(); } catch (e) {}
+  }
+
+  document.getElementById('volver').addEventListener('click', function () { location.hash = 'portada'; });
+  [].forEach.call(document.querySelectorAll('.cambio button'), function (b) {
+    b.addEventListener('click', function () { location.hash = b.getAttribute('data-ir'); });
+  });
+
+  var completa = document.getElementById('completa');
+  if (document.fullscreenEnabled && document.documentElement.requestFullscreen) {
+    completa.hidden = false;
+    completa.addEventListener('click', function () {
+      var p = document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+      if (p && p.catch) p.catch(function () { completa.hidden = true; });
+    });
+    document.addEventListener('fullscreenchange', function () {
+      completa.textContent = document.fullscreenElement ? 'Salir de pantalla completa' : 'Pantalla completa';
+    });
+  }
+
+  window.addEventListener('hashchange', mostrar);
+  mostrar();
+})();
+</script>
+
+</body></html>
